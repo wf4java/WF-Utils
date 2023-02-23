@@ -1,4 +1,4 @@
-package wf.utils.java.conver;
+package wf.utils.java.convert;
 
 public class NumberUtils {
 
