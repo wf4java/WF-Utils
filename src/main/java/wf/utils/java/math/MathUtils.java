@@ -1,7 +1,5 @@
 package wf.utils.java.math;
 
-import org.bukkit.Location;
-
 public class MathUtils {
 
 
