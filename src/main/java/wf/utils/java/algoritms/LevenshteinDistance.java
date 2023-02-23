@@ -33,7 +33,7 @@ public class LevenshteinDistance {
         }
         double maxLength = Double.max(str1.length(), str2.length());
         if (maxLength > 0) {
-            return (maxLength - getLevenshteinDistance(str1, str2)) / maxLength;
+            return (maxLength - getDistance(str1, str2)) / maxLength;
         }
         return 1.0;
     }
