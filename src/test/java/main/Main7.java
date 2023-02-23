@@ -24,6 +24,8 @@ public class Main7 {
         System.out.println(time.getSecondsFormatted());
         System.out.println(time.getSecondsFormatted(4));
 
+        time.update();
+
         Thread.sleep(5000);
 
         System.out.println(time.getSeconds());
