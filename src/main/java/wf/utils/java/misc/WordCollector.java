@@ -19,13 +19,11 @@ public class WordCollector {
 
 
     public static HashMap<Integer, List<String>> collectWordsMap(String letters){
-        Document doc;
-        try {doc = Jsoup.connect(collectorUrl + letters).get();
+        try {
+            return toMap(Jsoup.connect(collectorUrl + letters).get()
+                    .select("body > div.content_wrapper > div.content_left > ul > li > a")
+                    .stream().map(Element::wholeText).collect(Collectors.toList()));
         } catch (IOException e) {throw new RuntimeException(e);}
-
-        Elements wordElements = doc.select("body > div.content_wrapper > div.content_left > ul > li > a");
-
-        return toMap(wordElements.stream().map(Element::wholeText).collect(Collectors.toList()));
     }
 
     public static ArrayList<String> collectWords(String letters){
