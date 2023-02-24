@@ -203,7 +203,15 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
         this.language = language;
     }
 
-
+    @Override
+    public String toString() {
+        return "CommandHandler{" +
+                "plugin=" + plugin +
+                ", ownCommandName='" + ownCommandName + '\'' +
+                ", subcommands=" + subcommands +
+                ", language=" + language +
+                '}';
+    }
 }
 
 /*

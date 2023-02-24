@@ -1,4 +1,4 @@
-package wf.utils.bukkit.commands.command_builder.types.utils;
+package wf.utils.java.values;
 
 import java.util.regex.Pattern;
 
@@ -29,11 +29,6 @@ public class TypeUtils {
         if(arg.length() == 0) return false;
         return arg.equalsIgnoreCase("true") || arg.equalsIgnoreCase("false");
     }
-
-
-
-
-
 
 
 

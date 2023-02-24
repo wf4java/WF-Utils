@@ -77,4 +77,11 @@ public class CoolDown<T> {
         this.autoRemove = autoRemove;
     }
 
+    @Override
+    public String toString() {
+        return "CoolDown{" +
+                "items=" + items +
+                ", autoRemove=" + autoRemove +
+                '}';
+    }
 }

@@ -46,4 +46,13 @@ public class TimeController {
     public void setEndTime(long endTime) {
         this.endTime = endTime;
     }
+
+    @Override
+    public String toString() {
+        return "TimeController{" +
+                "initialTime=" + initialTime +
+                ", waitTime=" + waitTime +
+                ", endTime=" + endTime +
+                '}';
+    }
 }

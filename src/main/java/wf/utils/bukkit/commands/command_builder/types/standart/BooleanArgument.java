@@ -2,7 +2,7 @@ package wf.utils.bukkit.commands.command_builder.types.standart;
 
 import org.bukkit.entity.Player;
 import wf.utils.bukkit.commands.command_builder.types.ArgumentType;
-import wf.utils.bukkit.commands.command_builder.types.utils.TypeUtils;
+import wf.utils.java.values.TypeUtils;
 
 import java.util.Arrays;
 import java.util.List;

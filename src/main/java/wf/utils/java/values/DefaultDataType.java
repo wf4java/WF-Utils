@@ -3,31 +3,60 @@ package wf.utils.java.values;
 import org.bukkit.persistence.PersistentDataAdapterContext;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+
 public enum DefaultDataType {
 
-    BOOLEAN(Boolean.class),
-    FLOAT(Float.class),
-    DOUBLE(Double.class),
-    INTEGER(Integer.class),
-    STRING(String.class),
-    CHARACTER(Character.class),
-    LONG(Long.class),
-    BOOLEAN_ARRAY(Long[].class),
-    FLOAT_ARRAY(Float[].class),
-    DOUBLE_ARRAY(Double[].class),
-    INTEGER_ARRAY(Integer[].class),
-    STRING_ARRAY(String[].class),
-    CHARACTER_ARRAY(Character[].class),
-    LONG_ARRAY(Long[].class);
+    BOOLEAN(Boolean.class,false),
+    FLOAT(Float.class,false),
+    DOUBLE(Double.class,false),
+    INTEGER(Integer.class,false),
+    STRING(String.class,false),
+    CHARACTER(Character.class,false),
+    LONG(Long.class,false),
+    BOOLEAN_ARRAY(Long[].class,true),
+    FLOAT_ARRAY(Float[].class,true),
+    DOUBLE_ARRAY(Double[].class,true),
+    INTEGER_ARRAY(Integer[].class,true),
+    STRING_ARRAY(String[].class,true),
+    CHARACTER_ARRAY(Character[].class,true),
+    LONG_ARRAY(Long[].class,true);
 
     private Class typeClass;
+    private boolean itsArray;
 
-    DefaultDataType(Class typeClass){
+    private static final ArrayList<DefaultDataType> arrayTypes = new ArrayList<>(7);
+
+
+    static {
+        for(DefaultDataType type : values()){
+            if(!type.itsArray) continue;
+            arrayTypes.add(type);
+        }
+    }
+
+    DefaultDataType(Class typeClass, boolean itsArray){
         this.typeClass = typeClass;
+        this.itsArray = itsArray;
     }
 
     public Class getTypeClass(){
         return typeClass;
+    }
+
+    public boolean isItsArray() {
+        return itsArray;
+    }
+
+    public static boolean itsDefaultType(Object object){
+        for(DefaultDataType type : values()){
+            if(type.typeClass == object.getClass()) return true;
+        }
+        return false;
+    }
+
+    public static boolean itsDefaultArray(Object object){
+        return arrayTypes.contains(object);
     }
 
 }
