@@ -17,7 +17,7 @@ public class Main2 {
 
     public static void main(String[] args) {
 
-        String text = "HE";
+        String text = "+";
 
         double widthScale = 1;
         double heightScale = 1;
@@ -28,21 +28,23 @@ public class Main2 {
         int width = (int) Math.round(metrics.stringWidth(text) * widthScale);
         int height = (int) Math.round(metrics.getMaxAscent() * heightScale);
 
+        height -= 4;
+
         BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
         Graphics2D g2d = bi.createGraphics();
         g2d.setFont(font);
         g2d.setColor(Color.black);
-        g2d.drawString(text,0, height);
+        g2d.drawString(text, 0, height);
         g2d.dispose();
-        for(int j = 0; j < height; j++){
-            for(int i = 0; i < width; i++){
-                System.out.print(bi.getRGB(i,j)!=0?"1":"0");
+        for (int j = 0; j < height; j++) {
+            for (int i = 0; i < width; i++) {
+                System.out.print(bi.getRGB(i, j) != 0 ? "1" : "0");
 
             }
             System.out.print("\n"); //next line
         }
-
+    }
 
 
 
@@ -58,7 +60,7 @@ public class Main2 {
 //
 //        getPolyCords(bounds.getPathIterator(null)).forEach((p) -> System.out.println(p.getX() + ", " + p.getY()));
 
-    }
+
 
 
     private static ArrayList<Point2D> getPolyCords(PathIterator it) {

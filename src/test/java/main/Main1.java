@@ -29,7 +29,6 @@ public class Main1 {
     public static class MapKeyComparator implements Comparator<String> {
         @Override
         public int compare(String str1, String str2) {
-            System.out.println(str1.compareTo(str2));
             return str1.compareTo(str2) * -1;
         }
     }
