@@ -7,7 +7,7 @@ import static wf.utils.java.algoritms.sorts.SortUtils.*;
  * <p>
  * For more details @see <a href="https://en.wikipedia.org/wiki/Timsort">TimSort Algorithm</a>
  */
-class TimSort implements SortAlgorithm {
+public class TimSort implements SortAlgorithm {
     private static final int SUB_ARRAY_SIZE = 32;
     @SuppressWarnings("rawtypes")
     private static Comparable[] aux;

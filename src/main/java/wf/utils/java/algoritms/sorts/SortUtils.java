@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @author Podshivalov Nikita (https://github.com/nikitap492)
  */
-final class SortUtils {
+public final class SortUtils {
 
     /**
      * Helper method for swapping places in array

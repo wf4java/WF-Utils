@@ -1,6 +1,6 @@
 package wf.utils.java.algoritms.ciphers;
 
-class AffineCipher {
+public class AffineCipher {
 
     // Key values of a and b
     static int a = 17;

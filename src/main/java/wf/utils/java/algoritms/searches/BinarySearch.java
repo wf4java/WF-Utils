@@ -19,7 +19,7 @@ import static java.lang.String.format;
  * @author Podshivalov Nikita (https://github.com/nikitap492)
  * @see SearchAlgorithm
  */
-class BinarySearch implements SearchAlgorithm {
+public class BinarySearch implements SearchAlgorithm {
 
     /**
      * @param array is an array where the element should be found

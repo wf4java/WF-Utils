@@ -4,7 +4,7 @@ import java.util.function.Function;
 
 import static wf.utils.java.algoritms.sorts.SortUtils.*;
 
-class InsertionSort implements SortAlgorithm {
+public class InsertionSort implements SortAlgorithm {
 
     /**
      * Generic insertion sort algorithm in increasing order.
