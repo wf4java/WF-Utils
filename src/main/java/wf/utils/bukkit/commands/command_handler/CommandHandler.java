@@ -7,7 +7,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import wf.utils.bukkit.commands.command_builder.Argument;
 import wf.utils.bukkit.commands.command_builder.SubCommandExecutor;
+import wf.utils.bukkit.commands.command_builder.types.bukkit.BukkitArgumentType;
 import wf.utils.bukkit.config.language.GeneralLanguage;
 import wf.utils.bukkit.config.language.Language;
 import wf.utils.bukkit.config.language.MessageReceiver;
@@ -147,13 +149,14 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
         }));
 
 
-//        if(language instanceof GeneralLanguage)
-//            addSubcommand("languages", new Subcommand("CHANGE_LANGUAGE", new SubCommandExecutor(new Argument(BukkitArgumentType.LANGUAGE)),
-//                    (sender, command, args) -> {
-//                        GeneralLanguage.loadLanguage(plugin, (String) args[0]);}));
-//        else if(language instanceof PlayerLanguage)
-//        addSubcommand("languages", new Subcommand(new SubCommandExecutor(new Argument(BukkitArgumentType.PLAYER_LANGUAGE)),
-//                (sender, command, args) -> {PlayerLanguage.setPlayerLanguage(sender.getName(), (String) args[0]);}));
+        if(language instanceof GeneralLanguage)
+            addSubcommand("languages", new Subcommand("CHANGE_LANGUAGE", new SubCommandExecutor(new Argument(BukkitArgumentType.LANGUAGE)),
+                    (sender, command, args) -> {
+                        ((GeneralLanguage) language).selectLanguage(plugin, (String) args[0]);}));
+        else if(language instanceof PlayerLanguage){
+//            addSubcommand("languages", new Subcommand(new SubCommandExecutor(new Argument(BukkitArgumentType.PLAYER_LANGUAGE)),
+//                    (sender, command, args) -> {PlayerLanguage.setPlayerLanguage(sender.getName(), (String) args[0]);}));
+        }
 
 
 

@@ -1,5 +1,6 @@
 package wf.utils.bukkit.config.language;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.Plugin;
 import wf.utils.bukkit.config.BukkitConfig;
@@ -40,6 +41,7 @@ public class GeneralLanguage implements Language {
                 generalLanguage = availableLanguages.contains("en") ? "en" : availableLanguages.get(0);
                 selectLanguage(plugin, generalLanguage);
                 optionsConfig.set("general_language", generalLanguage);
+                optionsConfig.save();
             }
             selectedLanguage = generalLanguage;
         }else{
@@ -47,6 +49,7 @@ public class GeneralLanguage implements Language {
             selectLanguage(plugin, generalLanguage);
             selectedLanguage = generalLanguage;
             optionsConfig.set("general_language", generalLanguage);
+            optionsConfig.save();
         }
 
 
@@ -55,8 +58,9 @@ public class GeneralLanguage implements Language {
    private List<String> copyAllConfigs(Plugin plugin, String resourcePath, String toPath){
        List<String> files = ResourceUtils.getResourceFiles(resourcePath);
        List<String> existingFiles = getExistingConfigs(plugin, toPath);
+       Bukkit.broadcastMessage(files.toString());
        if(files.isEmpty() && existingFiles.isEmpty()){
-           languageConfig = new BukkitConfig(plugin, toPath + File.separator + "en.yml",false, defaultValues);
+           languageConfig = new BukkitConfig(plugin, toPath + File.separator + "en",false, defaultValues);
            return Arrays.asList("en");
        }else{
            for(String name : files){
@@ -69,8 +73,7 @@ public class GeneralLanguage implements Language {
     }
 
     private List<String> getExistingConfigs(Plugin plugin, String toPath){
-        List<String> fileNames = Arrays.asList(Objects.requireNonNull(new File(plugin.getDataFolder(), toPath).list()));
-        fileNames = new ArrayList<>(fileNames);
+        ArrayList<String> fileNames = new ArrayList<>(Arrays.asList(Objects.requireNonNull(new File(plugin.getDataFolder(), toPath).list())));
         fileNames.remove("options.yml");
         return fileNames.stream().map((f) -> {return f.split("\\.")[0];}).collect(Collectors.toList());
     }
@@ -78,6 +81,7 @@ public class GeneralLanguage implements Language {
     public void selectLanguage(Plugin plugin, String lang){
         languageConfig = new BukkitConfig(plugin, toPath + File.separator + lang);
         optionsConfig.set("general_language", lang);
+        optionsConfig.save();
         selectedLanguage = lang;
         messageReceiver = MessageReceiverBuilder.create(languageConfig.getConfig(), selectedLanguage);
     }
