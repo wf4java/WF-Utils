@@ -56,7 +56,7 @@ public class GeneralLanguage implements Language {
     }
 
    private List<String> copyAllConfigs(Plugin plugin, String resourcePath, String toPath){
-       List<String> files = ResourceUtils.getResourceFiles(resourcePath);
+       List<String> files = ResourceUtils.getResourceFiles(plugin.getClass(), resourcePath);
        List<String> existingFiles = getExistingConfigs(plugin, toPath);
        if(files.isEmpty() && existingFiles.isEmpty()){
            languageConfig = new BukkitConfig(plugin, toPath + File.separator + "en",false, defaultValues);
