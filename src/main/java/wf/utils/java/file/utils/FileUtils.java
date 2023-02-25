@@ -1,6 +1,11 @@
 package wf.utils.java.file.utils;
 
 import java.io.*;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.Collections;
 
 public class FileUtils {
 
@@ -51,6 +56,40 @@ public class FileUtils {
                 catch (IOException e1) { e1.printStackTrace(); }
             }
         }
+    }
+
+    public void copyFromJar(String source, final Path target) {
+        URI resource = null;
+        FileSystem fileSystem = null;
+        try {
+            resource = getClass().getResource("").toURI();
+            fileSystem = FileSystems.newFileSystem(resource, Collections.<String, String>emptyMap());
+        } catch (URISyntaxException | IOException e) {throw new RuntimeException(e);}
+
+
+
+        final Path jarPath = fileSystem.getPath(source);
+
+        try {
+            Files.walkFileTree(jarPath, new SimpleFileVisitor<Path>() {
+
+                private Path currentTarget;
+
+                @Override
+                public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+                    currentTarget = target.resolve(jarPath.relativize(dir).toString());
+                    Files.createDirectories(currentTarget);
+                    return FileVisitResult.CONTINUE;
+                }
+
+                @Override
+                public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+                    Files.copy(file, target.resolve(jarPath.relativize(file).toString()), StandardCopyOption.REPLACE_EXISTING);
+                    return FileVisitResult.CONTINUE;
+                }
+
+            });
+        } catch (IOException e) {throw new RuntimeException(e);}
     }
 
 }

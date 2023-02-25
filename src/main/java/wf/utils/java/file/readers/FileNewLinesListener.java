@@ -1,5 +1,9 @@
 package wf.utils.java.file.readers;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.function.Consumer;
 
 public class FileNewLinesListener {
@@ -9,24 +13,23 @@ public class FileNewLinesListener {
 
     public FileNewLinesListener(String path, Consumer<String> run) {
 
-//        thread = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(path),"windows-1251"));
-//                    reader.skip(Long.MAX_VALUE);
-//
-//                    String line = reader.readLine();
-//
-//                    while (true) {
-//                        if (line == null) Thread.sleep(25);
-//                        else run.accept(line);
-//                        line = reader.readLine();
-//                    }
-//                }catch (IOException | InterruptedException e) { e.printStackTrace(); }
-//            }
-//        });
-        run.accept("[Client thread/INFO][CHAT]Задание: Расшифруй слово [тресниивеУт]");
+        thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(path),"windows-1251"));
+                    reader.skip(Long.MAX_VALUE);
+
+                    String line = reader.readLine();
+
+                    while (true) {
+                        if (line == null) Thread.sleep(25);
+                        else run.accept(line);
+                        line = reader.readLine();
+                    }
+                }catch (IOException | InterruptedException e) { e.printStackTrace(); }
+            }
+        });
         //thread.start();
     }
 

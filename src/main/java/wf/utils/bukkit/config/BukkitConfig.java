@@ -4,6 +4,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
+import wf.utils.java.file.yamlconfiguration.configuration.ConfigDefaultValue;
 
 
 import java.io.File;
@@ -18,13 +19,50 @@ public class BukkitConfig {
 
 
     public BukkitConfig(Plugin plugin, String configName){
+        this(plugin, configName, true);
+    }
+
+    public BukkitConfig(Plugin plugin, String configName, boolean autoCopy){
         file = new File(plugin.getDataFolder(),configName + ".yml");
         if (!file.exists()) {
-            plugin.saveResource(configName + ".yml", true);
+            if(autoCopy) plugin.saveResource(configName + ".yml", true);
+            else try {file.createNewFile();} catch (IOException e) {throw new RuntimeException(e);}
         }
         config = YamlConfiguration.loadConfiguration(file);
     }
 
+    public BukkitConfig(Plugin plugin, String configName, boolean autoCopy, ConfigDefaultValue... values){
+        this(plugin, configName, autoCopy);
+        setDefaultValues(values);
+    }
+
+    public BukkitConfig(Plugin plugin, String configName, ConfigDefaultValue... values){
+        this(plugin, configName);
+        setDefaultValues(values);
+    }
+
+    public void setDefaultValues(boolean replace, ConfigDefaultValue... values){
+        for(ConfigDefaultValue value : values){
+            if(replace && config.contains(value.getPath())) continue;
+            config.set(value.getPath(), value.getValue());
+        }
+    }
+
+    public void set(String path, Object value){
+        config.set(path, value);
+    }
+
+    public boolean contains(String path){
+        return config.contains(path);
+    }
+
+    public void setDefaultValues(ConfigDefaultValue... values){
+        setDefaultValues(false, values);
+    }
+
+    public void reloadConfig(){
+        config = YamlConfiguration.loadConfiguration(file);
+    }
 
     public void save(){
         try { config.save(file); } catch (IOException e) { throw new RuntimeException(e); }

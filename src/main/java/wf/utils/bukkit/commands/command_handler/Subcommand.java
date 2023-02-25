@@ -3,7 +3,7 @@ package wf.utils.bukkit.commands.command_handler;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import wf.utils.bukkit.commands.command_builder.CommandBuilder;
+import wf.utils.bukkit.commands.command_builder.SubCommandExecutor;
 import wf.utils.bukkit.config.language.MessageReceiver;
 import wf.utils.java.functions.TriConsumer;
 
@@ -11,30 +11,44 @@ import wf.utils.java.functions.TriConsumer;
 
 public class Subcommand {
 
+    private String command;
     private String permission;
-    private CommandBuilder commandBuilder;
+    private SubCommandExecutor commandBuilder;
     private TriConsumer<CommandSender, Command, Object[]> runnable;
     private boolean onlyPlayer = false;
 
-    public Subcommand(String permission, CommandBuilder commandBuilder, TriConsumer<CommandSender, Command, Object[]> runnable, boolean onlyPlayer) {
+
+    public Subcommand(){
+
+    }
+
+    public Subcommand(String command, String permission, SubCommandExecutor commandBuilder, TriConsumer<CommandSender, Command, Object[]> runnable, boolean onlyPlayer) {
+        this.command = command;
         this.permission = permission;
         this.commandBuilder = commandBuilder;
         this.runnable = runnable;
         this.onlyPlayer = onlyPlayer;
     }
 
-    public Subcommand(CommandBuilder commandBuilder, TriConsumer<CommandSender, Command, Object[]> runnable) {
+    public Subcommand(String permission, SubCommandExecutor commandBuilder, TriConsumer<CommandSender, Command, Object[]> runnable, boolean onlyPlayer) {
+        this.permission = permission;
+        this.commandBuilder = commandBuilder;
+        this.runnable = runnable;
+        this.onlyPlayer = onlyPlayer;
+    }
+
+    public Subcommand(SubCommandExecutor commandBuilder, TriConsumer<CommandSender, Command, Object[]> runnable) {
         this.commandBuilder = commandBuilder;
         this.runnable = runnable;
     }
 
-    public Subcommand(String permission, CommandBuilder commandBuilder, TriConsumer<CommandSender, Command, Object[]> runnable) {
+    public Subcommand(String permission, SubCommandExecutor commandBuilder, TriConsumer<CommandSender, Command, Object[]> runnable) {
         this.permission = permission;
         this.commandBuilder = commandBuilder;
         this.runnable = runnable;
     }
 
-    public Subcommand(CommandBuilder commandBuilder, TriConsumer<CommandSender, Command, Object[]> runnable, boolean onlyPlayer) {
+    public Subcommand(SubCommandExecutor commandBuilder, TriConsumer<CommandSender, Command, Object[]> runnable, boolean onlyPlayer) {
         this.commandBuilder = commandBuilder;
         this.runnable = runnable;
         this.onlyPlayer = onlyPlayer;
@@ -59,6 +73,11 @@ public class Subcommand {
         return sender.hasPermission(permission);
     }
 
+
+    public SubCommandBuilder builder(){
+        return new SubCommandBuilder();
+    }
+
     public String getPermission() {
         return permission;
     }
@@ -67,11 +86,11 @@ public class Subcommand {
         this.permission = permission;
     }
 
-    public CommandBuilder getCommandBuilder() {
+    public SubCommandExecutor getCommandBuilder() {
         return commandBuilder;
     }
 
-    public void setCommandBuilder(CommandBuilder commandBuilder) {
+    public void setCommandBuilder(SubCommandExecutor commandBuilder) {
         this.commandBuilder = commandBuilder;
     }
 
@@ -89,6 +108,14 @@ public class Subcommand {
 
     public void setOnlyPlayer(boolean onlyPlayer) {
         this.onlyPlayer = onlyPlayer;
+    }
+
+    public String getCommand() {
+        return command;
+    }
+
+    public void setCommand(String command) {
+        this.command = command;
     }
 
     @Override

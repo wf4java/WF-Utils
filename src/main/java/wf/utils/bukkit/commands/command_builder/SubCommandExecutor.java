@@ -6,21 +6,21 @@ import wf.utils.bukkit.config.language.MessageReceiver;
 
 import java.util.Arrays;
 
-public class CommandBuilder {
+public class SubCommandExecutor {
 
     private Argument[] arguments;
     private String command = "/command";
 
 
-    public CommandBuilder(Argument... arguments) {
+    public SubCommandExecutor(Argument... arguments) {
         this.arguments = arguments;
     }
 
-    public CommandBuilder() {
+    public SubCommandExecutor() {
         this.arguments = new Argument[0];
     }
 
-    public CommandBuilder(String command, Argument... arguments) {
+    public SubCommandExecutor(String command, Argument... arguments) {
         this.command = command;
         this.arguments = arguments;
     }

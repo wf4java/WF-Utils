@@ -25,18 +25,19 @@ public class PlayerLanguageArgument implements ArgumentType {
 
     @Override
     public boolean isIt(String argument) {
-        for(String language : PlayerLanguage.getLoadedLanguages().keySet()) if(language.equalsIgnoreCase(argument)) return true;
+       // for(String language : PlayerLanguage.getLoadedLanguages().keySet()) if(language.equalsIgnoreCase(argument)) return true;
         return false;
     }
 
     @Override
     public Object get(String argument) {
-        for(String language : PlayerLanguage.getLoadedLanguages().keySet()) if(language.equalsIgnoreCase(argument)) return language;
+        //for(String language : PlayerLanguage.getLoadedLanguages().keySet()) if(language.equalsIgnoreCase(argument)) return language;
         return argument;
     }
 
     @Override
     public List<String> tabulation(Player player, String arg) {
-        return PlayerLanguage.getLoadedLanguages().keySet().stream().collect(Collectors.toList());
+        //return PlayerLanguage.getLoadedLanguages().keySet().stream().collect(Collectors.toList());
+        return null;
     }
 }

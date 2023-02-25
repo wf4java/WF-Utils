@@ -8,9 +8,9 @@ import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import wf.utils.bukkit.commands.command_builder.Argument;
-import wf.utils.bukkit.commands.command_builder.CommandBuilder;
+import wf.utils.bukkit.commands.command_builder.SubCommandExecutor;
 import wf.utils.bukkit.commands.command_builder.types.bukkit.BukkitArgumentType;
-import wf.utils.bukkit.config.language.Language;
+import wf.utils.bukkit.config.language.GeneralLanguage;
 import wf.utils.bukkit.config.language.MessageReceiver;
 import wf.utils.bukkit.config.language.PlayerLanguage;
 
@@ -23,17 +23,12 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
 
     private JavaPlugin plugin;
     private String ownCommandName;
-    private TreeMap<String, Subcommand> subcommands = new TreeMap<String, Subcommand>(
-            new Comparator<String>() {
-                @Override
-                public int compare(String str1, String str2) {
-                    return str1.compareTo(str2) * -1;
-                }});
-    private Language language;
+    private TreeMap<String, Subcommand> subcommands = new TreeMap<String, Subcommand>(new Comparator<String>() {@Override public int compare(String str1, String str2) {return str1.compareTo(str2) * -1;}});
+    private GeneralLanguage language;
 
 
 
-    public CommandHandler(JavaPlugin plugin, String[] commands, Language language) {
+    public CommandHandler(JavaPlugin plugin, String[] commands, GeneralLanguage language) {
         this.plugin = plugin;
         this.language = language;
         this.ownCommandName = commands[0];
@@ -44,7 +39,7 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
         addDefaultCommands();
     }
 
-    public CommandHandler(JavaPlugin plugin, String command, Language language) {
+    public CommandHandler(JavaPlugin plugin, String command, GeneralLanguage language) {
         this.plugin = plugin;
         this.language = language;
         plugin.getCommand(command).setExecutor(this);
@@ -133,7 +128,7 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
     }
 
     public void addDefaultCommands(){
-        addSubcommand("allcommands", new Subcommand(new CommandBuilder(),
+        addSubcommand("allcommands", new Subcommand(new SubCommandExecutor(),
                 (sender, command, args) -> {
                 int availableCommandsCount = 0;
 
@@ -153,12 +148,13 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
         }));
 
 
-        if(language instanceof Language)
-            addSubcommand("languages", new Subcommand("CHANGE_LANGUAGE", new CommandBuilder(new Argument(BukkitArgumentType.LANGUAGE)),
-                    (sender, command, args) -> {Language.loadLanguage(plugin, (String) args[0]);}));
-        else if(language instanceof PlayerLanguage)
-        addSubcommand("languages", new Subcommand(new CommandBuilder(new Argument(BukkitArgumentType.PLAYER_LANGUAGE)),
-                (sender, command, args) -> {PlayerLanguage.setPlayerLanguage(sender.getName(), (String) args[0]);}));
+//        if(language instanceof GeneralLanguage)
+//            addSubcommand("languages", new Subcommand("CHANGE_LANGUAGE", new SubCommandExecutor(new Argument(BukkitArgumentType.LANGUAGE)),
+//                    (sender, command, args) -> {
+//                        GeneralLanguage.loadLanguage(plugin, (String) args[0]);}));
+//        else if(language instanceof PlayerLanguage)
+//        addSubcommand("languages", new Subcommand(new SubCommandExecutor(new Argument(BukkitArgumentType.PLAYER_LANGUAGE)),
+//                (sender, command, args) -> {PlayerLanguage.setPlayerLanguage(sender.getName(), (String) args[0]);}));
 
 
 
@@ -169,17 +165,22 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
         subcommands.put(command, subcommand);
     }
 
+    public void addSubcommand(Subcommand subcommand) {
+        subcommand.getCommandBuilder().setCommand("/" + ownCommandName + " " + String.join(" ", subcommand.getCommand().split("\\.")) );
+        subcommands.put(subcommand.getCommand(), subcommand);
+    }
+
     public MessageReceiver getMessageReceiver(String player){
-        if(language instanceof PlayerLanguage) return ((PlayerLanguage) language).getMessageReceiver(player);
-        else if(language instanceof Language) return language.getMessageReceiver();
+//        if(language instanceof PlayerLanguage) return ((PlayerLanguage) language).getMessageReceiver(player);
+//        else if(language instanceof GeneralLanguage) return language.getMessageReceiver();
         return null;
     }
 
 
 
     public String getMess(CommandSender sender, String path){
-        if(language instanceof Language) return Language.mess(path);
-        else if(language instanceof PlayerLanguage) return ((PlayerLanguage) language).getMessageReceiver(sender.getName()).get(path);
+//        if(language instanceof GeneralLanguage) return GeneralLanguage.mess(path);
+//        else if(language instanceof PlayerLanguage) return ((PlayerLanguage) language).getMessageReceiver(sender.getName()).get(path);
         return path;
     }
 
@@ -199,7 +200,7 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
         this.ownCommandName = ownCommandName;
     }
 
-    public void setLanguage(Language language) {
+    public void setLanguage(GeneralLanguage language) {
         this.language = language;
     }
 

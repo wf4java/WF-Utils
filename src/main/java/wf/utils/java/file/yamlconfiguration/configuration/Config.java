@@ -73,6 +73,12 @@ public class Config {
         }
     }
 
+    public void set(String path, Object value){
+        config.set(path, value);
+    }
+    public boolean contains(String path){
+        return config.contains(path);
+    }
     public void setDefaultValues(ConfigDefaultValue... values){
         setDefaultValues(false, values);
     }

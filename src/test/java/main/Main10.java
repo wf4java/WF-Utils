@@ -1,5 +1,6 @@
 package main;
 
+import wf.utils.bukkit.config.BukkitConfig;
 import wf.utils.java.misc.WordCollector;
 
 public class Main10 {
@@ -7,7 +8,8 @@ public class Main10 {
 
     public static void main(String[] args) {
 
-        System.out.println(WordCollector.collectWords("блокяо"));
+        BukkitConfig config = new BukkitConfig(null,"config");
+
 
     }
 
