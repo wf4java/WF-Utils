@@ -38,7 +38,11 @@ public class ResourceUtils {
 //    }
 
     public static List<String> getResourceFiles(String path){
-        return Arrays.asList(new File(getContextClassLoader().getResource(File.separator + path).getFile()).list());
+        return Arrays.asList(new File(getContextClassLoader().getResource(path).getFile()).list());
+    }
+
+    public static List<String> getResourceFiles(Class c, String path){
+        return Arrays.asList(new File(c.getResource(path).getFile()).list());
     }
 
     private static InputStream getResourceAsStream(String resource) {
