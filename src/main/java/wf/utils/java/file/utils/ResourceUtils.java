@@ -9,7 +9,6 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 public class ResourceUtils {
 
@@ -39,7 +38,7 @@ public class ResourceUtils {
 //    }
 
     public static List<String> getResourceFiles(String path){
-        return Arrays.asList(Objects.requireNonNull(new File(getContextClassLoader().getResource(path).getFile()).list()));
+        return Arrays.asList(new File(getContextClassLoader().getResource(File.separator + path).getFile()).list());
     }
 
     private static InputStream getResourceAsStream(String resource) {
