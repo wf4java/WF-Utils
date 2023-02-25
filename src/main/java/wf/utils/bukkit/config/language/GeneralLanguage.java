@@ -54,7 +54,7 @@ public class GeneralLanguage implements Language {
 
    private List<String> copyAllConfigs(Plugin plugin, String resourcePath, String toPath){
        List<String> files = ResourceUtils.getResourceFiles(resourcePath);
-       List<String> existingFiles = getExistingConfigs(toPath);
+       List<String> existingFiles = getExistingConfigs(plugin, toPath);
        if(files.isEmpty() && existingFiles.isEmpty()){
            languageConfig = new BukkitConfig(plugin, toPath + File.separator + "en.yml",false, defaultValues);
            return Arrays.asList("en");
@@ -68,8 +68,8 @@ public class GeneralLanguage implements Language {
        return files;
     }
 
-    private List<String> getExistingConfigs(String toPath){
-        List<String> fileNames = Arrays.asList(Objects.requireNonNull(new File(toPath).list()));
+    private List<String> getExistingConfigs(Plugin plugin, String toPath){
+        List<String> fileNames = Arrays.asList(Objects.requireNonNull(new File(plugin.getDataFolder(), toPath).list()));
         fileNames.remove("options.yml");
         return fileNames.stream().map((f) -> {return f.split("\\.")[0];}).collect(Collectors.toList());
     }
