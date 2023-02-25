@@ -70,7 +70,7 @@ public class GeneralLanguage implements Language {
 
     private List<String> getExistingConfigs(String toPath){
         List<String> fileNames = Arrays.asList(Objects.requireNonNull(new File(toPath).list()));
-        if(fileNames.contains("options.yml")) fileNames.remove("options.yml");
+        fileNames.remove("options.yml");
         return fileNames.stream().map((f) -> {return f.split("\\.")[0];}).collect(Collectors.toList());
     }
 

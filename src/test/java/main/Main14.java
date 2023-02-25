@@ -5,6 +5,7 @@ import wf.utils.java.file.utils.ResourceUtils;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 
 public class Main14 {
 
@@ -17,6 +18,8 @@ public class Main14 {
             throw new RuntimeException(e);
         }
         System.out.println(new File("").getAbsolutePath());
+        System.out.println(ResourceUtils.getResourceFiles("test"));
+        ArrayList<String> list = new ArrayList<>();
 
     }
 

@@ -27,9 +27,9 @@ public class BukkitConfig {
         if (!file.exists()) {
             if(autoCopy) plugin.saveResource(configName + ".yml", true);
             else try {
-                file.mkdirs();
-                file.createNewFile();} catch (IOException e) {throw new RuntimeException(e);
-            }
+                new File(file.getParent()).mkdirs();
+                file.createNewFile();
+            } catch (IOException e) {throw new RuntimeException(e);}
         }
         config = YamlConfiguration.loadConfiguration(file);
     }

@@ -23,22 +23,20 @@ public class ResourceUtils {
     public static List<String> getResourceFiles(String path) {
         List<String> filenames = new ArrayList<>();
 
-        try (
-                InputStream in =  getResourceAsStream(path);
-                BufferedReader br = new BufferedReader(new InputStreamReader(in))) {
+        try(InputStream in = getResourceAsStream(path);
+            BufferedReader br = new BufferedReader(new InputStreamReader(in)))
+        {
             String resource;
 
             while ((resource = br.readLine()) != null) {
                 filenames.add(resource);
             }
-        } catch (IOException e) {throw new RuntimeException(e);}
+        } catch (Exception ignored) {}
 
         return filenames;
     }
     private static InputStream getResourceAsStream(String resource) {
-        final InputStream in
-                = getContextClassLoader().getResourceAsStream(resource);
-
+        final InputStream in = getContextClassLoader().getResourceAsStream(resource);
         return in == null ? ResourceUtils.class.getResourceAsStream(resource) : in;
     }
 
