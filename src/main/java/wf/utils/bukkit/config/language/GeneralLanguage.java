@@ -46,6 +46,7 @@ public class GeneralLanguage implements Language {
             String generalLanguage = availableLanguages.contains("en") ? "en" : availableLanguages.get(0);
             selectLanguage(plugin, generalLanguage);
             selectedLanguage = generalLanguage;
+            optionsConfig.set("general_language", generalLanguage);
         }
 
 
