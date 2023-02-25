@@ -29,7 +29,7 @@ public class GeneralLanguage implements Language {
     public GeneralLanguage(Plugin plugin, String resourcePath, String toPath, ConfigDefaultValue... defaultValues) {
         this.toPath = toPath;
         this.defaultValues = defaultValues;
-        optionsConfig = new BukkitConfig(plugin,toPath + File.separator + "options");
+        optionsConfig = new BukkitConfig(plugin,toPath + File.separator + "options",false);
         availableLanguages = copyAllConfigs(plugin, resourcePath, toPath);
 
         if(optionsConfig.contains("general_language")){
