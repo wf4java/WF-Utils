@@ -70,6 +70,7 @@ public class GeneralLanguage implements Language {
 
     private List<String> getExistingConfigs(Plugin plugin, String toPath){
         List<String> fileNames = Arrays.asList(Objects.requireNonNull(new File(plugin.getDataFolder(), toPath).list()));
+        fileNames = new ArrayList<>(fileNames);
         fileNames.remove("options.yml");
         return fileNames.stream().map((f) -> {return f.split("\\.")[0];}).collect(Collectors.toList());
     }
