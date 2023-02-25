@@ -7,10 +7,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
-import wf.utils.bukkit.commands.command_builder.Argument;
 import wf.utils.bukkit.commands.command_builder.SubCommandExecutor;
-import wf.utils.bukkit.commands.command_builder.types.bukkit.BukkitArgumentType;
 import wf.utils.bukkit.config.language.GeneralLanguage;
+import wf.utils.bukkit.config.language.Language;
 import wf.utils.bukkit.config.language.MessageReceiver;
 import wf.utils.bukkit.config.language.PlayerLanguage;
 
@@ -24,11 +23,11 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
     private JavaPlugin plugin;
     private String ownCommandName;
     private TreeMap<String, Subcommand> subcommands = new TreeMap<String, Subcommand>(new Comparator<String>() {@Override public int compare(String str1, String str2) {return str1.compareTo(str2) * -1;}});
-    private GeneralLanguage language;
+    private Language language;
 
 
 
-    public CommandHandler(JavaPlugin plugin, String[] commands, GeneralLanguage language) {
+    public CommandHandler(JavaPlugin plugin, String[] commands, Language language) {
         this.plugin = plugin;
         this.language = language;
         this.ownCommandName = commands[0];
@@ -39,7 +38,7 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
         addDefaultCommands();
     }
 
-    public CommandHandler(JavaPlugin plugin, String command, GeneralLanguage language) {
+    public CommandHandler(JavaPlugin plugin, String command, Language language) {
         this.plugin = plugin;
         this.language = language;
         plugin.getCommand(command).setExecutor(this);
@@ -171,16 +170,16 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
     }
 
     public MessageReceiver getMessageReceiver(String player){
-//        if(language instanceof PlayerLanguage) return ((PlayerLanguage) language).getMessageReceiver(player);
-//        else if(language instanceof GeneralLanguage) return language.getMessageReceiver();
+        if(language instanceof PlayerLanguage) return ((PlayerLanguage) language).getMessageReceiver(player);
+        if(language instanceof GeneralLanguage) return ((GeneralLanguage) language).getMessageReceiver();
         return null;
     }
 
 
 
     public String getMess(CommandSender sender, String path){
-//        if(language instanceof GeneralLanguage) return GeneralLanguage.mess(path);
-//        else if(language instanceof PlayerLanguage) return ((PlayerLanguage) language).getMessageReceiver(sender.getName()).get(path);
+        if(language instanceof GeneralLanguage) return ((GeneralLanguage) language).mess(path);
+        if(language instanceof PlayerLanguage) return ((PlayerLanguage) language).getMessageReceiver(sender.getName()).get(path);
         return path;
     }
 

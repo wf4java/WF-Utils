@@ -10,6 +10,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 
@@ -23,6 +24,7 @@ public class GeneralLanguage implements Language {
     private String toPath;
     private ConfigDefaultValue[] defaultValues;
     private String selectedLanguage;
+    private MessageReceiver messageReceiver;
 
     public GeneralLanguage(Plugin plugin, String resourcePath, String toPath, ConfigDefaultValue... defaultValues) {
         this.toPath = toPath;
@@ -66,8 +68,7 @@ public class GeneralLanguage implements Language {
     }
 
     private List<String> getExistingConfigs(String toPath){
-        File folder = new File(toPath);
-        List<String> fileNames = Arrays.asList(new File(toPath).list());
+        List<String> fileNames = Arrays.asList(Objects.requireNonNull(new File(toPath).list()));
         if(fileNames.contains("options.yml")) fileNames.remove("options.yml");
         return fileNames.stream().map((f) -> {return f.split("\\.")[0];}).collect(Collectors.toList());
     }
@@ -76,10 +77,11 @@ public class GeneralLanguage implements Language {
         languageConfig = new BukkitConfig(plugin, toPath + File.separator + lang);
         optionsConfig.set("general_language", lang);
         selectedLanguage = lang;
+        messageReceiver = MessageReceiverBuilder.create(languageConfig.getConfig(), selectedLanguage);
     }
 
     public MessageReceiver getMessageReceiver(){
-        return MessageReceiverBuilder.create(languageConfig.getConfig(), selectedLanguage);
+        return messageReceiver;
     }
 
     public String mess(String path) {
