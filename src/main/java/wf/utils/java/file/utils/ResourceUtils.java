@@ -7,7 +7,9 @@ import wf.utils.java.file.yamlconfiguration.file.YamlConfiguration;
 import java.io.*;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class ResourceUtils {
 
@@ -20,21 +22,26 @@ public class ResourceUtils {
             }
         }catch (IOException e) { e.printStackTrace(); }
     }
-    public static List<String> getResourceFiles(String path) {
-        List<String> filenames = new ArrayList<>();
+//    public static List<String> getResourceFiles(String path) {
+//        List<String> filenames = new ArrayList<>();
+//
+//        try(InputStream in = getResourceAsStream(path);
+//            BufferedReader br = new BufferedReader(new InputStreamReader(in)))
+//        {
+//            String resource;
+//
+//            while ((resource = br.readLine()) != null) {
+//                filenames.add(resource);
+//            }
+//        } catch (Exception ignored) {}
+//
+//        return filenames;
+//    }
 
-        try(InputStream in = getResourceAsStream(path);
-            BufferedReader br = new BufferedReader(new InputStreamReader(in)))
-        {
-            String resource;
-
-            while ((resource = br.readLine()) != null) {
-                filenames.add(resource);
-            }
-        } catch (Exception ignored) {}
-
-        return filenames;
+    public static List<String> getResourceFiles(String path){
+        return Arrays.asList(Objects.requireNonNull(new File(getContextClassLoader().getResource(path).getFile()).list()));
     }
+
     private static InputStream getResourceAsStream(String resource) {
         final InputStream in = getContextClassLoader().getResourceAsStream(resource);
         return in == null ? ResourceUtils.class.getResourceAsStream(resource) : in;

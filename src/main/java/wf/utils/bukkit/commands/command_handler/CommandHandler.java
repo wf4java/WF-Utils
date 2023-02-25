@@ -129,30 +129,34 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
     }
 
     public void addDefaultCommands(){
-        addSubcommand("allcommands", new Subcommand(new SubCommandExecutor(),
-                (sender, command, args) -> {
-                int availableCommandsCount = 0;
+        addSubcommand(new SubCommandBuilder()
+                .setCommand("allcommands")
+                .setRunnable((sender, command, args) -> {
+                    int availableCommandsCount = 0;
 
-                for(Map.Entry<String, Subcommand> entry : subcommands.entrySet()){
-                    if(entry.getValue().checkPermission(sender)){
-                        if(availableCommandsCount == 0) sender.sendMessage("\n");
-                        sender.sendMessage(entry.getValue().getCommandBuilder().getArgumentsText());
-                        availableCommandsCount++;
+                    for(Map.Entry<String, Subcommand> entry : subcommands.entrySet()){
+                        if(entry.getValue().checkPermission(sender)){
+                            if(availableCommandsCount == 0) sender.sendMessage("\n");
+                            sender.sendMessage(entry.getValue().getCommandBuilder().getArgumentsText());
+                            availableCommandsCount++;
+                        }
                     }
-                }
 
-                if(availableCommandsCount == 0){
-                    if(language == null) sender.sendMessage("Not found available commands!");
-                    else sender.sendMessage(getMess(sender,"NOT_FOUND_AVAILABLE_COMMANDS"));
-                }
-
-        }));
+                    if(availableCommandsCount == 0){
+                        if(language == null) sender.sendMessage("Not found available commands!");
+                        else sender.sendMessage(getMess(sender,"NOT_FOUND_AVAILABLE_COMMANDS"));
+                    }
+                }).build());
 
 
-        if(language instanceof GeneralLanguage)
-            addSubcommand("languages", new Subcommand("CHANGE_LANGUAGE", new SubCommandExecutor(new Argument(BukkitArgumentType.LANGUAGE)),
-                    (sender, command, args) -> {
-                        ((GeneralLanguage) language).selectLanguage(plugin, (String) args[0]);}));
+
+        if(language instanceof GeneralLanguage) {
+            addSubcommand(new SubCommandBuilder()
+                    .setCommand("languages")
+                    .setArguments(new Argument(BukkitArgumentType.LANGUAGE))
+                    .setRunnable((sender, command, args) -> {((GeneralLanguage) language).selectLanguage(plugin, (String) args[0]);})
+                    .build());
+        }
         else if(language instanceof PlayerLanguage){
 //            addSubcommand("languages", new Subcommand(new SubCommandExecutor(new Argument(BukkitArgumentType.PLAYER_LANGUAGE)),
 //                    (sender, command, args) -> {PlayerLanguage.setPlayerLanguage(sender.getName(), (String) args[0]);}));

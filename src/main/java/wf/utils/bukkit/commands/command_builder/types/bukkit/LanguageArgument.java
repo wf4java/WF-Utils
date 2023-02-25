@@ -19,7 +19,7 @@ public class LanguageArgument implements ArgumentType {
 
     @Override
     public String getName() {
-        return "languages";
+        return "language";
     }
 
     @Override
