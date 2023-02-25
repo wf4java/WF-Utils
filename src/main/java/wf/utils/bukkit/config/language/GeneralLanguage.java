@@ -106,4 +106,56 @@ public class GeneralLanguage implements Language {
     public BukkitConfig getConfig() {
         return null;
     }
+
+    public static List<String> getAvailableLanguages() {
+        return availableLanguages;
+    }
+
+    public static void setAvailableLanguages(List<String> availableLanguages) {
+        GeneralLanguage.availableLanguages = availableLanguages;
+    }
+
+    public BukkitConfig getLanguageConfig() {
+        return languageConfig;
+    }
+
+    public void setLanguageConfig(BukkitConfig languageConfig) {
+        this.languageConfig = languageConfig;
+    }
+
+    public BukkitConfig getOptionsConfig() {
+        return optionsConfig;
+    }
+
+    public void setOptionsConfig(BukkitConfig optionsConfig) {
+        this.optionsConfig = optionsConfig;
+    }
+
+    public String getToPath() {
+        return toPath;
+    }
+
+    public void setToPath(String toPath) {
+        this.toPath = toPath;
+    }
+
+    public ConfigDefaultValue[] getDefaultValues() {
+        return defaultValues;
+    }
+
+    public void setDefaultValues(ConfigDefaultValue[] defaultValues) {
+        this.defaultValues = defaultValues;
+    }
+
+    public String getSelectedLanguage() {
+        return selectedLanguage;
+    }
+
+    public void setSelectedLanguage(String selectedLanguage) {
+        this.selectedLanguage = selectedLanguage;
+    }
+
+    public void setMessageReceiver(MessageReceiver messageReceiver) {
+        this.messageReceiver = messageReceiver;
+    }
 }
