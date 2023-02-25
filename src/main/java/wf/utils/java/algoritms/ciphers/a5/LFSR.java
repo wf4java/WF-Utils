@@ -27,7 +27,7 @@ public class LFSR implements BaseLFSR {
         // We start from reverse because LFSR 0 index is the left most bit
         // while key 0 index is right most bit, so we reverse it
         for (int i = keyLength - 1; i >= 0; --i) {
-            var newBit = key.get(i) ^ xorTappingBits();
+            boolean newBit = key.get(i) ^ xorTappingBits();
             pushBit(newBit);
         }
     }

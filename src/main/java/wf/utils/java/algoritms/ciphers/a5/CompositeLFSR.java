@@ -17,7 +17,7 @@ public abstract class CompositeLFSR implements BaseLFSR {
     public boolean clock() {
         boolean majorityBit = getMajorityBit();
         boolean result = false;
-        for (var register : registers) {
+        for (LFSR register : registers) {
             result ^= register.getLastBit();
             if (register.getClockBit() == majorityBit) register.clock();
         }
