@@ -1,4 +1,4 @@
-package wf.utils.bukkit.commands.command_handler;
+package wf.utils.bukkit.commands.command_handler.subcommand;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -46,8 +46,8 @@ public class SubCommandBuilder {
         return this;
     }
 
-    public Subcommand build(){
-        return new Subcommand(command, permission, commandBuilder, runnable, onlyPlayer);
+    public SubCommand build(){
+        return new SubCommand(command, permission, commandBuilder, runnable, onlyPlayer);
     }
 
 }

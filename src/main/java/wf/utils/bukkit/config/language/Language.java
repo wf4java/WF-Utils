@@ -10,4 +10,6 @@ public interface Language {
     public BukkitConfig getConfig();
     public List<String> getAvailableLanguages();
 
+
+
 }

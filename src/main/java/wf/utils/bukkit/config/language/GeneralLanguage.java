@@ -97,7 +97,7 @@ public class GeneralLanguage implements Language {
         optionsConfig.set("general_language", lang);
         optionsConfig.save();
         selectedLanguage = lang;
-        messageReceiver = MessageReceiverBuilder.create(languageConfig.getConfig(), selectedLanguage);
+        loadMessageReceiver();
     }
 
     public void loadMessageReceiver(){

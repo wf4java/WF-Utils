@@ -1,4 +1,4 @@
-package wf.utils.bukkit.commands.command_handler;
+package wf.utils.bukkit.commands.command_handler.handler;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

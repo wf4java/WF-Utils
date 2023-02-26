@@ -4,9 +4,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import wf.utils.bukkit.commands.command_builder.Argument;
 import wf.utils.bukkit.commands.command_builder.types.ArgumentType;
-import wf.utils.bukkit.commands.command_handler.SubCommandBuilder;
-import wf.utils.bukkit.commands.command_handler.Subcommand;
-import wf.utils.java.thread.queue.Queue;
+import wf.utils.bukkit.commands.command_handler.subcommand.SubCommandBuilder;
+import wf.utils.bukkit.commands.command_handler.subcommand.SubCommand;
 import wf.utils.java.time.cooldown.CoolDown;
 
 public class Main13 {
@@ -15,7 +14,7 @@ public class Main13 {
 
     public static void main(String[] args) {
 
-        Subcommand subcommand = new SubCommandBuilder()
+        SubCommand subcommand = new SubCommandBuilder()
                 .setCommand("invite")
                 .setPermission("moderator")
                 .setOnlyPlayer(true)
