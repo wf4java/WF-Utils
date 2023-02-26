@@ -19,19 +19,28 @@ public class GeneralLanguage implements Language {
 
 
 
-    private static List<String> availableLanguages;
+    private List<String> availableLanguages;
     private BukkitConfig languageConfig;
     private BukkitConfig optionsConfig;
-    private String toPath;
+    private String path;
     private ConfigDefaultValue[] defaultValues;
     private String selectedLanguage;
     private MessageReceiver messageReceiver;
 
-    public GeneralLanguage(Plugin plugin, String resourcePath, String toPath, ConfigDefaultValue... defaultValues) {
-        this.toPath = toPath;
+
+
+    public GeneralLanguage(Plugin plugin, String toPath, ConfigDefaultValue... defaultValues) {
+        this(plugin, toPath, new String[0], defaultValues);
+    }
+    public GeneralLanguage(Plugin plugin, String toPath, String... defaultLanguages) {
+        this(plugin, toPath, defaultLanguages, new ConfigDefaultValue[0]);
+    }
+
+    public GeneralLanguage(Plugin plugin, String toPath, String[] defaultLanguages, ConfigDefaultValue... defaultValues) {
+        this.path = toPath;
         this.defaultValues = defaultValues;
         optionsConfig = new BukkitConfig(plugin,toPath + File.separator + "options",false);
-        availableLanguages = copyAllConfigs(plugin, resourcePath, toPath);
+        availableLanguages = copyAllConfigs(plugin, path, defaultLanguages);
 
         if(optionsConfig.contains("general_language")){
             String generalLanguage = optionsConfig.getString("general_language");
@@ -51,20 +60,22 @@ public class GeneralLanguage implements Language {
             optionsConfig.set("general_language", generalLanguage);
             optionsConfig.save();
         }
-
-
     }
 
-   private List<String> copyAllConfigs(Plugin plugin, String resourcePath, String toPath){
-       List<String> files = ResourceUtils.getResourceFiles(plugin.getClass(), resourcePath);
-       List<String> existingFiles = getExistingConfigs(plugin, toPath);
+   private List<String> copyAllConfigs(Plugin plugin, String path, String[] defaultLanguages){
+       List<String> files = new ArrayList<>();
+       for(String l : defaultLanguages){
+           plugin.saveResource(path + File.separator + l + ".yml",false);
+           files.add(l + ".yml");
+       }
+       List<String> existingFiles = getExistingConfigs(plugin, path);
        if(files.isEmpty() && existingFiles.isEmpty()){
-           languageConfig = new BukkitConfig(plugin, toPath + File.separator + "en",false, defaultValues);
+           languageConfig = new BukkitConfig(plugin, path + File.separator + "en",false, defaultValues);
            return Arrays.asList("en");
        }else{
            for(String name : files){
                if(existingFiles.contains(name)) continue;
-               ResourceUtils.copyFromResource(resourcePath + File.separator + name,toPath + File.separator + name,false);
+               ResourceUtils.copyFromResource(path + File.separator + name,path + File.separator + name,false);
            }
        }
        files.addAll(existingFiles);
@@ -78,16 +89,40 @@ public class GeneralLanguage implements Language {
     }
 
     public void selectLanguage(Plugin plugin, String lang){
-        languageConfig = new BukkitConfig(plugin, toPath + File.separator + lang);
+        languageConfig = new BukkitConfig(plugin, path + File.separator + lang);
         optionsConfig.set("general_language", lang);
         optionsConfig.save();
         selectedLanguage = lang;
         messageReceiver = MessageReceiverBuilder.create(languageConfig.getConfig(), selectedLanguage);
     }
 
+    public void loadMessageReceiver(){
+        messageReceiver = new MessageReceiver() {
+            @Override
+            public String get(String path) {
+                return mess(path);
+            }
+
+            @Override
+            public String get(String path, boolean colorTranslate) {
+                return mess(path, colorTranslate);
+            }
+
+            @Override
+            public String get(String path, char colorChar) {
+                return mess(path, colorChar);
+            }
+
+            @Override
+            public String getLanguage() {
+                return selectedLanguage;
+            }
+        };
+    }
     public MessageReceiver getMessageReceiver(){
         return messageReceiver;
     }
+
 
     public String mess(String path) {
         String mess = languageConfig.getString(path);
@@ -107,17 +142,18 @@ public class GeneralLanguage implements Language {
                 ChatColor.translateAlternateColorCodes(colorChar, mess);
     }
 
+
     @Override
     public BukkitConfig getConfig() {
         return null;
     }
 
-    public static List<String> getAvailableLanguages() {
+    public List<String> getAvailableLanguages() {
         return availableLanguages;
     }
 
-    public static void setAvailableLanguages(List<String> availableLanguages) {
-        GeneralLanguage.availableLanguages = availableLanguages;
+    public void setAvailableLanguages(List<String> availableLanguages) {
+        this.availableLanguages = availableLanguages;
     }
 
     public BukkitConfig getLanguageConfig() {
@@ -136,12 +172,12 @@ public class GeneralLanguage implements Language {
         this.optionsConfig = optionsConfig;
     }
 
-    public String getToPath() {
-        return toPath;
+    public String getPath() {
+        return path;
     }
 
-    public void setToPath(String toPath) {
-        this.toPath = toPath;
+    public void setPath(String path) {
+        this.path = path;
     }
 
     public ConfigDefaultValue[] getDefaultValues() {

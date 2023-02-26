@@ -1,6 +1,7 @@
 package wf.utils.java.file.utils;
 
 
+import org.bukkit.plugin.java.JavaPlugin;
 import wf.utils.java.file.yamlconfiguration.configuration.Config;
 import wf.utils.java.file.yamlconfiguration.file.YamlConfiguration;
 
