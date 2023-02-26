@@ -152,8 +152,8 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
 
         if(language instanceof GeneralLanguage) {
             addSubcommand(new SubCommandBuilder()
-                    .setCommand("languages")
-                    .setArguments(new Argument(BukkitArgumentType.LANGUAGE))
+                    .setCommand("language")
+                    .setArguments(new Argument(BukkitArgumentType.LANGUAGE(language)))
                     .setRunnable((sender, command, args) -> {((GeneralLanguage) language).selectLanguage(plugin, (String) args[0]);})
                     .build());
         }
@@ -206,9 +206,11 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
         this.ownCommandName = ownCommandName;
     }
 
-    public void setLanguage(GeneralLanguage language) {
-        this.language = language;
+    public Language getLanguage() {
+        return language;
     }
+
+
 
     @Override
     public String toString() {

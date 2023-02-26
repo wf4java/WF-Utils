@@ -6,7 +6,7 @@
 
     <groupId>wf.utils</groupId>
     <artifactId>WF-Utils</artifactId>
-    <version>1.17</version>
+    <version>1.18</version>
     <packaging>jar</packaging>
 
     <name>WF-Utils</name>

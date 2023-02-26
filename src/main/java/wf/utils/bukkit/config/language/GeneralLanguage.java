@@ -8,6 +8,7 @@ import wf.utils.java.file.utils.ResourceUtils;
 import wf.utils.java.file.yamlconfiguration.configuration.ConfigDefaultValue;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,15 +33,15 @@ public class GeneralLanguage implements Language {
     public GeneralLanguage(Plugin plugin, String toPath, ConfigDefaultValue... defaultValues) {
         this(plugin, toPath, new String[0], defaultValues);
     }
-    public GeneralLanguage(Plugin plugin, String toPath, String... defaultLanguages) {
-        this(plugin, toPath, defaultLanguages, new ConfigDefaultValue[0]);
+    public GeneralLanguage(Plugin plugin, String toPath, String... dl) {
+        this(plugin, toPath, dl, new ConfigDefaultValue[0]);
     }
 
-    public GeneralLanguage(Plugin plugin, String toPath, String[] defaultLanguages, ConfigDefaultValue... defaultValues) {
+    public GeneralLanguage(Plugin plugin, String toPath, String[] dl, ConfigDefaultValue... defaultValues) {
         this.path = toPath;
         this.defaultValues = defaultValues;
         optionsConfig = new BukkitConfig(plugin,toPath + File.separator + "options",false);
-        availableLanguages = copyAllConfigs(plugin, path, defaultLanguages);
+        availableLanguages = copyAllConfigs(plugin, path, dl);
 
         if(optionsConfig.contains("general_language")){
             String generalLanguage = optionsConfig.getString("general_language");
@@ -62,23 +63,21 @@ public class GeneralLanguage implements Language {
         }
     }
 
-   private List<String> copyAllConfigs(Plugin plugin, String path, String[] defaultLanguages){
+   private List<String> copyAllConfigs(Plugin plugin, String path, String[] dl){
        List<String> files = new ArrayList<>();
-       for(String l : defaultLanguages){
-           plugin.saveResource(path + File.separator + l + ".yml",false);
-           files.add(l + ".yml");
+       for(String l : dl){
+           copyFromResource(plugin,path + File.separator + l + ".yml");
+           files.add(l);
        }
        List<String> existingFiles = getExistingConfigs(plugin, path);
        if(files.isEmpty() && existingFiles.isEmpty()){
            languageConfig = new BukkitConfig(plugin, path + File.separator + "en",false, defaultValues);
            return Arrays.asList("en");
-       }else{
-           for(String name : files){
-               if(existingFiles.contains(name)) continue;
-               ResourceUtils.copyFromResource(path + File.separator + name,path + File.separator + name,false);
-           }
        }
-       files.addAll(existingFiles);
+       for(String s : existingFiles){
+           if(files.contains(s)) continue;
+           files.add(s);
+       }
        return files;
     }
 
@@ -86,6 +85,11 @@ public class GeneralLanguage implements Language {
         ArrayList<String> fileNames = new ArrayList<>(Arrays.asList(Objects.requireNonNull(new File(plugin.getDataFolder(), toPath).list())));
         fileNames.remove("options.yml");
         return fileNames.stream().map((f) -> {return f.split("\\.")[0];}).collect(Collectors.toList());
+    }
+
+    private static void copyFromResource(Plugin plugin, String path){
+        File file = new File(plugin.getDataFolder(), path);
+        if (!file.exists()) {plugin.saveResource(path, true);}
     }
 
     public void selectLanguage(Plugin plugin, String lang){

@@ -5,8 +5,9 @@ import wf.utils.bukkit.commands.command_builder.types.ArgumentType;
 import wf.utils.bukkit.commands.command_builder.types.bukkit.target_block.XTargetBlockArgument;
 import wf.utils.bukkit.commands.command_builder.types.bukkit.target_block.YTargetBlockArgument;
 import wf.utils.bukkit.commands.command_builder.types.bukkit.target_block.ZTargetBlockArgument;
+import wf.utils.bukkit.config.language.Language;
 
-public interface BukkitArgumentType {
+public class BukkitArgumentType {
 
     public static final ArgumentType ONLINE_PLAYER = new OnlinePlayerArgument(true);
     public static final ArgumentType MATERIAL = new MaterialArgument();
@@ -17,8 +18,9 @@ public interface BukkitArgumentType {
     public static final ArgumentType Y_TARGET_BLOCK = new YTargetBlockArgument(25,true);
     public static final ArgumentType Z_TARGET_BLOCK = new ZTargetBlockArgument(25,true);
 
-    public static final ArgumentType LANGUAGE = new LanguageArgument();
-    public static final ArgumentType PLAYER_LANGUAGE = new LanguageArgument();
+
+    public static ArgumentType LANGUAGE(Language language){return new LanguageArgument(language);}
+    public static final ArgumentType PLAYER_LANGUAGE = null;
 
 
 }
