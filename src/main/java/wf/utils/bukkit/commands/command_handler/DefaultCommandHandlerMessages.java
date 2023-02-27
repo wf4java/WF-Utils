@@ -12,7 +12,7 @@ public class DefaultCommandHandlerMessages {
         values[1] = new ConfigDefaultValue("COMMAND.DEFAULT.COMMAND_NOT_FOUND","Command not found!");
         values[2] = new ConfigDefaultValue("COMMAND.DEFAULT.NOT_FOUND_AVAILABLE_COMMANDS","Not found available commands!");
         values[3] = new ConfigDefaultValue("COMMAND.DEFAULT.YOU_NOT_HAVE_PERMISSION","You not have permission!");
-        values[4] = new ConfigDefaultValue("COMMAND.DEFAULT.LANGUAGE_CHANGE", "You change language on %{lang}");
+        values[4] = new ConfigDefaultValue("COMMAND.DEFAULT.LANGUAGE_CHANGE", "You change language on: %{lang}");
         values[5] = new ConfigDefaultValue("COMMAND.DEFAULT.ARGUMENT.BLOCK_ARGUMENT_WRONG","This argument is not valid, enter minecraft block name!");
         values[6] = new ConfigDefaultValue("COMMAND.DEFAULT.ARGUMENT.ITEM_ARGUMENT_WRONG","This argument is not valid, enter minecraft item name!");
         values[7] = new ConfigDefaultValue("COMMAND.DEFAULT.ARGUMENT.LANGUAGE_ARGUMENT_WRONG","This argument is not valid, enter available language!");

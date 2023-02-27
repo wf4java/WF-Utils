@@ -159,14 +159,22 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
                     .setCommand("language")
                     .setPermission("wf.language.change")
                     .setArguments(new Argument(BukkitArgumentType.LANGUAGE(language)))
-                    .setRunnable((sender, command, args) -> {((GeneralLanguage) language).selectLanguage(plugin, (String) args[0]);})
+                    .setRunnable((sender, command, args) -> {
+                                ((GeneralLanguage) language).selectLanguage(plugin, (String) args[0]);
+                                sender.sendMessage(ChatColor.YELLOW + getMess(sender,"LANGUAGE_CHANGE")
+                                        .replace("%{lang}",ChatColor.AQUA + (String) args[0]));
+                    })
                     .build());
         }
         else if(languageType == LanguageType.PERSONAL){
             addSubcommand(new SubCommandBuilder()
                     .setCommand("language")
                     .setArguments(new Argument(BukkitArgumentType.LANGUAGE(language)))
-                    .setRunnable((sender, command, args) -> {((PersonalLanguage) language).setPlayerLanguage(sender.getName(), (String) args[0]);})
+                    .setRunnable((sender, command, args) -> {
+                        ((PersonalLanguage) language).setPlayerLanguage(sender.getName(), (String) args[0]);
+                        sender.sendMessage(ChatColor.YELLOW + getMess(sender,"LANGUAGE_CHANGE")
+                                .replace("%{lang}",ChatColor.AQUA + (String) args[0]));
+                    })
                     .build());
         }
 

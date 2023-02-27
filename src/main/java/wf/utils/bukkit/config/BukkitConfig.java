@@ -37,11 +37,13 @@ public class BukkitConfig {
     public BukkitConfig(Plugin plugin, String configName, boolean autoCopy, ConfigDefaultValue... values){
         this(plugin, configName, autoCopy);
         setDefaultValues(values);
+        save();
     }
 
     public BukkitConfig(Plugin plugin, String configName, ConfigDefaultValue... values){
         this(plugin, configName);
         setDefaultValues(values);
+        save();
     }
 
     public void setDefaultValues(boolean replace, ConfigDefaultValue... values){
