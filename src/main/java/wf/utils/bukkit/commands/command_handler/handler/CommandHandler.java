@@ -157,7 +157,7 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
         if(languageType == LanguageType.GENERAL) {
             addSubcommand(new SubCommandBuilder()
                     .setCommand("language")
-                    .setPermission("wf.change.language")
+                    .setPermission("wf.language.change")
                     .setArguments(new Argument(BukkitArgumentType.LANGUAGE(language)))
                     .setRunnable((sender, command, args) -> {((GeneralLanguage) language).selectLanguage(plugin, (String) args[0]);})
                     .build());

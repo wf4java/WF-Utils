@@ -62,6 +62,9 @@ public class PersonalLanguage implements Language {
         }
     }
 
+    private static MessageReceiver getLastElement(MessageReceiver[] array){
+        return array[array.length - 1];
+    }
 
 
     public static MessageReceiver createMessageReceiver(FileConfiguration config, String language){
@@ -94,9 +97,10 @@ public class PersonalLanguage implements Language {
 
     public MessageReceiver getMessageReceiver(String player){
         String language = optionsConfig.getString("players." + player + ".language");
-        if(language == null) return allReceivers.values().toArray(new MessageReceiver[0])[0];
+
+        if(language == null) return getLastElement(allReceivers.values().toArray(new MessageReceiver[0]));
         MessageReceiver mr = allReceivers.get(language);
-        return mr != null ? mr : allReceivers.values().toArray(new MessageReceiver[0])[0];
+        return mr != null ? mr : getLastElement(allReceivers.values().toArray(new MessageReceiver[0]));
     }
 
     public void setPlayerLanguage(String player, String language){
@@ -109,4 +113,39 @@ public class PersonalLanguage implements Language {
         return availableLanguages;
     }
 
+    public void setAvailableLanguages(List<String> availableLanguages) {
+        this.availableLanguages = availableLanguages;
+    }
+
+    public ArrayList<BukkitConfig> getAllLanguages() {
+        return allLanguages;
+    }
+
+    public void setAllLanguages(ArrayList<BukkitConfig> allLanguages) {
+        this.allLanguages = allLanguages;
+    }
+
+    public HashMap<String, MessageReceiver> getAllReceivers() {
+        return allReceivers;
+    }
+
+    public void setAllReceivers(HashMap<String, MessageReceiver> allReceivers) {
+        this.allReceivers = allReceivers;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public BukkitConfig getOptionsConfig() {
+        return optionsConfig;
+    }
+
+    public void setOptionsConfig(BukkitConfig optionsConfig) {
+        this.optionsConfig = optionsConfig;
+    }
 }
