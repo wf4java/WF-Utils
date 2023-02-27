@@ -13,8 +13,8 @@ import java.util.List;
 
 public class Config {
 
-    public File file;
-    public FileConfiguration config;
+    private File file;
+    private FileConfiguration config;
 
 
     public Config(String path, String resourcePath){

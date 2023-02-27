@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface Language {
 
-    public BukkitConfig getConfig();
+    public default BukkitConfig getConfig(){
+        return null;
+    }
     public List<String> getAvailableLanguages();
 
 

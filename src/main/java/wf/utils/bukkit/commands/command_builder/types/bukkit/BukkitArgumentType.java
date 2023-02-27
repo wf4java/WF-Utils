@@ -20,7 +20,5 @@ public class BukkitArgumentType {
 
 
     public static ArgumentType LANGUAGE(Language language){return new LanguageArgument(language);}
-    public static final ArgumentType PLAYER_LANGUAGE = null;
-
 
 }

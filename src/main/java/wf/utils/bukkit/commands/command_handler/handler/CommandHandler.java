@@ -157,8 +157,11 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
                     .build());
         }
         else if(languageType == LanguageType.PERSONAL){
-//            addSubcommand("languages", new Subcommand(new SubCommandExecutor(new Argument(BukkitArgumentType.PLAYER_LANGUAGE)),
-//                    (sender, command, args) -> {PlayerLanguage.setPlayerLanguage(sender.getName(), (String) args[0]);}));
+            addSubcommand(new SubCommandBuilder()
+                    .setCommand("language")
+                    .setArguments(new Argument(BukkitArgumentType.LANGUAGE(language)))
+                    .setRunnable((sender, command, args) -> {((PersonalLanguage) language).setPlayerLanguage(sender.getName(), (String) args[0]);})
+                    .build());
         }
 
 
@@ -176,7 +179,7 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
     }
 
     public MessageReceiver getMessageReceiver(String player){
-        if(languageType == LanguageType.PERSONAL) return ((PlayerLanguage) language).getMessageReceiver(player);
+        if(languageType == LanguageType.PERSONAL) return ((PersonalLanguage) language).getMessageReceiver(player);
         if(languageType == LanguageType.GENERAL) return ((GeneralLanguage) language).getMessageReceiver();
         return null;
     }
@@ -185,7 +188,7 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
 
     public String getMess(CommandSender sender, String path){
         if(languageType == LanguageType.GENERAL) return ((GeneralLanguage) language).mess(path);
-        if(languageType == LanguageType.PERSONAL) return ((PlayerLanguage) language).getMessageReceiver(sender.getName()).get(path);
+        if(languageType == LanguageType.PERSONAL) return ((PersonalLanguage) language).getMessageReceiver(sender.getName()).get(path);
         return path;
     }
 

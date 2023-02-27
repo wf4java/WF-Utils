@@ -1,11 +1,10 @@
 package wf.utils.bukkit.commands.command_handler.handler;
 
-import org.bukkit.Material;
 import org.bukkit.plugin.java.JavaPlugin;
 import wf.utils.bukkit.config.language.GeneralLanguage;
 import wf.utils.bukkit.config.language.Language;
 import wf.utils.bukkit.config.language.LanguageType;
-import wf.utils.bukkit.config.language.PlayerLanguage;
+import wf.utils.bukkit.config.language.PersonalLanguage;
 
 import java.util.ArrayList;
 
@@ -71,7 +70,7 @@ public class CommandHandlerBuilder {
         if(languagePath == null) return null;
         if(languageType == LanguageType.GENERAL){return new GeneralLanguage(plugin, languagePath, defaultLanguages.toArray(new String[0]));}
         if(languageType == LanguageType.PERSONAL){
-            return new PlayerLanguage(null, null, null);
+            return new PersonalLanguage(null, null, null);
         }
         return null;
     }

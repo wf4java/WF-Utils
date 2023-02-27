@@ -14,8 +14,8 @@ import java.util.List;
 public class BukkitConfig {
 
 
-    public File file;
-    public FileConfiguration config;
+    private File file;
+    private FileConfiguration config;
 
 
     public BukkitConfig(Plugin plugin, String configName){

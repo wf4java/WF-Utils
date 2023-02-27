@@ -8,7 +8,7 @@ public enum LanguageType {
 
     public static LanguageType getLanguageType(Language language){
         if(language instanceof GeneralLanguage) return GENERAL;
-        if(language instanceof PlayerLanguage) return PERSONAL;
+        if(language instanceof PersonalLanguage) return PERSONAL;
         return UNKNOWN;
     }
 
