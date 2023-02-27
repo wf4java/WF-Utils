@@ -13,6 +13,9 @@ import wf.utils.bukkit.commands.command_handler.DefaultCommandHandlerMessages;
 import wf.utils.bukkit.commands.command_handler.subcommand.SubCommand;
 import wf.utils.bukkit.commands.command_handler.subcommand.SubCommandBuilder;
 import wf.utils.bukkit.config.language.*;
+import wf.utils.bukkit.config.language.models.Language;
+import wf.utils.bukkit.config.language.models.LanguageType;
+import wf.utils.bukkit.config.language.models.MessageReceiver;
 import wf.utils.java.file.yamlconfiguration.configuration.ConfigDefaultValue;
 
 
@@ -154,6 +157,7 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
         if(languageType == LanguageType.GENERAL) {
             addSubcommand(new SubCommandBuilder()
                     .setCommand("language")
+                    .setPermission("wf.change.language")
                     .setArguments(new Argument(BukkitArgumentType.LANGUAGE(language)))
                     .setRunnable((sender, command, args) -> {((GeneralLanguage) language).selectLanguage(plugin, (String) args[0]);})
                     .build());

@@ -1,4 +1,4 @@
-package wf.utils.bukkit.config.language;
+package wf.utils.bukkit.config.language.models;
 
 public interface MessageReceiver {
 

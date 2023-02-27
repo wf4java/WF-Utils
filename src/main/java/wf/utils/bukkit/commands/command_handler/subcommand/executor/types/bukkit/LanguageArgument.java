@@ -2,7 +2,7 @@ package wf.utils.bukkit.commands.command_handler.subcommand.executor.types.bukki
 
 import org.bukkit.entity.Player;
 import wf.utils.bukkit.commands.command_handler.subcommand.executor.types.ArgumentType;
-import wf.utils.bukkit.config.language.Language;
+import wf.utils.bukkit.config.language.models.Language;
 
 import java.util.List;
 

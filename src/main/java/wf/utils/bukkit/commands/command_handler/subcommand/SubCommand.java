@@ -4,7 +4,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import wf.utils.bukkit.commands.command_handler.subcommand.executor.SubCommandExecutor;
-import wf.utils.bukkit.config.language.MessageReceiver;
+import wf.utils.bukkit.config.language.models.MessageReceiver;
 import wf.utils.java.functions.TriConsumer;
 
 

@@ -5,11 +5,12 @@ import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
 import wf.utils.bukkit.config.BukkitConfig;
+import wf.utils.bukkit.config.language.models.Language;
+import wf.utils.bukkit.config.language.models.MessageReceiver;
 import wf.utils.java.file.yamlconfiguration.configuration.ConfigDefaultValue;
 
 import java.io.File;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class PersonalLanguage implements Language {
 
@@ -31,8 +32,9 @@ public class PersonalLanguage implements Language {
         this.path = path;
         optionsConfig = new BukkitConfig(plugin,path + File.separator + "options",false);
 
-        // copy and load
-        loadAllLanguages(plugin, copyAllConfigs(plugin, dl), defaultValues);
+
+        availableLanguages = copyAllConfigs(plugin, dl);
+        loadAllLanguages(plugin, availableLanguages, defaultValues);
     }
 
 

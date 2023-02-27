@@ -5,7 +5,7 @@ import wf.utils.bukkit.commands.command_handler.subcommand.executor.types.Argume
 import wf.utils.bukkit.commands.command_handler.subcommand.executor.types.bukkit.target_block.XTargetBlockArgument;
 import wf.utils.bukkit.commands.command_handler.subcommand.executor.types.bukkit.target_block.YTargetBlockArgument;
 import wf.utils.bukkit.commands.command_handler.subcommand.executor.types.bukkit.target_block.ZTargetBlockArgument;
-import wf.utils.bukkit.config.language.Language;
+import wf.utils.bukkit.config.language.models.Language;
 
 public class BukkitArgumentType {
 

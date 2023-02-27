@@ -2,7 +2,7 @@ package wf.utils.bukkit.commands.command_handler.subcommand.executor;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
-import wf.utils.bukkit.config.language.MessageReceiver;
+import wf.utils.bukkit.config.language.models.MessageReceiver;
 
 import java.util.Arrays;
 

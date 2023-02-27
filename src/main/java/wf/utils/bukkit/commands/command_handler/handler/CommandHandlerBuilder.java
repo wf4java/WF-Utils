@@ -2,8 +2,8 @@ package wf.utils.bukkit.commands.command_handler.handler;
 
 import org.bukkit.plugin.java.JavaPlugin;
 import wf.utils.bukkit.config.language.GeneralLanguage;
-import wf.utils.bukkit.config.language.Language;
-import wf.utils.bukkit.config.language.LanguageType;
+import wf.utils.bukkit.config.language.models.Language;
+import wf.utils.bukkit.config.language.models.LanguageType;
 import wf.utils.bukkit.config.language.PersonalLanguage;
 
 import java.util.ArrayList;
