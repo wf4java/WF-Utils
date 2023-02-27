@@ -21,20 +21,22 @@ public class PersonalLanguage implements Language {
     private BukkitConfig optionsConfig;
 
 
-    public PersonalLanguage(Plugin plugin, String resourcePath, String path) {
 
-    }
 
     public PersonalLanguage(Plugin plugin, String path, ConfigDefaultValue... defaultValues) {
-
+        this(plugin, path, new String[0], defaultValues);
     }
 
     public PersonalLanguage(Plugin plugin, String path, String[] dl, ConfigDefaultValue... defaultValues) {
+        this.path = path;
+        optionsConfig = new BukkitConfig(plugin,path + File.separator + "options",false);
 
+        // copy and load
+        loadAllLanguages(plugin, copyAllConfigs(plugin, dl), defaultValues);
     }
 
 
-    private List<String> copyAllConfigs(Plugin plugin, String[] dl, ConfigDefaultValue... defaultValues){
+    private List<String> copyAllConfigs(Plugin plugin, String[] dl){
         List<String> files = new ArrayList<>();
         for(String l : dl){
             GeneralLanguage.copyFromResource(plugin,path + File.separator + l + ".yml");
@@ -89,12 +91,15 @@ public class PersonalLanguage implements Language {
     }
 
     public MessageReceiver getMessageReceiver(String player){
-        MessageReceiver mr = allReceivers.get(optionsConfig.getString("players." + player + ".language"));
+        String language = optionsConfig.getString("players." + player + ".language");
+        if(language == null) return allReceivers.values().toArray(new MessageReceiver[0])[0];
+        MessageReceiver mr = allReceivers.get(language);
         return mr != null ? mr : allReceivers.values().toArray(new MessageReceiver[0])[0];
     }
 
     public void setPlayerLanguage(String player, String language){
         optionsConfig.set("players." + player + ".language", language);
+        optionsConfig.save();
     }
 
     @Override

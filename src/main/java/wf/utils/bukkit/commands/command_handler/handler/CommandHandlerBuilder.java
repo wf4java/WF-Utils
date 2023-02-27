@@ -68,10 +68,8 @@ public class CommandHandlerBuilder {
 
     private Language createLanguage(){
         if(languagePath == null) return null;
-        if(languageType == LanguageType.GENERAL){return new GeneralLanguage(plugin, languagePath, defaultLanguages.toArray(new String[0]));}
-        if(languageType == LanguageType.PERSONAL){
-            return new PersonalLanguage(null, null, null);
-        }
+        if(languageType == LanguageType.GENERAL){return new GeneralLanguage(plugin, languagePath, defaultLanguages.toArray(new String[0]), CommandHandler.getLanguageDefaultValues());}
+        if(languageType == LanguageType.PERSONAL){return new PersonalLanguage(plugin, languagePath, defaultLanguages.toArray(new String[0]),CommandHandler.getLanguageDefaultValues());}
         return null;
     }
 

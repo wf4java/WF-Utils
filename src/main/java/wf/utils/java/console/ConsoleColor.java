@@ -52,7 +52,7 @@ public class ConsoleColor {
 
         for(String s : text.split(String.valueOf(key))){
             if(s.length() == 0) continue;
-            builder.append(colored(s.substring(1),ChatColor.getByChar(s.substring(0, 1)), bold));
+            builder.append(colored(s.substring(1),getColorByChar(s.substring(0, 1)), bold));
         }
 
         return builder.toString();

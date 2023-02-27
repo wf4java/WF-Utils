@@ -9,9 +9,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import wf.utils.bukkit.commands.command_builder.Argument;
 import wf.utils.bukkit.commands.command_builder.types.bukkit.BukkitArgumentType;
+import wf.utils.bukkit.commands.command_handler.DefaultCommandHandlerMessages;
 import wf.utils.bukkit.commands.command_handler.subcommand.SubCommand;
 import wf.utils.bukkit.commands.command_handler.subcommand.SubCommandBuilder;
 import wf.utils.bukkit.config.language.*;
+import wf.utils.java.file.yamlconfiguration.configuration.ConfigDefaultValue;
 
 
 import java.util.*;
@@ -212,6 +214,9 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
         return language;
     }
 
+    public static ConfigDefaultValue[] getLanguageDefaultValues(){
+        return DefaultCommandHandlerMessages.getValues();
+    }
 
 
     @Override
@@ -225,8 +230,11 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
     }
 }
 
-/*
 
+// OLD, NOT RECOMMENDED FOR USE!!! Pls use builder!
+
+
+/*
 CommandHandler commandHandler = new CommandHandler(this,"wf", new PlayerLanguage(plugin));
 
 
