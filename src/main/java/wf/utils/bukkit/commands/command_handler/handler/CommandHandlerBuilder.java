@@ -25,23 +25,15 @@ public class CommandHandlerBuilder {
         return this;
     }
 
-    public CommandHandlerBuilder setCommand(String command) {
-        commands.clear();
-        commands.add(command);
-        return this;
-    }
-    public CommandHandlerBuilder addCommand(String... command) {
+    public CommandHandlerBuilder setCommand(String... command) {
+        if(!commands.isEmpty()) commands.clear();
         for(String s : command){commands.add(s);}
         return this;
     }
 
-    public CommandHandlerBuilder setDefaultLanguage(String language) {
-        defaultLanguages.clear();
-        defaultLanguages.add(language);
-        return this;
-    }
 
-    public CommandHandlerBuilder addDefaultLanguage(String... language) {
+    public CommandHandlerBuilder setDefaultLanguage(String... language) {
+        if(!defaultLanguages.isEmpty()) defaultLanguages.clear();
         for(String s : language){defaultLanguages.add(s);}
         return this;
     }
