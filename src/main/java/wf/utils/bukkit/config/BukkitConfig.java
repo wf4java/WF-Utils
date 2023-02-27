@@ -48,7 +48,7 @@ public class BukkitConfig {
 
     public void setDefaultValues(boolean replace, ConfigDefaultValue... values){
         for(ConfigDefaultValue value : values){
-            if(replace && config.contains(value.getPath())) continue;
+            if(!replace && config.contains(value.getPath())) continue;
             config.set(value.getPath(), value.getValue());
         }
     }
