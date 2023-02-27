@@ -25,14 +25,14 @@ public class CommandHandlerBuilder {
         return this;
     }
 
-    public CommandHandlerBuilder setCommand(String... command) {
+    public CommandHandlerBuilder setCommands(String... command) {
         if(!commands.isEmpty()) commands.clear();
         for(String s : command){commands.add(s);}
         return this;
     }
 
 
-    public CommandHandlerBuilder setDefaultLanguage(String... language) {
+    public CommandHandlerBuilder setDefaultLanguages(String... language) {
         if(!defaultLanguages.isEmpty()) defaultLanguages.clear();
         for(String s : language){defaultLanguages.add(s);}
         return this;
