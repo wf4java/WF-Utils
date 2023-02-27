@@ -19,11 +19,32 @@ public class DefaultCommandHandlerMessages {
         values[8] = new ConfigDefaultValue("COMMAND.DEFAULT.ARGUMENT.MATERIAL_ARGUMENT_WRONG","This argument is not valid, enter minecraft material name!");
         values[9] = new ConfigDefaultValue("COMMAND.DEFAULT.ARGUMENT.ONLINE_PLAYER_ARGUMENT_WRONG","This argument is not valid, enter online player name!");
         values[10] = new ConfigDefaultValue("COMMAND.DEFAULT.ARGUMENT.BOOLEAN_ARGUMENT_WRONG","This argument is not valid, enter true/false!");
-        values[11] = new ConfigDefaultValue("COMMAND.DEFAULT.ARGUMENT.DOUBLE_ARGUMENT_WRONG","This argument is not valid, enter an number!");
-        values[12] = new ConfigDefaultValue("COMMAND.DEFAULT.ARGUMENT.INTEGER_ARGUMENT_WRONG","This argument is not valid, enter an number(integer)!");
+        values[11] = new ConfigDefaultValue("COMMAND.DEFAULT.ARGUMENT.DOUBLE_ARGUMENT_WRONG","This argument is not valid, enter a number!");
+        values[12] = new ConfigDefaultValue("COMMAND.DEFAULT.ARGUMENT.INTEGER_ARGUMENT_WRONG","This argument is not valid, enter a number(integer)!");
 
 
     }
+
+
+//CONFIG FORMAT:
+/*
+COMMAND:
+    DEFAULT:
+        WRITE_ALL_ARGUMENTS: Write all arguments!
+        COMMAND_NOT_FOUND: Command not found!
+        NOT_FOUND_AVAILABLE_COMMANDS: Not found available commands!
+        YOU_NOT_HAVE_PERMISSION: You not have permission!
+        LANGUAGE_CHANGE: 'You change language on: %{lang}'
+        ARGUMENT:
+            BLOCK_ARGUMENT_WRONG: This argument is not valid, enter minecraft block name!
+            ITEM_ARGUMENT_WRONG: This argument is not valid, enter minecraft item name!
+            LANGUAGE_ARGUMENT_WRONG: This argument is not valid, enter available language!
+            MATERIAL_ARGUMENT_WRONG: This argument is not valid, enter minecraft material name!
+            ONLINE_PLAYER_ARGUMENT_WRONG: This argument is not valid, enter online player name!
+            BOOLEAN_ARGUMENT_WRONG: This argument is not valid, enter true/false!
+            DOUBLE_ARGUMENT_WRONG: This argument is not valid, enter a number!
+            INTEGER_ARGUMENT_WRONG: This argument is not valid, enter a number(integer)!
+*/
 
 
     public static ConfigDefaultValue[] getValues() {
