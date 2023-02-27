@@ -1,7 +1,7 @@
-package wf.utils.bukkit.commands.command_builder;
+package wf.utils.bukkit.commands.command_handler.subcommand.executor;
 
 
-import wf.utils.bukkit.commands.command_builder.types.ArgumentType;
+import wf.utils.bukkit.commands.command_handler.subcommand.executor.types.ArgumentType;
 
 public class Argument {
 

@@ -1,4 +1,4 @@
-package wf.utils.bukkit.commands.command_builder;
+package wf.utils.bukkit.commands.command_handler.subcommand.executor;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;

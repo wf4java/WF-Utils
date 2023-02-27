@@ -1,11 +1,11 @@
-package wf.utils.bukkit.commands.command_builder.types;
+package wf.utils.bukkit.commands.command_handler.subcommand.executor.types;
 
 
 import org.bukkit.entity.Player;
-import wf.utils.bukkit.commands.command_builder.types.standart.IntegerArgument;
-import wf.utils.bukkit.commands.command_builder.types.standart.BooleanArgument;
-import wf.utils.bukkit.commands.command_builder.types.standart.DoubleArgument;
-import wf.utils.bukkit.commands.command_builder.types.standart.StringArgument;
+import wf.utils.bukkit.commands.command_handler.subcommand.executor.types.standart.BooleanArgument;
+import wf.utils.bukkit.commands.command_handler.subcommand.executor.types.standart.DoubleArgument;
+import wf.utils.bukkit.commands.command_handler.subcommand.executor.types.standart.IntegerArgument;
+import wf.utils.bukkit.commands.command_handler.subcommand.executor.types.standart.StringArgument;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
-package wf.utils.bukkit.commands.command_builder.types.bukkit;
+package wf.utils.bukkit.commands.command_handler.subcommand.executor.types.bukkit;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import wf.utils.bukkit.commands.command_builder.types.ArgumentType;
+import wf.utils.bukkit.commands.command_handler.subcommand.executor.types.ArgumentType;
 
 import java.util.List;
 import java.util.stream.Collectors;

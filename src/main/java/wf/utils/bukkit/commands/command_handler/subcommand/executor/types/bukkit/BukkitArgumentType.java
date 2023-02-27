@@ -1,10 +1,10 @@
-package wf.utils.bukkit.commands.command_builder.types.bukkit;
+package wf.utils.bukkit.commands.command_handler.subcommand.executor.types.bukkit;
 
 
-import wf.utils.bukkit.commands.command_builder.types.ArgumentType;
-import wf.utils.bukkit.commands.command_builder.types.bukkit.target_block.XTargetBlockArgument;
-import wf.utils.bukkit.commands.command_builder.types.bukkit.target_block.YTargetBlockArgument;
-import wf.utils.bukkit.commands.command_builder.types.bukkit.target_block.ZTargetBlockArgument;
+import wf.utils.bukkit.commands.command_handler.subcommand.executor.types.ArgumentType;
+import wf.utils.bukkit.commands.command_handler.subcommand.executor.types.bukkit.target_block.XTargetBlockArgument;
+import wf.utils.bukkit.commands.command_handler.subcommand.executor.types.bukkit.target_block.YTargetBlockArgument;
+import wf.utils.bukkit.commands.command_handler.subcommand.executor.types.bukkit.target_block.ZTargetBlockArgument;
 import wf.utils.bukkit.config.language.Language;
 
 public class BukkitArgumentType {

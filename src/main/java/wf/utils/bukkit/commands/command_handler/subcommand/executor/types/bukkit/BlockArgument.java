@@ -1,32 +1,34 @@
-package wf.utils.bukkit.commands.command_builder.types.bukkit;
+package wf.utils.bukkit.commands.command_handler.subcommand.executor.types.bukkit;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import wf.utils.bukkit.commands.command_builder.types.ArgumentType;
+import wf.utils.bukkit.commands.command_handler.subcommand.executor.types.ArgumentType;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemArgument  implements ArgumentType {
+public class BlockArgument implements ArgumentType {
 
     @Override
     public String getMessage() {
-        return "This argument is not valid, enter minecraft item name!";
+        return "This argument is not valid, enter minecraft block name!";
     }
 
     @Override
     public String getMessageCode() {
-        return "ITEM_ARGUMENT_WRONG";
+        return "BLOCK_ARGUMENT_WRONG";
     }
 
     @Override
     public String getName() {
-        return "item";
+        return "block";
     }
 
     @Override
     public boolean isIt(String argument) {
-        return Material.getMaterial(argument.toUpperCase()) != null;
+        Material material = Material.getMaterial(argument.toUpperCase());
+        if(material == null || !material.isBlock()) return false;
+        return true;
     }
 
     @Override
@@ -40,11 +42,10 @@ public class ItemArgument  implements ArgumentType {
     }
 
 
-
     private List<String> getAllMaterials() {
         List<String> list = new ArrayList<String>();
         for(Material mat : Material.values()) {
-            if(mat.isItem()) list.add(mat.name().toLowerCase());
+            if(mat.isBlock()) list.add(mat.name().toLowerCase());
         }
 
         return list;
@@ -63,4 +64,3 @@ public class ItemArgument  implements ArgumentType {
 
 
 }
-
