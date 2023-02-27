@@ -16,7 +16,7 @@ public class IntegerArgument implements ArgumentType {
 
     @Override
     public String getMessageCode() {
-        return "INTEGER_ARGUMENT_WRONG";
+        return "COMMAND.DEFAULT.ARGUMENT.INTEGER_ARGUMENT_WRONG";
     }
 
     @Override

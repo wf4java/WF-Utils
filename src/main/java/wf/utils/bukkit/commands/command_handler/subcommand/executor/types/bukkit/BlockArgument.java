@@ -16,7 +16,7 @@ public class BlockArgument implements ArgumentType {
 
     @Override
     public String getMessageCode() {
-        return "BLOCK_ARGUMENT_WRONG";
+        return "COMMAND.DEFAULT.ARGUMENT.BLOCK_ARGUMENT_WRONG";
     }
 
     @Override

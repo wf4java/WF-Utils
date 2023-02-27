@@ -94,7 +94,7 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
         }
 
         if(msg == null) sender.sendMessage("\n" + ChatColor.RED + "Command not found!");
-        else sender.sendMessage(ChatColor.RED + msg.get("COMMAND_NOT_FOUND"));
+        else sender.sendMessage(ChatColor.RED + msg.get("COMMAND.DEFAULT.COMMAND_NOT_FOUND"));
 
         return true;
     }
@@ -148,7 +148,7 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
 
                     if(availableCommandsCount == 0){
                         if(language == null) sender.sendMessage("Not found available commands!");
-                        else sender.sendMessage(getMess(sender,"NOT_FOUND_AVAILABLE_COMMANDS"));
+                        else sender.sendMessage(getMess(sender,"COMMAND.DEFAULT.NOT_FOUND_AVAILABLE_COMMANDS"));
                     }
                 }).build());
 
@@ -161,7 +161,7 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
                     .setArguments(new Argument(BukkitArgumentType.LANGUAGE(language)))
                     .setRunnable((sender, command, args) -> {
                                 ((GeneralLanguage) language).selectLanguage(plugin, (String) args[0]);
-                                sender.sendMessage(ChatColor.YELLOW + getMess(sender,"LANGUAGE_CHANGE")
+                                sender.sendMessage(ChatColor.YELLOW + getMess(sender,"COMMAND.DEFAULT.LANGUAGE_CHANGE")
                                         .replace("%{lang}",ChatColor.AQUA + (String) args[0]));
                     })
                     .build());
@@ -172,7 +172,7 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
                     .setArguments(new Argument(BukkitArgumentType.LANGUAGE(language)))
                     .setRunnable((sender, command, args) -> {
                         ((PersonalLanguage) language).setPlayerLanguage(sender.getName(), (String) args[0]);
-                        sender.sendMessage(ChatColor.YELLOW + getMess(sender,"LANGUAGE_CHANGE")
+                        sender.sendMessage(ChatColor.YELLOW + getMess(sender,"COMMAND.DEFAULT.LANGUAGE_CHANGE")
                                 .replace("%{lang}",ChatColor.AQUA + (String) args[0]));
                     })
                     .build());

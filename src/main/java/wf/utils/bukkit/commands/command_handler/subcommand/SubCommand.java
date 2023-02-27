@@ -58,7 +58,7 @@ public class SubCommand {
     public void onCommand(CommandSender sender, Command command, String[] args, int argsPosition, MessageReceiver msg){
 
         if(!checkPermission(sender)){
-            sender.sendMessage(ChatColor.RED + ("\n" + (msg == null ? "You not have permission!" : msg.get("YOU_NOT_HAVE_PERMISSION"))));
+            sender.sendMessage(ChatColor.RED + ("\n" + (msg == null ? "You not have permission!" : msg.get("COMMAND.DEFAULT.YOU_NOT_HAVE_PERMISSION"))));
             return;
         }
 

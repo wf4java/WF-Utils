@@ -24,7 +24,7 @@ public class OnlinePlayerArgument implements ArgumentType {
 
     @Override
     public String getMessageCode() {
-        return "ONLINE_PLAYER_ARGUMENT_WRONG";
+        return "COMMAND.DEFAULT.ARGUMENT.ONLINE_PLAYER_ARGUMENT_WRONG";
     }
 
     @Override

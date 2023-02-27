@@ -17,7 +17,7 @@ public class DoubleArgument implements ArgumentType {
 
     @Override
     public String getMessageCode() {
-        return "DOUBLE_ARGUMENT_WRONG";
+        return "COMMAND.DEFAULT.ARGUMENT.DOUBLE_ARGUMENT_WRONG";
     }
 
     @Override

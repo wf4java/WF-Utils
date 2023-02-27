@@ -35,7 +35,7 @@ public class SubCommandExecutor {
 
         if(getMinObligatorilyArgs() > args.length){
             sender.sendMessage("\n" + ChatColor.RED + (messages == null ? "Write all arguments!" :
-                    messages.get("WRITE_ALL_ARGUMENTS")));
+                    messages.get("COMMAND.DEFAULT.WRITE_ALL_ARGUMENTS")));
             sender.sendMessage(getArgumentsText());
             return null;
         }

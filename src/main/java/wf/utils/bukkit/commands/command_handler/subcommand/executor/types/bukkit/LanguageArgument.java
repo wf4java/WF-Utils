@@ -21,7 +21,7 @@ public class LanguageArgument implements ArgumentType {
 
     @Override
     public String getMessageCode() {
-        return "LANGUAGE_ARGUMENT_WRONG";
+        return "COMMAND.DEFAULT.ARGUMENT.LANGUAGE_ARGUMENT_WRONG";
     }
 
     @Override

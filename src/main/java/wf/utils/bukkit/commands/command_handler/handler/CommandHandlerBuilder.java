@@ -5,8 +5,10 @@ import wf.utils.bukkit.config.language.GeneralLanguage;
 import wf.utils.bukkit.config.language.models.Language;
 import wf.utils.bukkit.config.language.models.LanguageType;
 import wf.utils.bukkit.config.language.PersonalLanguage;
+import wf.utils.java.file.yamlconfiguration.configuration.ConfigDefaultValue;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class CommandHandlerBuilder {
@@ -18,6 +20,7 @@ public class CommandHandlerBuilder {
     private boolean autoAddDefaultCommands = true;
     private String languagePath;
     private LanguageType languageType = LanguageType.GENERAL;
+    private ConfigDefaultValue[] values;
 
 
     public CommandHandlerBuilder setPlugin(JavaPlugin plugin) {
@@ -60,9 +63,21 @@ public class CommandHandlerBuilder {
 
     private Language createLanguage(){
         if(languagePath == null) return null;
-        if(languageType == LanguageType.GENERAL){return new GeneralLanguage(plugin, languagePath, defaultLanguages.toArray(new String[0]), CommandHandler.getLanguageDefaultValues());}
-        if(languageType == LanguageType.PERSONAL){return new PersonalLanguage(plugin, languagePath, defaultLanguages.toArray(new String[0]),CommandHandler.getLanguageDefaultValues());}
+        if(languageType == LanguageType.GENERAL){return new GeneralLanguage(plugin, languagePath, defaultLanguages.toArray(new String[0]), getValues());}
+        if(languageType == LanguageType.PERSONAL){return new PersonalLanguage(plugin, languagePath, defaultLanguages.toArray(new String[0]), getValues());}
         return null;
+    }
+
+    private ConfigDefaultValue[] getValues(){
+        if(values == null) return CommandHandler.getLanguageDefaultValues();
+        return concatenateValues(CommandHandler.getLanguageDefaultValues(), values);
+    }
+
+    private static ConfigDefaultValue[] concatenateValues(ConfigDefaultValue[] a, ConfigDefaultValue[] b) {
+        ConfigDefaultValue[] result = new ConfigDefaultValue[a.length + b.length];
+        System.arraycopy(a, 0, result, 0, a.length);
+        System.arraycopy(b, 0, result, a.length, b.length);
+        return result;
     }
 
 }

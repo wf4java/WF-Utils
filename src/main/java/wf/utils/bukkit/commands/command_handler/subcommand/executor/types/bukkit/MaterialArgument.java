@@ -16,7 +16,7 @@ public class MaterialArgument implements ArgumentType {
 
     @Override
     public String getMessageCode() {
-        return "MATERIAL_ARGUMENT_WRONG";
+        return "COMMAND.DEFAULT.ARGUMENT.MATERIAL_ARGUMENT_WRONG";
     }
 
     @Override

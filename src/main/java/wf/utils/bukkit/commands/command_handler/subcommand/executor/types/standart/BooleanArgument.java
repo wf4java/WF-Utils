@@ -18,7 +18,7 @@ public class BooleanArgument implements ArgumentType {
 
     @Override
     public String getMessageCode() {
-        return "BOOLEAN_ARGUMENT_WRONG";
+        return "COMMAND.DEFAULT.ARGUMENT.BOOLEAN_ARGUMENT_WRONG";
     }
 
     @Override

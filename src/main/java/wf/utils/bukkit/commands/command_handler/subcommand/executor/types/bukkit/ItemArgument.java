@@ -16,7 +16,7 @@ public class ItemArgument  implements ArgumentType {
 
     @Override
     public String getMessageCode() {
-        return "ITEM_ARGUMENT_WRONG";
+        return "COMMAND.DEFAULT.ARGUMENT.ITEM_ARGUMENT_WRONG";
     }
 
     @Override
