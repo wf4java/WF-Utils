@@ -31,8 +31,8 @@ package wf.utils.java.file.yamlconfiguration.configuration;
 
 import java.util.Collections;
 import java.util.List;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import wf.utils.jetbrains.annotations.NotNull;
+import wf.utils.jetbrains.annotations.Nullable;
 
 /**
  * Represents data that may be stored in a {@link MemoryConfiguration}, along

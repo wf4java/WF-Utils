@@ -30,7 +30,7 @@
 package wf.utils.java.file.yamlconfiguration.serialization;
 
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
+import wf.utils.jetbrains.annotations.NotNull;
 
 /**
  * Represents an object that may be serialized.

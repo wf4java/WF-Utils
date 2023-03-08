@@ -104,8 +104,6 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
         if(!(sender instanceof Player)) return null;
         List<String> tabulation = new ArrayList<>();
 
-        MessageReceiver msg = getMessageReceiver(sender.getName());
-
         for(Map.Entry<String, SubCommand> entry : subcommands.entrySet()){
             if(!entry.getValue().checkPermission(sender)) continue;
 
@@ -121,9 +119,9 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
 
                 if(args.length <= subcommandArgs.length){
                     tabulation.add(subcommandArgs[args.length - 1]);
-                }else if(args.length <= subcommandArgs.length + entry.getValue().getCommandBuilder().getArguments().length){
-                    return entry.getValue().getCommandBuilder().getArguments()[args.length - subcommandArgs.length - 1].getType().
-                            tabulation((Player)sender, args[args.length - 1]);
+                }else if(args.length <= subcommandArgs.length + entry.getValue().getSubCommandExecutor().getArguments().length){
+                    return entry.getValue().getSubCommandExecutor().getArguments()[args.length - subcommandArgs.length - 1]
+                            .getType().tabulation((Player)sender, args[args.length - 1]);
                 }
 
             }
@@ -141,7 +139,7 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
                     for(Map.Entry<String, SubCommand> entry : subcommands.entrySet()){
                         if(entry.getValue().checkPermission(sender)){
                             if(availableCommandsCount == 0) sender.sendMessage("\n");
-                            sender.sendMessage(entry.getValue().getCommandBuilder().getArgumentsText());
+                            sender.sendMessage(entry.getValue().getSubCommandExecutor().getArgumentsText());
                             availableCommandsCount++;
                         }
                     }
@@ -150,7 +148,8 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
                         if(language == null) sender.sendMessage("Not found available commands!");
                         else sender.sendMessage(getMess(sender,"COMMAND.DEFAULT.NOT_FOUND_AVAILABLE_COMMANDS"));
                     }
-                }).build());
+                })
+                .build());
 
 
         if(language.getAvailableLanguages().size() > 1) {
@@ -182,12 +181,12 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
     }
 
     public void addSubcommand(String command, SubCommand subcommand) {
-        subcommand.getCommandBuilder().setCommand("/" + ownCommandName + " " + String.join(" ", command.split("\\.")) );
+        subcommand.getSubCommandExecutor().setCommand("/" + ownCommandName + " " + String.join(" ", command.split("\\.")) );
         subcommands.put(command, subcommand);
     }
 
     public void addSubcommand(SubCommand subcommand) {
-        subcommand.getCommandBuilder().setCommand("/" + ownCommandName + " " + String.join(" ", subcommand.getCommand().split("\\.")) );
+        subcommand.getSubCommandExecutor().setCommand("/" + ownCommandName + " " + String.join(" ", subcommand.getCommand().split("\\.")) );
         subcommands.put(subcommand.getCommand(), subcommand);
     }
 
@@ -242,164 +241,12 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
 }
 
 
-// OLD, NOT RECOMMENDED FOR USE!!! Pls use builder!
-
-
-/*
-CommandHandler commandHandler = new CommandHandler(this,"wf", new PlayerLanguage(plugin));
-
-
-        commandHandler.addSubcommand("mess", new Subcommand(new CommandBuilder(
-                new Argument("player", ArgumentType.STRING)
-        ), (sender, command, args) -> {
-
-            String string = (String) args[0];
-
-            sender.sendMessage(PlayerLanguage.getMessageReceiver(sender.getName()).get(string));
-        } ));
-
-        commandHandler.addSubcommand("give", new Subcommand(new CommandBuilder(
-                new Argument("player", BukkitArgumentType.ONLINE_PLAYER),
-                new Argument("item", BukkitArgumentType.ITEM),
-                new Argument("count", ArgumentType.INTEGER,false,1)
-        ), (sender, command, args) -> {
-            Player player = (Player) args[0];
-            Material material = (Material) args[1];
-            int count = (Integer) args[2];
-
-            player.getInventory().addItem(new ItemStack(material, count));
-        } ));
-
-
-        commandHandler.addSubcommand("home.removes", new Subcommand(new CommandBuilder(
-                new Argument("inf", ArgumentType.INTEGER),
-                new Argument("not", ArgumentType.BOOLEAN,false,true)
-        ), (sender, command, args) -> {
-                Bukkit.broadcastMessage(String.valueOf(args[1]) + " |3");
-
-        }));
-
-        commandHandler.addSubcommand("home.sets", new Subcommand(new CommandBuilder(
-                new Argument("inf", ArgumentType.BOOLEAN),
-                new Argument("not", ArgumentType.BOOLEAN,false,true)
-        ), (sender, command, args) -> {
-                Bukkit.broadcastMessage(String.valueOf(args[1]) + " |4");
-
-        }));
-
-        commandHandler.addSubcommand("set", new Subcommand(new CommandBuilder("wf",
-                new Argument("inf", ArgumentType.STRING),
-                new Argument("not", ArgumentType.BOOLEAN,false,true)
-        ), (sender, command, args) -> {
-                Bukkit.broadcastMessage(String.valueOf(args[1]) + " |1");
-
-        }));
-
-        commandHandler.addSubcommand("remove", new Subcommand(new CommandBuilder(
-                new Argument("inf", ArgumentType.DOUBLE),
-                new Argument("not", ArgumentType.BOOLEAN,false,true)
-        ), (sender, command, args) -> {
-                Bukkit.broadcastMessage(String.valueOf(args[1]) + " |2");
-
-        }));
-
-        commandHandler.addSubcommand("test.player", new Subcommand("test", new CommandBuilder(
-                new Argument(new OnlinePlayerArgument(false)),
-                new Argument(ArgumentType.BOOLEAN,false,true)
-        ), (sender, command, args) -> {
-                Bukkit.broadcastMessage(String.valueOf(((Player) args[0]).getHealth()));
-        }));
-
-
-
-        commandHandler.addSubcommand("test.home", new Subcommand("test", new CommandBuilder(
-                new Argument(new OnlinePlayerArgument(false)),
-                new Argument(ArgumentType.DOUBLE),
-                new Argument(ArgumentType.DOUBLE),
-                new Argument(ArgumentType.DOUBLE),
-                new Argument("hp", ArgumentType.DOUBLE),
-                new Argument(ArgumentType.BOOLEAN,false,true)
-        ), (sender, command, args) -> {
-                Bukkit.broadcastMessage(String.valueOf(((Player) args[0]).getHealth()));
-
-        }));
-
-
-        commandHandler.addSubcommand("player.give", new Subcommand("test", new CommandBuilder(
-                new Argument(new OnlinePlayerArgument(false)),
-                new Argument(BukkitArgumentType.ITEM),
-                new Argument(ArgumentType.INTEGER, false, 1)
-        ), (sender, command, args) -> {
-                ((Player) args[0]).getInventory().addItem(new ItemStack((Material) args[1], (Integer) args[2]));
-
-        }));
-
-        commandHandler.addSubcommand("player.giveb", new Subcommand("test", new CommandBuilder(
-                new Argument(new OnlinePlayerArgument(false)),
-                new Argument(BukkitArgumentType.BLOCK),
-                new Argument(ArgumentType.INTEGER,false,1)
-        ), (sender, command, args) -> {
-                ((Player) args[0]).getInventory().addItem(new ItemStack((Material) args[1], (Integer) args[2]));
-
-        }));
-
-        commandHandler.addSubcommand("player.setb", new Subcommand("test", new CommandBuilder(
-                new Argument(new OnlinePlayerArgument(false)),
-                new Argument(BukkitArgumentType.BLOCK),
-                new Argument("x", ArgumentType.DOUBLE,false,0d),
-                new Argument("y", ArgumentType.DOUBLE,false,0d),
-                new Argument("z", ArgumentType.DOUBLE,false,0d)
-        ), (sender, command, args) -> {
-                ((Player) args[0]).getLocation().add((Double) args[2], (Double) args[3] - 1, (Double) args[4]).getBlock().
-                        setType((Material) args[1]);
-
-        }));
 
 
 
 
-        commandHandler.addSubcommand("block", new Subcommand("test", new CommandBuilder(
-                new Argument("x", BukkitArgumentType.X_TARGET_BLOCK),
-                new Argument("y", BukkitArgumentType.Y_TARGET_BLOCK),
-                new Argument("z", BukkitArgumentType.Z_TARGET_BLOCK),
-                new Argument(BukkitArgumentType.BLOCK)
-        ), (sender, command, args) -> {
-                ((Player) sender).getWorld().getBlockAt((Integer) args[0], (Integer) args[1],(Integer) args[2]).setType((Material) args[3]);
-
-        }));
 
 
-        commandHandler.addSubcommand("line", new Subcommand("test", new CommandBuilder(
-                new Argument("x1", BukkitArgumentType.X_TARGET_BLOCK),
-                new Argument("y1", BukkitArgumentType.Y_TARGET_BLOCK),
-                new Argument("z1", BukkitArgumentType.Z_TARGET_BLOCK),
-                new Argument("x2", BukkitArgumentType.X_TARGET_BLOCK),
-                new Argument("y2", BukkitArgumentType.Y_TARGET_BLOCK),
-                new Argument("z2", BukkitArgumentType.Z_TARGET_BLOCK),
-                new Argument(BukkitArgumentType.BLOCK),
-                new Argument("step", ArgumentType.DOUBLE,false,1d)
-        ), (sender, command, args) -> {
-
-                double x1 = (Integer) args[0];
-                double y1 = (Integer) args[1];
-                double z1 = (Integer) args[2];
-
-                double x2 = (Integer) args[3];
-                double y2 = (Integer) args[4];
-                double z2 = (Integer) args[5];
-
-                double[] confusion = MathUtils.getConfusion(x1, y1, z1, x2, y2, z2);
-                double distance = MathUtils.getDistance(x1, y1, z1, x2, y2, z2);
-
-
-                for(double i = 0; i < distance; i += (Double) args[7]){
-                    ((Player) sender).getWorld().getBlockAt((int) Math.round(x2 + confusion[0] * i), (int) Math.round(y2 + confusion[1] * i),
-                            (int) Math.round(z2 + confusion[2] * i)).setType((Material) args[6]);
-                }
-
-        }));
-
- */
 
 
 

@@ -1,6 +1,7 @@
 package wf.utils.bukkit.commands.command_handler.subcommand.executor.types.bukkit;
 
 
+import org.bukkit.configuration.ConfigurationSection;
 import wf.utils.bukkit.commands.command_handler.subcommand.executor.types.ArgumentType;
 import wf.utils.bukkit.commands.command_handler.subcommand.executor.types.bukkit.target_block.XTargetBlockArgument;
 import wf.utils.bukkit.commands.command_handler.subcommand.executor.types.bukkit.target_block.YTargetBlockArgument;
@@ -20,5 +21,6 @@ public class BukkitArgumentType {
 
 
     public static ArgumentType LANGUAGE(Language language){return new LanguageArgument(language);}
+    public static ArgumentType CONFIGURATION_SECTION(ConfigurationSection section){return new ConfigurationSectionArgument(section);}
 
 }

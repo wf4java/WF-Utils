@@ -4,7 +4,7 @@ import wf.utils.java.file.yamlconfiguration.configuration.ConfigDefaultValue;
 
 public class DefaultCommandHandlerMessages {
 
-    private static ConfigDefaultValue[] values = new ConfigDefaultValue[13];
+    private static ConfigDefaultValue[] values = new ConfigDefaultValue[14];
 
     static {
 
@@ -21,6 +21,7 @@ public class DefaultCommandHandlerMessages {
         values[10] = new ConfigDefaultValue("COMMAND.DEFAULT.ARGUMENT.BOOLEAN_ARGUMENT_WRONG","This argument is not valid, enter true/false!");
         values[11] = new ConfigDefaultValue("COMMAND.DEFAULT.ARGUMENT.DOUBLE_ARGUMENT_WRONG","This argument is not valid, enter a number!");
         values[12] = new ConfigDefaultValue("COMMAND.DEFAULT.ARGUMENT.INTEGER_ARGUMENT_WRONG","This argument is not valid, enter a number(integer)!");
+        values[13] = new ConfigDefaultValue("COMMAND.DEFAULT.ARGUMENT.CONFIGURATION_SECTION_ARGUMENT_WRONG","This argument is not valid, enter valid name!");
 
 
     }

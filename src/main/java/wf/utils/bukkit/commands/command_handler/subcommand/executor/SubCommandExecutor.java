@@ -63,16 +63,13 @@ public class SubCommandExecutor {
 
 
     public String getWrongArgumentText(int num){
-
-        StringBuilder builder = new StringBuilder();
-
-        StringBuilder text = new StringBuilder(ChatColor.GOLD + command);
+        StringBuilder builder = new StringBuilder(ChatColor.GOLD + command);
         for(int i = 0; i < arguments.length; i++){
-            text.append(" " + ChatColor.AQUA + "{").append(i == num ? ChatColor.DARK_RED :
+            builder.append(" " + ChatColor.AQUA + "{").append(i == num ? ChatColor.DARK_RED :
                     ( i > num ? ChatColor.YELLOW : ChatColor.GREEN )).append(!arguments[i].isObligatorily() ? "@" : "").
                     append(arguments[i].getName()).append(ChatColor.AQUA).append("}");
         }
-        return text.toString();
+        return builder.toString();
     }
 
     public String getArgumentsText(){

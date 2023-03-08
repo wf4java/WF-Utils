@@ -41,8 +41,8 @@ import java.nio.file.Files;
 import wf.utils.java.file.yamlconfiguration.configuration.Configuration;
 import wf.utils.java.file.yamlconfiguration.configuration.InvalidConfigurationException;
 import wf.utils.java.file.yamlconfiguration.configuration.MemoryConfiguration;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import wf.utils.jetbrains.annotations.NotNull;
+import wf.utils.jetbrains.annotations.Nullable;
 
 /**
  * This is a base class for all {@link File}-based implementations of

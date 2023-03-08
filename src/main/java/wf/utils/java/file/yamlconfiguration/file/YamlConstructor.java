@@ -32,13 +32,13 @@ package wf.utils.java.file.yamlconfiguration.file;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import wf.utils.java.file.yamlconfiguration.serialization.ConfigurationSerialization;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.yaml.snakeyaml.constructor.SafeConstructor;
-import org.yaml.snakeyaml.error.YAMLException;
-import org.yaml.snakeyaml.nodes.MappingNode;
-import org.yaml.snakeyaml.nodes.Node;
-import org.yaml.snakeyaml.nodes.Tag;
+import wf.utils.jetbrains.annotations.NotNull;
+import wf.utils.jetbrains.annotations.Nullable;
+import wf.utils.java.file.yamlconfiguration.snakeyaml.constructor.SafeConstructor;
+import wf.utils.java.file.yamlconfiguration.snakeyaml.error.YAMLException;
+import wf.utils.java.file.yamlconfiguration.snakeyaml.nodes.MappingNode;
+import wf.utils.java.file.yamlconfiguration.snakeyaml.nodes.Node;
+import wf.utils.java.file.yamlconfiguration.snakeyaml.nodes.Tag;
 
 /**
  * Represents a custom {@link SafeConstructor} for use with a
@@ -56,8 +56,6 @@ public final class YamlConstructor extends SafeConstructor {
     
         /**
          * Creates a new basic {@link ConstructCustomObject}.
-         * 
-         * @see ConstructYamlMap#ConstructYamlMap()
          */
         private ConstructCustomObject() {
             super();

@@ -63,7 +63,7 @@ public class RSA {
         publicKey = BigInteger.valueOf(3L);
 
         while (m.gcd(publicKey).intValue() > 1) {
-            publicKey = publicKey.add(BigInteger.TWO);
+            publicKey = publicKey.add(BigInteger.valueOf(2l));
         }
 
         privateKey = publicKey.modInverse(m);

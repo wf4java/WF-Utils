@@ -15,10 +15,10 @@ public class A5Cipher {
 
     public BitSet encrypt(BitSet plainTextBits) {
         // create a copy
-        var result = new BitSet(KEY_STREAM_LENGTH);
+        BitSet result = new BitSet(KEY_STREAM_LENGTH);
         result.xor(plainTextBits);
 
-        var key = keyStreamGenerator.getNextKeyStream();
+        BitSet key = keyStreamGenerator.getNextKeyStream();
         result.xor(key);
 
         return result;

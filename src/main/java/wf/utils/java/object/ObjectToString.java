@@ -22,7 +22,8 @@ public class ObjectToString {
     }
 
     public static String filedToString(Object object, Field field){
-        if(!field.trySetAccessible()) return "";
+        field.setAccessible(true);
+        if(!field.isAccessible()) return "";
         field.setAccessible(true);
         Object result;
         try {result = field.get(object);} catch (IllegalAccessException e) {throw new RuntimeException(e);}

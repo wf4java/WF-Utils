@@ -30,8 +30,9 @@
 package wf.utils.java.file.yamlconfiguration.configuration;
 
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import wf.utils.jetbrains.annotations.NotNull;
+import wf.utils.jetbrains.annotations.Nullable;
+
 
 /**
  * This is a {@link Configuration} implementation that does not save or load

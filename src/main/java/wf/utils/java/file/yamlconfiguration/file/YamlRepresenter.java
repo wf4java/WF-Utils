@@ -34,9 +34,9 @@ import java.util.Map;
 import wf.utils.java.file.yamlconfiguration.configuration.ConfigurationSection;
 import wf.utils.java.file.yamlconfiguration.serialization.ConfigurationSerializable;
 import wf.utils.java.file.yamlconfiguration.serialization.ConfigurationSerialization;
-import org.jetbrains.annotations.NotNull;
-import org.yaml.snakeyaml.nodes.Node;
-import org.yaml.snakeyaml.representer.Representer;
+import wf.utils.jetbrains.annotations.NotNull;
+import wf.utils.java.file.yamlconfiguration.snakeyaml.nodes.Node;
+import wf.utils.java.file.yamlconfiguration.snakeyaml.representer.Representer;
 
 /**
  * A {@link Representer} that can work with
@@ -56,7 +56,7 @@ public final class YamlRepresenter extends Representer {
         /**
          * Creates a new {@link RepresentConfigurationSection}.
          * 
-         * @see RepresentMap#RepresentMap()
+
          */
         private RepresentConfigurationSection() {
             super();
@@ -86,7 +86,7 @@ public final class YamlRepresenter extends Representer {
         /**
          * Creates a new {@link RepresentConfigurationSerializable}.
          * 
-         * @see RepresentMap#RepresentMap()
+
          */
         private RepresentConfigurationSerializable() {
             super();

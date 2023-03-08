@@ -31,8 +31,8 @@ package wf.utils.java.file.yamlconfiguration.file;
 
 import java.util.List;
 import wf.utils.java.file.yamlconfiguration.configuration.MemoryConfiguration;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import wf.utils.jetbrains.annotations.NotNull;
+import wf.utils.jetbrains.annotations.Nullable;
 
 /**
  * Various settings for controlling the input and output of a

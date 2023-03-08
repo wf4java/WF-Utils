@@ -13,7 +13,7 @@ public class SubCommand {
 
     private String command;
     private String permission;
-    private SubCommandExecutor commandBuilder;
+    private SubCommandExecutor subCommandExecutor;
     private TriConsumer<CommandSender, Command, Object[]> runnable;
     private boolean onlyPlayer = false;
 
@@ -25,31 +25,31 @@ public class SubCommand {
     public SubCommand(String command, String permission, SubCommandExecutor commandBuilder, TriConsumer<CommandSender, Command, Object[]> runnable, boolean onlyPlayer) {
         this.command = command;
         this.permission = permission;
-        this.commandBuilder = commandBuilder;
+        this.subCommandExecutor = commandBuilder;
         this.runnable = runnable;
         this.onlyPlayer = onlyPlayer;
     }
 
     public SubCommand(String permission, SubCommandExecutor commandBuilder, TriConsumer<CommandSender, Command, Object[]> runnable, boolean onlyPlayer) {
         this.permission = permission;
-        this.commandBuilder = commandBuilder;
+        this.subCommandExecutor = commandBuilder;
         this.runnable = runnable;
         this.onlyPlayer = onlyPlayer;
     }
 
     public SubCommand(SubCommandExecutor commandBuilder, TriConsumer<CommandSender, Command, Object[]> runnable) {
-        this.commandBuilder = commandBuilder;
+        this.subCommandExecutor = commandBuilder;
         this.runnable = runnable;
     }
 
     public SubCommand(String permission, SubCommandExecutor commandBuilder, TriConsumer<CommandSender, Command, Object[]> runnable) {
         this.permission = permission;
-        this.commandBuilder = commandBuilder;
+        this.subCommandExecutor = commandBuilder;
         this.runnable = runnable;
     }
 
     public SubCommand(SubCommandExecutor commandBuilder, TriConsumer<CommandSender, Command, Object[]> runnable, boolean onlyPlayer) {
-        this.commandBuilder = commandBuilder;
+        this.subCommandExecutor = commandBuilder;
         this.runnable = runnable;
         this.onlyPlayer = onlyPlayer;
     }
@@ -62,7 +62,7 @@ public class SubCommand {
             return;
         }
 
-        Object[] output = commandBuilder.calculate(sender, msg, args, argsPosition);
+        Object[] output = subCommandExecutor.calculate(sender, msg, args, argsPosition);
         if(output == null) return;
         runnable.accept(sender, command, output);
     }
@@ -86,12 +86,12 @@ public class SubCommand {
         this.permission = permission;
     }
 
-    public SubCommandExecutor getCommandBuilder() {
-        return commandBuilder;
+    public SubCommandExecutor getSubCommandExecutor() {
+        return subCommandExecutor;
     }
 
-    public void setCommandBuilder(SubCommandExecutor commandBuilder) {
-        this.commandBuilder = commandBuilder;
+    public void setSubCommandExecutor(SubCommandExecutor subCommandExecutor) {
+        this.subCommandExecutor = subCommandExecutor;
     }
 
     public TriConsumer<CommandSender, Command, Object[]> getRunnable() {
@@ -122,7 +122,7 @@ public class SubCommand {
     public String toString() {
         return "Subcommand{" +
                 "permission=" + permission +
-                ", commandBuilder=" + commandBuilder +
+                ", commandBuilder=" + subCommandExecutor +
                 ", runnable=" + runnable +
                 ", onlyPlayer=" + onlyPlayer +
                 '}';

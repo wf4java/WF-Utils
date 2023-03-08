@@ -30,8 +30,8 @@
 package wf.utils.java.file.yamlconfiguration.configuration;
 
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import wf.utils.jetbrains.annotations.NotNull;
+import wf.utils.jetbrains.annotations.Nullable;
 
 /**
  * Represents a source of configurable options and settings.

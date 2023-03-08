@@ -1,7 +1,6 @@
 package wf.utils.java.values;
 
 import org.bukkit.persistence.PersistentDataAdapterContext;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 

@@ -56,8 +56,7 @@ public class ColumnarTranspositionCipher {
         String abecedarium
     ) {
         ColumnarTranspositionCipher.keyword = keyword;
-        ColumnarTranspositionCipher.abecedarium =
-            Objects.requireNonNullElse(abecedarium, ABECEDARIUM);
+        ColumnarTranspositionCipher.abecedarium = abecedarium != null ? abecedarium : ABECEDARIUM;
         table = tableBuilder(word);
         Object[][] sortedTable = sortTable(table);
         StringBuilder wordEncrypted = new StringBuilder();

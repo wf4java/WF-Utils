@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="WF-Utils">
+    <output-path>$PROJECT_DIR$/out/artifacts/WF_Utils</output-path>
+    <root id="archive" name="WF-Utils.jar">
+      <element id="module-output" name="WF-Utils" />
+    </root>
+  </artifact>
+</component>

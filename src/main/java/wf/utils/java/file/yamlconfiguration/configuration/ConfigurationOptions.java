@@ -29,7 +29,7 @@
 
 package wf.utils.java.file.yamlconfiguration.configuration;
 
-import org.jetbrains.annotations.NotNull;
+import wf.utils.jetbrains.annotations.NotNull;
 
 /**
  * Various settings for controlling the input and output of a

@@ -46,22 +46,22 @@ import wf.utils.java.file.yamlconfiguration.configuration.ConfigurationSection;
 import wf.utils.java.file.yamlconfiguration.configuration.InvalidConfigurationException;
 import wf.utils.java.file.yamlconfiguration.serialization.ConfigurationSerializable;
 import wf.utils.java.file.yamlconfiguration.serialization.ConfigurationSerialization;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.yaml.snakeyaml.DumperOptions;
-import org.yaml.snakeyaml.LoaderOptions;
-import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.comments.CommentLine;
-import org.yaml.snakeyaml.comments.CommentType;
-import org.yaml.snakeyaml.error.YAMLException;
-import org.yaml.snakeyaml.nodes.AnchorNode;
-import org.yaml.snakeyaml.nodes.MappingNode;
-import org.yaml.snakeyaml.nodes.Node;
-import org.yaml.snakeyaml.nodes.NodeTuple;
-import org.yaml.snakeyaml.nodes.ScalarNode;
-import org.yaml.snakeyaml.nodes.SequenceNode;
-import org.yaml.snakeyaml.nodes.Tag;
-import org.yaml.snakeyaml.reader.UnicodeReader;
+import wf.utils.jetbrains.annotations.NotNull;
+import wf.utils.jetbrains.annotations.Nullable;
+import wf.utils.java.file.yamlconfiguration.snakeyaml.DumperOptions;
+import wf.utils.java.file.yamlconfiguration.snakeyaml.LoaderOptions;
+import wf.utils.java.file.yamlconfiguration.snakeyaml.Yaml;
+import wf.utils.java.file.yamlconfiguration.snakeyaml.comments.CommentLine;
+import wf.utils.java.file.yamlconfiguration.snakeyaml.comments.CommentType;
+import wf.utils.java.file.yamlconfiguration.snakeyaml.error.YAMLException;
+import wf.utils.java.file.yamlconfiguration.snakeyaml.nodes.AnchorNode;
+import wf.utils.java.file.yamlconfiguration.snakeyaml.nodes.MappingNode;
+import wf.utils.java.file.yamlconfiguration.snakeyaml.nodes.Node;
+import wf.utils.java.file.yamlconfiguration.snakeyaml.nodes.NodeTuple;
+import wf.utils.java.file.yamlconfiguration.snakeyaml.nodes.ScalarNode;
+import wf.utils.java.file.yamlconfiguration.snakeyaml.nodes.SequenceNode;
+import wf.utils.java.file.yamlconfiguration.snakeyaml.nodes.Tag;
+import wf.utils.java.file.yamlconfiguration.snakeyaml.reader.UnicodeReader;
 
 /**
  * An implementation of {@link Configuration} which saves all files in

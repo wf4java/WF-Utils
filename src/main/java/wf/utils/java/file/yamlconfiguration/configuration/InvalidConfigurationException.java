@@ -29,7 +29,7 @@
 
 package wf.utils.java.file.yamlconfiguration.configuration;
 
-import org.jetbrains.annotations.NotNull;
+import wf.utils.jetbrains.annotations.NotNull;
 
 /**
  * An {@link Exception} thrown when attempting to load an invalid {@link Configuration}.
