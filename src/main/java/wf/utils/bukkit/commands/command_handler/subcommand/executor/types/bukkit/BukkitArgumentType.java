@@ -23,5 +23,8 @@ public class BukkitArgumentType {
 
     public static ArgumentType LANGUAGE(Language language){return new LanguageArgument(language);}
     public static ArgumentType CONFIGURATION(Configuration configuration){return new ConfigurationArgument(configuration);}
+    public static ArgumentType CONFIGURATION(Configuration configuration, String path){
+        return new ConfigurationArgument(configuration, path);
+    }
 
 }
