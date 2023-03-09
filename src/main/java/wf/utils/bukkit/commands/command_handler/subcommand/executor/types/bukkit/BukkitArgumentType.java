@@ -21,6 +21,6 @@ public class BukkitArgumentType {
 
 
     public static ArgumentType LANGUAGE(Language language){return new LanguageArgument(language);}
-    public static ArgumentType CONFIGURATION_SECTION(ConfigurationSection section){return new ConfigurationSectionArgument(section);}
+    public static ArgumentType CONFIGURATION(ConfigurationSection section){return new ConfigurationArgument(section);}
 
 }
