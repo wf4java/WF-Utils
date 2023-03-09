@@ -69,6 +69,7 @@ public class SubCommand {
 
 
     public boolean checkPermission(CommandSender sender){
+        if(permission == null) return true;
         if(sender.isOp() || sender.hasPermission("*")) return true;
         return sender.hasPermission(permission);
     }

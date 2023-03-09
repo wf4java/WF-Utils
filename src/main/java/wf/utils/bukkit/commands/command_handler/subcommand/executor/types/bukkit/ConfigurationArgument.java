@@ -3,9 +3,9 @@ package wf.utils.bukkit.commands.command_handler.subcommand.executor.types.bukki
 import org.bukkit.Material;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import wf.utils.bukkit.commands.command_handler.subcommand.executor.types.ArgumentType;
+import wf.utils.java.file.yamlconfiguration.file.FileConfiguration;
 
 
 import java.util.ArrayList;
