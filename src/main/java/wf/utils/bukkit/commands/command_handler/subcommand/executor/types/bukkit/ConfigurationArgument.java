@@ -13,15 +13,18 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ConfigurationSectionArgument implements ArgumentType {
+public class ConfigurationArgument implements ArgumentType {
 
-    private ConfigurationSection section;
+    private Configuration configuration;
+    private String path;
 
-    public ConfigurationSectionArgument(ConfigurationSection section) {
-        this.section = section;
+    public ConfigurationArgument(Configuration configuration, String path) {
+        this.configuration = configuration;
+        this.path = path;
     }
-    public ConfigurationSectionArgument(Configuration configuration) {
-        this(configuration.getDefaultSection());
+
+    public ConfigurationArgument(Configuration configuration) {
+        this.configuration = configuration;
     }
 
     @Override
@@ -41,7 +44,8 @@ public class ConfigurationSectionArgument implements ArgumentType {
 
     @Override
     public boolean isIt(String argument) {
-        return section.contains(argument);
+        if(path == null) return configuration.contains(argument);
+        else return configuration.contains(path + "." + argument);
     }
 
     @Override
@@ -51,7 +55,24 @@ public class ConfigurationSectionArgument implements ArgumentType {
 
     @Override
     public List<String> tabulation(Player player, String arg) {
-        return new ArrayList<>(section.getKeys(false));
+        if(path == null) return new ArrayList<>(configuration.getKeys(false));
+        else return new ArrayList<>(configuration.getConfigurationSection(path).getKeys(false));
+
     }
 
+    public Configuration getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(Configuration configuration) {
+        this.configuration = configuration;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
 }
