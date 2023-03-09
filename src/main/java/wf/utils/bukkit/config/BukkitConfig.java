@@ -4,6 +4,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
+import wf.utils.java.file.utils.types.IntegerRandom;
 import wf.utils.java.file.yamlconfiguration.configuration.ConfigDefaultValue;
 
 
@@ -104,6 +105,15 @@ public class BukkitConfig {
     public Object get(String path, Object def){ return config.get(path, def); }
     public <T> T getObject(String path, Class<T> type, T def){ return config.getObject(path, type, def); }
 
+
+
+
+    public void set(String path, IntegerRandom value){
+        set(path, value.getStringSerializable());
+    }
+    public IntegerRandom getIntegerRandom(String path){
+        return new IntegerRandom(config.getString(path));
+    }
 
 
 
