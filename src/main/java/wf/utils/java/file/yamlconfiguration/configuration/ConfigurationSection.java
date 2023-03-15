@@ -32,6 +32,7 @@ package wf.utils.java.file.yamlconfiguration.configuration;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import wf.utils.java.file.yamlconfiguration.serialization.ConfigurationSerializable;
 import wf.utils.jetbrains.annotations.Contract;
 import wf.utils.jetbrains.annotations.NotNull;

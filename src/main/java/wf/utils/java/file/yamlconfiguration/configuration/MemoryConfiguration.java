@@ -33,7 +33,6 @@ import java.util.Map;
 import wf.utils.jetbrains.annotations.NotNull;
 import wf.utils.jetbrains.annotations.Nullable;
 
-
 /**
  * This is a {@link Configuration} implementation that does not save or load
  * from any source, and stores all values in memory only.

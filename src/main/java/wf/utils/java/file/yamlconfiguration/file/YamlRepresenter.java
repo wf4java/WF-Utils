@@ -56,7 +56,7 @@ public final class YamlRepresenter extends Representer {
         /**
          * Creates a new {@link RepresentConfigurationSection}.
          * 
-
+         * @see RepresentMap#RepresentMap()
          */
         private RepresentConfigurationSection() {
             super();
@@ -86,7 +86,7 @@ public final class YamlRepresenter extends Representer {
         /**
          * Creates a new {@link RepresentConfigurationSerializable}.
          * 
-
+         * @see RepresentMap#RepresentMap()
          */
         private RepresentConfigurationSerializable() {
             super();

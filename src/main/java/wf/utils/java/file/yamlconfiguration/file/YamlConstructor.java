@@ -56,6 +56,8 @@ public final class YamlConstructor extends SafeConstructor {
     
         /**
          * Creates a new basic {@link ConstructCustomObject}.
+         * 
+         * @see ConstructYamlMap#ConstructYamlMap()
          */
         private ConstructCustomObject() {
             super();

@@ -38,6 +38,7 @@ import java.io.Reader;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+
 import wf.utils.java.file.yamlconfiguration.configuration.Configuration;
 import wf.utils.java.file.yamlconfiguration.configuration.InvalidConfigurationException;
 import wf.utils.java.file.yamlconfiguration.configuration.MemoryConfiguration;
@@ -93,7 +94,7 @@ public abstract class FileConfiguration extends MemoryConfiguration {
             }
         }
         
-        try (final Writer writer = new OutputStreamWriter(Files.newOutputStream(file.toPath()), StandardCharsets.UTF_8)) {
+        try (final Writer writer = new OutputStreamWriter(Files.newOutputStream(file.toPath()), StandardCharsets.UTF_8.name())) {
             writer.write(this.saveToString());
         }
     }
