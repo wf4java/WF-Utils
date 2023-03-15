@@ -11,6 +11,8 @@ public class Main8 {
 
     public static void main(String[] args) {
 
+        new HashMap<>();
+
         System.out.println(1 << 30);
 
         System.out.println(tableSizeFor(100));

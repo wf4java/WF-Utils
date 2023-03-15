@@ -20,9 +20,9 @@ public class Config {
 
     public Config(String path, String resourcePath){
         try {
-            file = new File(path);
+            file = new File(path + ".yml");
             if (!file.exists()) {
-                InputStream link = (Config.class.getResourceAsStream(resourcePath));
+                InputStream link = (Config.class.getResourceAsStream(resourcePath + ".yml"));
                 Files.copy(link, file.getAbsoluteFile().toPath());
             }
             config = YamlConfiguration.loadConfiguration(file);
@@ -31,9 +31,9 @@ public class Config {
 
     public Config(String path){
         try {
-            file = new File(path);
+            file = new File(path + ".yml");
             if (!file.exists()) {
-                InputStream link = (Config.class.getResourceAsStream(path));
+                InputStream link = (Config.class.getResourceAsStream(path + ".yml"));
                 if(link == null) file.createNewFile();
                 else Files.copy(link, file.getAbsoluteFile().toPath());
             }
@@ -43,9 +43,9 @@ public class Config {
 
     public Config(String path, String resourcePath, ConfigDefaultValue... values){
         try {
-            file = new File(path);
+            file = new File(path + ".yml");
             if (!file.exists()) {
-                InputStream link = (Config.class.getResourceAsStream(resourcePath));
+                InputStream link = (Config.class.getResourceAsStream(resourcePath + ".yml"));
                 Files.copy(link, file.getAbsoluteFile().toPath());
             }
             config = YamlConfiguration.loadConfiguration(file);
@@ -55,9 +55,9 @@ public class Config {
 
     public Config(String path, ConfigDefaultValue... values){
         try {
-            file = new File(path);
+            file = new File(path + ".yml");
             if (!file.exists()) {
-                InputStream link = (Config.class.getResourceAsStream(path));
+                InputStream link = (Config.class.getResourceAsStream(path + ".yml"));
                 if(link == null) file.createNewFile();
                 else Files.copy(link, file.getAbsoluteFile().toPath());
             }
