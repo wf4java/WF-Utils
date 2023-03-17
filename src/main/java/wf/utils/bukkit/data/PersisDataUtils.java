@@ -15,6 +15,11 @@ public class PersisDataUtils {
         this.plugin = plugin;
     }
 
+
+    public <T extends PersistentDataHolder> void set(String key, T item, boolean value){
+        set(plugin, key, item, value);
+    }
+
     public <T extends PersistentDataHolder> void set(String key, T item, int value){
         set(plugin, key, item, value);
     }
@@ -65,7 +70,9 @@ public class PersisDataUtils {
 
 
 
-
+    public <T extends PersistentDataHolder> boolean getBoolean(String key, T item){
+        return getBoolean(plugin, key, item);
+    }
     public <T extends PersistentDataHolder> int getInt(String key, T item){
         return getInt(plugin, key, item);
     }
@@ -119,7 +126,9 @@ public class PersisDataUtils {
 
 
 
-
+    public static <T extends PersistentDataHolder> void set(Plugin plugin, String key, T item, boolean value){
+        item.getPersistentDataContainer().set(new NamespacedKey(plugin, key), PersistentDataType.BYTE, (byte) (value ? 1 : 0));
+    }
     public static <T extends PersistentDataHolder> void set(Plugin plugin, String key, T item, int value){
         item.getPersistentDataContainer().set(new NamespacedKey(plugin, key), PersistentDataType.INTEGER, value);
     }
@@ -170,7 +179,9 @@ public class PersisDataUtils {
 
 
 
-
+    public static <T extends PersistentDataHolder> boolean getBoolean(Plugin plugin, String key, T item){
+        return item.getPersistentDataContainer().get(new NamespacedKey(plugin, key), PersistentDataType.BYTE) >= 1 ? true : false;
+    }
     public static <T extends PersistentDataHolder> int getInt(Plugin plugin, String key, T item){
         return item.getPersistentDataContainer().get(new NamespacedKey(plugin, key), PersistentDataType.INTEGER);
     }
