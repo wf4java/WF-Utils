@@ -7,11 +7,11 @@ import org.bukkit.persistence.PersistentDataHolder;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
 
-public class DataUtils {
+public class PersisDataUtils {
 
     private Plugin plugin;
 
-    public DataUtils(Plugin plugin) {
+    public PersisDataUtils(Plugin plugin) {
         this.plugin = plugin;
     }
 
