@@ -15,9 +15,9 @@ public class Main18 {
         ItemStack item = new ItemStack(Material.PLAYER_HEAD);
         Entity entity = null;
 
-        utils.set(null, "hook", item.getItemMeta(),"");
+        utils.set(null, "hook", item,"");
 
-        PersistDataUtils.getString(null, "hook", item.getItemMeta());
+        PersistDataUtils.getString(null, "hook", item);
 
     }
 

@@ -94,6 +94,104 @@ public class PersistDataUtils {
 
 
 
+    public static boolean hasBoolean(Plugin plugin, String key, ItemStack item){
+        return hasBoolean(plugin, key, item.getItemMeta());
+    }
+    public static boolean hasInt(Plugin plugin, String key, ItemStack item){
+        return hasInt(plugin, key, item.getItemMeta());
+    }
+
+    public static boolean hasDouble(Plugin plugin, String key, ItemStack item){
+        return hasDouble(plugin, key, item.getItemMeta());
+    }
+
+    public static boolean hasByte(Plugin plugin, String key, ItemStack item){
+        return hasByte(plugin, key, item.getItemMeta());
+    }
+
+    public static boolean hasLong(Plugin plugin, String key, ItemStack item){
+        return hasLong(plugin, key, item.getItemMeta());
+    }
+
+    public static boolean hasString(Plugin plugin, String key, ItemStack item){
+        return hasString(plugin, key, item.getItemMeta());
+    }
+
+    public static boolean hasShort(Plugin plugin, String key, ItemStack item){
+        return hasShort(plugin, key, item.getItemMeta());
+    }
+
+    public static boolean hasFloat(Plugin plugin, String key, ItemStack item){
+        return hasFloat(plugin, key, item.getItemMeta());
+    }
+
+    public static boolean hasByteArray(Plugin plugin, String key, ItemStack item){
+        return hasByteArray(plugin, key, item.getItemMeta());
+    }
+
+    public static boolean hasLongArray(Plugin plugin, String key, ItemStack item){
+        return hasLongArray(plugin, key, item.getItemMeta());
+    }
+
+    public static boolean hasIntArray(Plugin plugin, String key, ItemStack item){
+        return hasIntArray(plugin, key, item.getItemMeta());
+    }
+
+    public static boolean hasDataContainer(Plugin plugin, String key, ItemStack item){
+        return hasDataContainer(plugin, key, item.getItemMeta());
+    }
+
+
+
+    public boolean hasBoolean(String key, ItemStack item){
+        return hasBoolean(plugin, key, item.getItemMeta());
+    }
+    public boolean hasInt(String key, ItemStack item){
+        return hasInt(plugin, key, item.getItemMeta());
+    }
+
+    public boolean hasDouble(String key, ItemStack item){
+        return hasDouble(plugin, key, item.getItemMeta());
+    }
+
+    public boolean hasByte(String key, ItemStack item){
+        return hasByte(plugin, key, item.getItemMeta());
+    }
+
+    public boolean hasLong(String key, ItemStack item){
+        return hasLong(plugin, key, item.getItemMeta());
+    }
+
+    public boolean hasString(String key, ItemStack item){
+        return hasString(plugin, key, item.getItemMeta());
+    }
+
+    public boolean hasShort(String key, ItemStack item){
+        return hasShort(plugin, key, item.getItemMeta());
+    }
+
+    public boolean hasFloat(String key, ItemStack item){
+        return hasFloat(plugin, key, item.getItemMeta());
+    }
+
+    public boolean hasByteArray(String key, ItemStack item){
+        return hasByteArray(plugin, key, item.getItemMeta());
+    }
+
+    public boolean hasLongArray(String key, ItemStack item){
+        return hasLongArray(plugin, key, item.getItemMeta());
+    }
+
+    public boolean hasIntArray(String key, ItemStack item){
+        return hasIntArray(plugin, key, item.getItemMeta());
+    }
+
+    public boolean hasDataContainer(String key, ItemStack item){
+        return hasDataContainer(plugin, key, item.getItemMeta());
+    }
+
+
+
 
     public boolean getBoolean(String key, ItemStack item){
         return getBoolean(plugin, key, item.getItemMeta());
@@ -272,6 +370,55 @@ public class PersistDataUtils {
 
 
 
+
+
+
+
+    public boolean hasBoolean(String key, PersistentDataHolder item){
+        return hasBoolean(plugin, key, item);
+    }
+    public boolean hasInt(String key, PersistentDataHolder item){
+        return hasInt(plugin, key, item);
+    }
+
+    public boolean hasDouble(String key, PersistentDataHolder item){
+        return hasDouble(plugin, key, item);    }
+
+    public boolean hasByte(String key, PersistentDataHolder item){
+        return hasByte(plugin, key, item);    }
+
+    public boolean hasLong(String key, PersistentDataHolder item){
+        return hasLong(plugin, key, item);    }
+
+    public boolean hasString(String key, PersistentDataHolder item){
+        return hasString(plugin, key, item);    }
+
+    public boolean hasShort(String key, PersistentDataHolder item){
+        return hasShort(plugin, key, item);    }
+
+    public boolean hasFloat(String key, PersistentDataHolder item){
+        return hasFloat(plugin, key, item);    }
+
+    public boolean hasByteArray(String key, PersistentDataHolder item){
+        return hasByteArray(plugin, key, item);    }
+
+    public boolean hasLongArray(String key, PersistentDataHolder item){
+        return hasLongArray(plugin, key, item);    }
+
+    public boolean hasIntArray(String key, PersistentDataHolder item){
+        return hasIntArray(plugin, key, item);    }
+
+    public boolean hasDataContainer(String key, PersistentDataHolder item){
+        return hasDataContainer(plugin, key, item);
+    }
+
+
+
+
+
+
+
+
     public void set(String key, PersistentDataHolder item, boolean value){
         set(plugin, key, item, value);
     }
@@ -319,6 +466,15 @@ public class PersistDataUtils {
     public void set(String key, PersistentDataHolder item, PersistentDataContainer value){
         set(plugin, key, item, value);
     }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -382,6 +538,61 @@ public class PersistDataUtils {
 
 
 
+
+
+
+    public static boolean hasBoolean(Plugin plugin, String key, PersistentDataHolder item){
+        return item.getPersistentDataContainer().has(new NamespacedKey(plugin, key), PersistentDataType.BYTE);
+    }
+    public static boolean hasInt(Plugin plugin, String key, PersistentDataHolder item){
+        return item.getPersistentDataContainer().has(new NamespacedKey(plugin, key), PersistentDataType.INTEGER);
+    }
+
+    public static boolean hasDouble(Plugin plugin, String key, PersistentDataHolder item){
+        return item.getPersistentDataContainer().has(new NamespacedKey(plugin, key), PersistentDataType.DOUBLE);
+    }
+
+    public static boolean hasByte(Plugin plugin, String key, PersistentDataHolder item){
+        return item.getPersistentDataContainer().has(new NamespacedKey(plugin, key), PersistentDataType.BYTE);
+    }
+
+    public static boolean hasLong(Plugin plugin, String key, PersistentDataHolder item){
+        return item.getPersistentDataContainer().has(new NamespacedKey(plugin, key), PersistentDataType.LONG);
+    }
+
+    public static boolean hasString(Plugin plugin, String key, PersistentDataHolder item){
+        return item.getPersistentDataContainer().has(new NamespacedKey(plugin, key), PersistentDataType.STRING);
+    }
+
+    public static boolean hasShort(Plugin plugin, String key, PersistentDataHolder item){
+        return item.getPersistentDataContainer().has(new NamespacedKey(plugin, key), PersistentDataType.SHORT);
+    }
+
+    public static boolean hasFloat(Plugin plugin, String key, PersistentDataHolder item){
+        return item.getPersistentDataContainer().has(new NamespacedKey(plugin, key), PersistentDataType.FLOAT);
+    }
+
+    public static boolean hasByteArray(Plugin plugin, String key, PersistentDataHolder item){
+        return item.getPersistentDataContainer().has(new NamespacedKey(plugin, key), PersistentDataType.BYTE_ARRAY);
+    }
+
+    public static boolean hasLongArray(Plugin plugin, String key, PersistentDataHolder item){
+        return item.getPersistentDataContainer().has(new NamespacedKey(plugin, key), PersistentDataType.LONG_ARRAY);
+    }
+
+    public static boolean hasIntArray(Plugin plugin, String key, PersistentDataHolder item){
+        return item.getPersistentDataContainer().has(new NamespacedKey(plugin, key), PersistentDataType.INTEGER_ARRAY);
+    }
+
+    public static boolean hasDataContainer(Plugin plugin, String key, PersistentDataHolder item){
+        return item.getPersistentDataContainer().has(new NamespacedKey(plugin, key), PersistentDataType.TAG_CONTAINER);
+    }
+
+
+
+
+
+
     public static void set(Plugin plugin, String key, PersistentDataHolder item, boolean value){
         item.getPersistentDataContainer().set(new NamespacedKey(plugin, key), PersistentDataType.BYTE, (byte) (value ? 1 : 0));
     }
@@ -428,6 +639,14 @@ public class PersistDataUtils {
     public static void set(Plugin plugin, String key, PersistentDataHolder item, PersistentDataContainer value){
         item.getPersistentDataContainer().set(new NamespacedKey(plugin, key), PersistentDataType.TAG_CONTAINER, value);
     }
+
+
+
+
+
+
+
+
 
 
 
