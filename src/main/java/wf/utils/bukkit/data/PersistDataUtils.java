@@ -95,98 +95,122 @@ public class PersistDataUtils {
 
 
     public static boolean hasBoolean(Plugin plugin, String key, ItemStack item){
+        if(!item.hasItemMeta()) return false;
         return hasBoolean(plugin, key, item.getItemMeta());
     }
     public static boolean hasInt(Plugin plugin, String key, ItemStack item){
+        if(!item.hasItemMeta()) return false;
         return hasInt(plugin, key, item.getItemMeta());
     }
 
     public static boolean hasDouble(Plugin plugin, String key, ItemStack item){
+        if(!item.hasItemMeta()) return false;
         return hasDouble(plugin, key, item.getItemMeta());
     }
 
     public static boolean hasByte(Plugin plugin, String key, ItemStack item){
+        if(!item.hasItemMeta()) return false;
         return hasByte(plugin, key, item.getItemMeta());
     }
 
     public static boolean hasLong(Plugin plugin, String key, ItemStack item){
+        if(!item.hasItemMeta()) return false;
         return hasLong(plugin, key, item.getItemMeta());
     }
 
     public static boolean hasString(Plugin plugin, String key, ItemStack item){
+        if(!item.hasItemMeta()) return false;
         return hasString(plugin, key, item.getItemMeta());
     }
 
     public static boolean hasShort(Plugin plugin, String key, ItemStack item){
+        if(!item.hasItemMeta()) return false;
         return hasShort(plugin, key, item.getItemMeta());
     }
 
     public static boolean hasFloat(Plugin plugin, String key, ItemStack item){
+        if(!item.hasItemMeta()) return false;
         return hasFloat(plugin, key, item.getItemMeta());
     }
 
     public static boolean hasByteArray(Plugin plugin, String key, ItemStack item){
+        if(!item.hasItemMeta()) return false;
         return hasByteArray(plugin, key, item.getItemMeta());
     }
 
     public static boolean hasLongArray(Plugin plugin, String key, ItemStack item){
+        if(!item.hasItemMeta()) return false;
         return hasLongArray(plugin, key, item.getItemMeta());
     }
 
     public static boolean hasIntArray(Plugin plugin, String key, ItemStack item){
+        if(!item.hasItemMeta()) return false;
         return hasIntArray(plugin, key, item.getItemMeta());
     }
 
     public static boolean hasDataContainer(Plugin plugin, String key, ItemStack item){
+        if(!item.hasItemMeta()) return false;
         return hasDataContainer(plugin, key, item.getItemMeta());
     }
 
 
 
     public boolean hasBoolean(String key, ItemStack item){
+        if(!item.hasItemMeta()) return false;
         return hasBoolean(plugin, key, item.getItemMeta());
     }
     public boolean hasInt(String key, ItemStack item){
+        if(!item.hasItemMeta()) return false;
         return hasInt(plugin, key, item.getItemMeta());
     }
 
     public boolean hasDouble(String key, ItemStack item){
+        if(!item.hasItemMeta()) return false;
         return hasDouble(plugin, key, item.getItemMeta());
     }
 
     public boolean hasByte(String key, ItemStack item){
+        if(!item.hasItemMeta()) return false;
         return hasByte(plugin, key, item.getItemMeta());
     }
 
     public boolean hasLong(String key, ItemStack item){
+        if(!item.hasItemMeta()) return false;
         return hasLong(plugin, key, item.getItemMeta());
     }
 
     public boolean hasString(String key, ItemStack item){
+        if(!item.hasItemMeta()) return false;
         return hasString(plugin, key, item.getItemMeta());
     }
 
     public boolean hasShort(String key, ItemStack item){
+        if(!item.hasItemMeta()) return false;
         return hasShort(plugin, key, item.getItemMeta());
     }
 
     public boolean hasFloat(String key, ItemStack item){
+        if(!item.hasItemMeta()) return false;
         return hasFloat(plugin, key, item.getItemMeta());
     }
 
     public boolean hasByteArray(String key, ItemStack item){
+        if(!item.hasItemMeta()) return false;
         return hasByteArray(plugin, key, item.getItemMeta());
     }
 
     public boolean hasLongArray(String key, ItemStack item){
+        if(!item.hasItemMeta()) return false;
         return hasLongArray(plugin, key, item.getItemMeta());
     }
 
     public boolean hasIntArray(String key, ItemStack item){
+        if(!item.hasItemMeta()) return false;
         return hasIntArray(plugin, key, item.getItemMeta());
     }
 
     public boolean hasDataContainer(String key, ItemStack item){
+        if(!item.hasItemMeta()) return false;
         return hasDataContainer(plugin, key, item.getItemMeta());
     }
 

@@ -4,7 +4,9 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
-import wf.utils.java.file.utils.types.IntegerRandom;
+import wf.utils.java.file.yamlconfiguration.utils.StringSerializable;
+import wf.utils.java.file.yamlconfiguration.utils.types.IntegerInRange;
+import wf.utils.java.file.yamlconfiguration.utils.types.IntegerRandom;
 import wf.utils.java.file.yamlconfiguration.configuration.ConfigDefaultValue;
 
 
@@ -106,18 +108,37 @@ public class BukkitConfig {
     public <T> T getObject(String path, Class<T> type, T def){ return config.getObject(path, type, def); }
 
 
+    public void set(String path, StringSerializable value){
+        set(path, value.getSerializableString());
+    }
+
+    public <T extends StringSerializable> T get(String path, T value){
+        return (T) value.getSerializableObject(getString(path));
+    }
 
 
-    public void set(String path, IntegerRandom value){
-        set(path, value.getStringSerializable());
-    }
-    public IntegerRandom getIntegerRandom(String path){
-        return new IntegerRandom(config.getString(path));
-    }
 
 
 
     public ConfigurationSection getConfigurationSection(String path){ return config.getConfigurationSection(path); }
+
+
+
+
+    public void set(String path, IntegerRandom value){
+        set(path, value.getSerializableString());
+    }
+    public IntegerRandom getIntegerRandom(String path){
+        return new IntegerRandom().getSerializableObject(config.getString(path));
+    }
+
+    public void set(String path, IntegerInRange value){
+        set(path, value.getSerializableString());
+    }
+    public IntegerInRange getIntegerInRange(String path){
+        return new IntegerInRange().getSerializableObject(config.getString(path));
+    }
+
 
 
 }

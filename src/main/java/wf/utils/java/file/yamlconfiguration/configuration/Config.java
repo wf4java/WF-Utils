@@ -3,6 +3,9 @@ package wf.utils.java.file.yamlconfiguration.configuration;
 
 import wf.utils.java.file.yamlconfiguration.file.FileConfiguration;
 import wf.utils.java.file.yamlconfiguration.file.YamlConfiguration;
+import wf.utils.java.file.yamlconfiguration.utils.StringSerializable;
+import wf.utils.java.file.yamlconfiguration.utils.types.IntegerInRange;
+import wf.utils.java.file.yamlconfiguration.utils.types.IntegerRandom;
 
 import java.io.File;
 import java.io.IOException;
@@ -119,8 +122,40 @@ public class Config {
     public <T> T getObject(String path, Class<T> type, T def){ return config.getObject(path, type, def); }
 
 
+    public void set(String path, StringSerializable value){
+        set(path, value.getSerializableString());
+    }
 
+    public <T extends StringSerializable> T get(String path, T value){
+        return (T) value.getSerializableObject(getString(path));
+    }
 
     public ConfigurationSection getConfigurationSection(String path){ return config.getConfigurationSection(path); }
+
+
+
+
+
+
+
+
+
+
+
+
+    public void set(String path, IntegerRandom value){
+        set(path, value.getSerializableString());
+    }
+    public IntegerRandom getIntegerRandom(String path){
+        return new IntegerRandom().getSerializableObject(config.getString(path));
+    }
+
+    public void set(String path, IntegerInRange value){
+        set(path, value.getSerializableString());
+    }
+    public IntegerInRange getIntegerInRange(String path){
+        return new IntegerInRange().getSerializableObject(config.getString(path));
+    }
+
 
 }
