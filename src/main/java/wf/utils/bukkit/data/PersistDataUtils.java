@@ -217,6 +217,9 @@ public class PersistDataUtils {
 
 
 
+    public boolean getBooleanExists(String key, ItemStack item){
+        return getBooleanExists(plugin, key, item.getItemMeta());
+    }
     public boolean getBoolean(String key, ItemStack item){
         return getBoolean(plugin, key, item.getItemMeta());
     }
@@ -268,7 +271,9 @@ public class PersistDataUtils {
 
 
 
-
+    public static boolean getBooleanExists(Plugin plugin, String key, ItemStack item){
+        return getBooleanExists(plugin, key, item.getItemMeta());
+    }
     public static boolean getBoolean(Plugin plugin, String key, ItemStack item){
         return getBoolean(plugin, key, item.getItemMeta());
     }
@@ -504,7 +509,9 @@ public class PersistDataUtils {
 
 
 
-
+    public boolean getBooleanExists(String key, PersistentDataHolder item){
+        return getBooleanExists(plugin, key, item);
+    }
 
     public boolean getBoolean(String key, PersistentDataHolder item){
         return getBoolean(plugin, key, item);
@@ -677,9 +684,12 @@ public class PersistDataUtils {
 
 
 
-
+    public static boolean getBooleanExists(Plugin plugin, String key, PersistentDataHolder item){
+        if(!hasBoolean(plugin, key, item)) return false;
+        return item.getPersistentDataContainer().get(new NamespacedKey(plugin, key), PersistentDataType.BYTE) >= 1;
+    }
     public static boolean getBoolean(Plugin plugin, String key, PersistentDataHolder item){
-        return item.getPersistentDataContainer().get(new NamespacedKey(plugin, key), PersistentDataType.BYTE) >= 1 ? true : false;
+        return item.getPersistentDataContainer().get(new NamespacedKey(plugin, key), PersistentDataType.BYTE) >= 1;
     }
     public static int getInt(Plugin plugin, String key, PersistentDataHolder item){
         return item.getPersistentDataContainer().get(new NamespacedKey(plugin, key), PersistentDataType.INTEGER);

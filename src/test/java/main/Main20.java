@@ -34,6 +34,8 @@ public class Main20 {
 
         config.save();
 
+
+
 //        System.out.println(config.getIntegerRandom("b1").get());
 //        System.out.println(config.getIntegerRandom("b2").get());
 //        System.out.println(config.getIntegerRandom("b3").get());
