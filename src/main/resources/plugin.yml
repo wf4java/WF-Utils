@@ -1,0 +1,6 @@
+name: WF-Utils
+version: '1.0'
+main: wf.plugin.utils.main.Main
+api-version: 1.14
+authors: [ _wf_nik_ ]
+

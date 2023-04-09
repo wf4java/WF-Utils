@@ -3,6 +3,7 @@ package wf.utils.java.thread.mutex;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Mutex {
+
     private final AtomicBoolean lock;
     private final Object mutex;
 

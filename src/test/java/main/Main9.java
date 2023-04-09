@@ -1,6 +1,6 @@
 package main;
 
-import wf.utils.bukkit.commands.command_handler.subcommand.executor.SubCommandExecutor;
+import wf.utils.bukkit.command.handler.subcommand.executor.SubCommandExecutor;
 import wf.utils.java.object.ObjectToString;
 
 public class Main9 {

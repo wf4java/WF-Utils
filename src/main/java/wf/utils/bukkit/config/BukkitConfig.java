@@ -4,6 +4,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
+import wf.utils.bukkit.config.utils.ConfigSerializable;
 import wf.utils.java.file.yamlconfiguration.utils.StringSerializable;
 import wf.utils.java.file.yamlconfiguration.utils.types.IntegerInRange;
 import wf.utils.java.file.yamlconfiguration.utils.types.IntegerRandom;
@@ -13,6 +14,7 @@ import wf.utils.java.file.yamlconfiguration.configuration.ConfigDefaultValue;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class BukkitConfig {
 
@@ -117,11 +119,27 @@ public class BukkitConfig {
     }
 
 
+    public <T extends ConfigSerializable> T get(String path, T value){
+        return (T) value.getSerializableObject(getConfigurationSection(path));
+    }
+
+    public void set(String path, ConfigSerializable value){
+        set(path, value.setSerializableObject(getConfigurationSection(path)));
+    }
+
 
 
 
     public ConfigurationSection getConfigurationSection(String path){ return config.getConfigurationSection(path); }
 
+
+    public void forEach(String path, Consumer<String> consumer){
+        forEach(path,false, consumer);
+    }
+
+    public void forEach(String path, boolean deap, Consumer<String> consumer){
+        for(String s : getConfigurationSection(path).getKeys(deap)) consumer.accept(s);
+    }
 
 
 

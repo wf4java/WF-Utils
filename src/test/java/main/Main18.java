@@ -1,6 +1,7 @@
 package main;
 
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerFishEvent;
@@ -10,7 +11,7 @@ import wf.utils.bukkit.data.PersistDataUtils;
 public class Main18 {
 
 
-    private static PersistDataUtils utils = new PersistDataUtils(null);
+    private static final PersistDataUtils utils = new PersistDataUtils(null);
 
     public static void main(String[] args) {
 
@@ -20,7 +21,6 @@ public class Main18 {
         utils.set(null, "hook", item,"");
 
         PersistDataUtils.getString(null, "hook", item);
-
 
 
     }

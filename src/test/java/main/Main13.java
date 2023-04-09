@@ -2,10 +2,10 @@ package main;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import wf.utils.bukkit.commands.command_handler.subcommand.executor.Argument;
-import wf.utils.bukkit.commands.command_handler.subcommand.executor.types.ArgumentType;
-import wf.utils.bukkit.commands.command_handler.subcommand.SubCommandBuilder;
-import wf.utils.bukkit.commands.command_handler.subcommand.SubCommand;
+import wf.utils.bukkit.command.handler.subcommand.executor.Argument;
+import wf.utils.bukkit.command.handler.subcommand.executor.types.ArgumentType;
+import wf.utils.bukkit.command.handler.subcommand.SubCommandBuilder;
+import wf.utils.bukkit.command.handler.subcommand.SubCommand;
 import wf.utils.java.time.cooldown.CoolDown;
 
 public class Main13 {

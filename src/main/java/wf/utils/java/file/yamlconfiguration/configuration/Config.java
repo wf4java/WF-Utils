@@ -3,6 +3,7 @@ package wf.utils.java.file.yamlconfiguration.configuration;
 
 import wf.utils.java.file.yamlconfiguration.file.FileConfiguration;
 import wf.utils.java.file.yamlconfiguration.file.YamlConfiguration;
+import wf.utils.java.file.yamlconfiguration.utils.ConfigSerializable;
 import wf.utils.java.file.yamlconfiguration.utils.StringSerializable;
 import wf.utils.java.file.yamlconfiguration.utils.types.IntegerInRange;
 import wf.utils.java.file.yamlconfiguration.utils.types.IntegerRandom;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.List;
+import java.util.function.Consumer;
 
 
 public class Config {
@@ -36,7 +38,10 @@ public class Config {
             file = new File(path);
             if (!file.exists()) {
                 InputStream link = (Config.class.getResourceAsStream(path));
-                if(link == null) file.createNewFile();
+                if(link == null) {
+                    file.getParentFile().mkdirs();
+                    file.createNewFile();
+                }
                 else Files.copy(link, file.getAbsoluteFile().toPath());
             }
             config = YamlConfiguration.loadConfiguration(file);
@@ -60,7 +65,10 @@ public class Config {
             file = new File(path);
             if (!file.exists()) {
                 InputStream link = (Config.class.getResourceAsStream(path));
-                if(link == null) file.createNewFile();
+                if(link == null) {
+                    file.getParentFile().mkdirs();
+                    file.createNewFile();
+                }
                 else Files.copy(link, file.getAbsoluteFile().toPath());
             }
             config = YamlConfiguration.loadConfiguration(file);
@@ -122,23 +130,37 @@ public class Config {
     public <T> T getObject(String path, Class<T> type, T def){ return config.getObject(path, type, def); }
 
 
+    public ConfigurationSection getConfigurationSection(String path){ return config.getConfigurationSection(path); }
+
     public void set(String path, StringSerializable value){
         set(path, value.getSerializableString());
     }
+
 
     public <T extends StringSerializable> T get(String path, T value){
         return (T) value.getSerializableObject(getString(path));
     }
 
-    public ConfigurationSection getConfigurationSection(String path){ return config.getConfigurationSection(path); }
+
+
+    public <T extends ConfigSerializable> T get(String path, T value){
+        return (T) value.getSerializableObject(getConfigurationSection(path));
+    }
+
+    public void set(String path, ConfigSerializable value){
+        set(path, value.setSerializableObject(getConfigurationSection(path)));
+    }
 
 
 
 
+    public void forEach(String path, Consumer<String> consumer){
+        forEach(path,false, consumer);
+    }
 
-
-
-
+    public void forEach(String path, boolean deap, Consumer<String> consumer){
+        for(String s : getConfigurationSection(path).getKeys(deap)) consumer.accept(s);
+    }
 
 
 

@@ -1,6 +1,6 @@
 package wf.utils.java.time.execution;
 
-import wf.utils.java.data_utils.NumberUtils;
+import wf.utils.java.data.number.NumberUtils;
 
 public class ExecutionTimeNano {
 

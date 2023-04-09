@@ -96,5 +96,21 @@ public class MathUtils {
     }
 
 
+    public static double roundTo10(double value) {
+        return Math.round(value * 10d) / 10d;
+    }
+
+    public static double roundTo100(double value) {
+        return Math.round(value * 100d) / 100d;
+    }
+
+    public static double roundTo1000(double value) {
+        return Math.round(value * 1000d) / 1000d;
+    }
+
+    public static double roundTo10000(double value) {
+        return Math.round(value * 10000d) / 10000d;
+    }
+
 
 }

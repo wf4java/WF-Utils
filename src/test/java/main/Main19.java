@@ -11,7 +11,7 @@ public class Main19 {
 
     public static void main(String[] args) {
 
-        System.out.println(format(0.1,2,2));
+        System.out.println(format(1236.5,2,2));
 
     }
 
@@ -40,7 +40,7 @@ public class Main19 {
             builder.insert(0,values[values.length - 1 - i].replaceFirst("^0+(?!$)", "") + getMonetType(i > max ? max : i + 1));
         }
 
-        return builder.toString();
+        return builder.toString().replace(" ","");
     }
 
     public static String[] splitOnEveryCharAmount(String s, int amount){

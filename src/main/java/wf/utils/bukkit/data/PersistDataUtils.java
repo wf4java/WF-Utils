@@ -1,7 +1,6 @@
 package wf.utils.bukkit.data;
 
 import org.bukkit.NamespacedKey;
-import org.bukkit.entity.Entity;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
@@ -89,6 +88,12 @@ public class PersistDataUtils {
     public static void set(Plugin plugin, String key, ItemStack item, PersistentDataContainer value){
         ItemMeta meta = item.getItemMeta();
         set(plugin, key, meta, value);
+        item.setItemMeta(meta);
+    }
+
+    public static void remove(Plugin plugin, String key, ItemStack item){
+        ItemMeta meta = item.getItemMeta();
+        remove(plugin, key, meta);
         item.setItemMeta(meta);
     }
 
@@ -218,6 +223,7 @@ public class PersistDataUtils {
 
 
     public boolean getBooleanExists(String key, ItemStack item){
+        if(!item.hasItemMeta()) return false;
         return getBooleanExists(plugin, key, item.getItemMeta());
     }
     public boolean getBoolean(String key, ItemStack item){
@@ -272,6 +278,7 @@ public class PersistDataUtils {
 
 
     public static boolean getBooleanExists(Plugin plugin, String key, ItemStack item){
+        if(!item.hasItemMeta()) return false;
         return getBooleanExists(plugin, key, item.getItemMeta());
     }
     public static boolean getBoolean(Plugin plugin, String key, ItemStack item){
@@ -396,7 +403,11 @@ public class PersistDataUtils {
         item.setItemMeta(meta);
     }
 
-
+    public void remove(String key, ItemStack item){
+        ItemMeta meta = item.getItemMeta();
+        remove(plugin, key, meta);
+        item.setItemMeta(meta);
+    }
 
 
 
@@ -496,6 +507,9 @@ public class PersistDataUtils {
         set(plugin, key, item, value);
     }
 
+    public void remove(String key, PersistentDataHolder item){
+        remove(plugin, key, item);
+    }
 
 
 
@@ -671,7 +685,9 @@ public class PersistDataUtils {
         item.getPersistentDataContainer().set(new NamespacedKey(plugin, key), PersistentDataType.TAG_CONTAINER, value);
     }
 
-
+    public static void remove(Plugin plugin, String key, PersistentDataHolder item){
+        item.getPersistentDataContainer().remove(new NamespacedKey(plugin, key));
+    }
 
 
 
@@ -734,6 +750,8 @@ public class PersistDataUtils {
     public static PersistentDataContainer getDataContainer(Plugin plugin, String key, PersistentDataHolder item){
         return item.getPersistentDataContainer().get(new NamespacedKey(plugin, key), PersistentDataType.TAG_CONTAINER);
     }
+
+
 
 
     public Plugin getPlugin() {
