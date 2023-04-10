@@ -1,17 +1,12 @@
 package main;
 
 
-import jdk.nashorn.internal.ir.debug.ObjectSizeCalculator;
+
 import org.bukkit.event.inventory.InventoryType;
-import wf.utils.java.data.list.BoundedArrayList;
-import wf.utils.java.file.yamlconfiguration.configuration.Configuration;
-import wf.utils.java.file.yamlconfiguration.configuration.ConfigurationSection;
-import wf.utils.java.file.yamlconfiguration.configuration.MemoryConfiguration;
-import wf.utils.java.file.yamlconfiguration.configuration.MemorySection;
+import wf.utils.java.data.list.ListUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.List;
 
 
 public class Main27 {
@@ -19,8 +14,8 @@ public class Main27 {
 
     public static void main(String[] args) {
 
-        System.out.println(InventoryType.valueOf("CHEST"));
-
+        String s = null;
+        System.out.println(String.valueOf(s));
     }
 
 

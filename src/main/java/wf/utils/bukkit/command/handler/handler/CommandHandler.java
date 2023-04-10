@@ -152,7 +152,7 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
                 .build());
 
 
-        if(language.getAvailableLanguages().size() > 1) {
+        if(language != null && language.getAvailableLanguages().size() > 1) {
             if (languageType == LanguageType.GENERAL) {
                 addSubcommand(new SubCommandBuilder()
                         .setCommand("language")
@@ -191,6 +191,7 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
     }
 
     public MessageReceiver getMessageReceiver(String player){
+        if(language == null) return null;
         if(languageType == LanguageType.PERSONAL) return ((PersonalLanguage) language).getMessageReceiver(player);
         if(languageType == LanguageType.GENERAL) return ((GeneralLanguage) language).getMessageReceiver();
         return null;
@@ -199,6 +200,7 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
 
 
     public String getMess(CommandSender sender, String path){
+        if(language == null) return null;
         if(languageType == LanguageType.GENERAL) return ((GeneralLanguage) language).mess(path);
         if(languageType == LanguageType.PERSONAL) return ((PersonalLanguage) language).getMessageReceiver(sender.getName()).get(path);
         return path;

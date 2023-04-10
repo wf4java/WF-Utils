@@ -7,10 +7,9 @@ import java.util.List;
 
 public class ListColored {
 
-    public static List<String> chatColored(List<String> list, char c){
-        List<String> ret = new ArrayList<>();
-        for(String s : list) ret.add(ChatColor.translateAlternateColorCodes(c, s));
-        return ret;
+    public static List<String> translate(char c, List<String> list){
+        list.replaceAll(textToTranslate -> ChatColor.translateAlternateColorCodes(c, textToTranslate));
+        return list;
     }
 
 }

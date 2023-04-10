@@ -9,6 +9,9 @@ import org.bukkit.plugin.Plugin;
 import wf.utils.bukkit.inventory.gui.item.Item;
 import wf.utils.bukkit.inventory.gui.item.ItemSlot;
 
+import java.util.Arrays;
+
+
 public class BukkitGui {
 
     private String name;
@@ -22,18 +25,23 @@ public class BukkitGui {
 
 
     public BukkitGui() {
+
     }
 
-
+    public BukkitGui(Plugin plugin, String name) {
+        this.plugin = plugin;
+        this.name = name;
+    }
 
     public Inventory getInventory(Player player){
 
         Inventory inv = createEmptyInventory();
 
+
         for(ItemSlot slot : slots){
             Item item = slot.getItem();
-            if(item.isCondition()) {
-                ItemStack itemStack = item.getReplacedItemStack(player);
+            if(item.isCondition(player,null)) {
+                ItemStack itemStack = item.getReplacedItemStack(player,null);
                 inv.setItem(slot.getIndex(), itemStack);
             }
         }
@@ -93,4 +101,7 @@ public class BukkitGui {
     public void setSlots(ItemSlot[] slots) {
         this.slots = slots;
     }
+
+
+
 }

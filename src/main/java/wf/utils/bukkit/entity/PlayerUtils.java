@@ -15,15 +15,6 @@ public class PlayerUtils {
         player.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(message));
     }
 
-    public static ItemStack setHead(ItemStack item, String name){
-        SkullMeta sm = (SkullMeta) item.getItemMeta();
-        sm.setOwner(name);
-        item.setItemMeta(sm);
-        return item;
-    }
 
-    public static ItemStack getHead(String name){
-        return setHead(new ItemStack(Material.PLAYER_HEAD, 1), name);
-    }
 
 }
