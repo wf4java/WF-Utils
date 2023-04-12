@@ -1,11 +1,14 @@
 package wf.utils.bukkit.inventory.gui.item;
 
+import java.util.HashSet;
+
 public class ItemSlot {
 
     private Item item;
     public int index;
 
     public ItemSlot() {
+
     }
 
     public ItemSlot(Item item, int index) {
