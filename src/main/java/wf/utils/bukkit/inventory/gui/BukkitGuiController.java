@@ -14,7 +14,7 @@ import org.bukkit.plugin.Plugin;
 import wf.utils.bukkit.config.BukkitConfig;
 import wf.utils.bukkit.data.PersistDataUtils;
 import wf.utils.bukkit.inventory.gui.item.*;
-import wf.utils.bukkit.misc.ListColored;
+import wf.utils.bukkit.misc.chat_color.ListColored;
 
 
 import java.util.*;
@@ -109,9 +109,9 @@ public class BukkitGuiController implements Listener {
 
             item.setItemStack(itemStack, plugin);
 
-            item.setReplaceDisplayName(config.getBoolean("items." + s + ".replace_name", false));
-            item.setReplaceLore(config.getBoolean("items." + s + ".replace_lore", false));
-            item.setReplaceFunction(config.getBoolean("items." + s + ".replace_function", false));
+            item.setReplaceDisplayName(config.getBoolean("items." + s + ".replace_name",false));
+            item.setReplaceLore(config.getBoolean("items." + s + ".replace_lore",false));
+            item.setReplaceFunction(config.getBoolean("items." + s + ".replace_function",false));
 
             List<ItemFunction> itemFunctions = new ArrayList<>();
             if(config.contains("items." + s + ".functions")){

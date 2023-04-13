@@ -1,26 +1,8 @@
-package main;
+package wf.utils.java.data.versions;
 
+public class VersionCompare {
 
-
-import org.bukkit.event.inventory.InventoryType;
-import wf.utils.java.data.list.ListUtils;
-
-import java.util.ArrayList;
-import java.util.List;
-
-
-public class Main27 {
-
-
-    public static void main(String[] args) {
-
-        System.out.println(compareVersions("1.1","2.1"));
-        System.out.println(compareVersions("2.2.2.2","2.2.2.3"));
-        System.out.println(compareVersions("2.2.8","2.3.1"));
-
-    }
-
-    public static int compareVersions(String v1, String v2) {
+    public static int compare(String v1, String v2) {
         String[] v1Parts = v1.split("\\.");
         String[] v2Parts = v2.split("\\.");
 

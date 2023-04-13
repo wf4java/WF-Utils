@@ -5,6 +5,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 import wf.utils.bukkit.config.utils.ConfigSerializable;
+
+
 import wf.utils.java.file.yamlconfiguration.utils.StringSerializable;
 import wf.utils.java.file.yamlconfiguration.utils.types.IntegerInRange;
 import wf.utils.java.file.yamlconfiguration.utils.types.IntegerRandom;
@@ -97,7 +99,6 @@ public class BukkitConfig {
     public List<Float> getFloatList(String path){ return config.getFloatList(path); }
 
     public Object get(String path){ return config.get(path); }
-    public <T> T getObject(String path, Class<T> type){ return config.getObject(path, type); }
 
     public String getString(String path, String def){ return config.getString(path, def); }
     public int getInt(String path, int def){ return config.getInt(path, def); }
@@ -105,9 +106,11 @@ public class BukkitConfig {
     public double getDouble(String path, double def){ return config.getDouble(path, def); }
     public boolean getBoolean(String path, boolean def){ return config.getBoolean(path, def); }
 
+    public <T> T getObject(String path, Class<T> type){ return config.getObject(path, type); }
+
+    public <T> T getObject(String path, Class<T> type, T def){ return config.getObject(path, type, def); }
 
     public Object get(String path, Object def){ return config.get(path, def); }
-    public <T> T getObject(String path, Class<T> type, T def){ return config.getObject(path, type, def); }
 
 
     public void set(String path, StringSerializable value){

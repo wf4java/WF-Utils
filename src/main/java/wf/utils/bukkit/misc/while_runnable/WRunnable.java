@@ -1,4 +1,4 @@
-package wf.utils.bukkit.other.while_runnable;
+package wf.utils.bukkit.misc.while_runnable;
 
 public interface WRunnable {
 

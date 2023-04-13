@@ -1,4 +1,4 @@
-package wf.utils.bukkit.misc;
+package wf.utils.bukkit.misc.chat_color;
 
 import org.bukkit.ChatColor;
 

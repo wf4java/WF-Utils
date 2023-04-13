@@ -9,6 +9,7 @@ import org.bukkit.plugin.Plugin;
 import wf.utils.bukkit.data.PersistDataUtils;
 import wf.utils.bukkit.item.ItemUtils;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,6 +47,7 @@ public class Item {
 
     public void setName(String name) {
         this.name = name;
+
     }
 
     public ItemStack getItemStack() {

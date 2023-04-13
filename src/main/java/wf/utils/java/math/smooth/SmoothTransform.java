@@ -1,7 +1,6 @@
 package wf.utils.java.math.smooth;
 
-import javafx.animation.Interpolator;
-import javafx.animation.PathTransition;
+
 
 public class SmoothTransform {
 
