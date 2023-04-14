@@ -45,7 +45,7 @@ items:
     replaces:
       - "{player_name}"
     functions:
-      open_inv:
+      open_gui:
         gui: list
 
   test2:
@@ -53,7 +53,7 @@ items:
       material: "IRON_INGOT"
       name: "&4Открыть 1"
     functions:
-      open_inv:
+      open_gui:
         gui: gui_1
 
   test3:
@@ -61,7 +61,7 @@ items:
       material: "EMERALD"
       name: "&4Открыть 3"
     functions:
-      open_inv:
+      open_gui:
         gui: gui_3
 
 guis:

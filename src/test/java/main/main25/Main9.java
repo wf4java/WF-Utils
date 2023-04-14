@@ -1,4 +1,4 @@
-package main;
+package main.main25;
 
 import wf.utils.bukkit.command.handler.subcommand.executor.SubCommandExecutor;
 import wf.utils.java.object.ObjectToString;

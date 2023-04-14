@@ -1,4 +1,4 @@
-package main;
+package main.main25;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

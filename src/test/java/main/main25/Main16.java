@@ -1,4 +1,4 @@
-package main;
+package main.main25;
 
 import java.awt.*;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package main;
+package main.main25;
 
 import org.bukkit.Material;
 import org.bukkit.Sound;

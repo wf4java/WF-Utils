@@ -1,4 +1,4 @@
-package main;
+package main.main25;
 
 public class Main21 {
 

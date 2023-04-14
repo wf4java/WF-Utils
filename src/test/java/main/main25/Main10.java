@@ -1,4 +1,4 @@
-package main;
+package main.main25;
 
 import wf.utils.bukkit.config.BukkitConfig;
 import wf.utils.java.misc.WordCollector;

@@ -39,8 +39,8 @@ public class Config {
             if (!file.exists()) {
                 InputStream link = (Config.class.getResourceAsStream(path));
                 if(link == null) {
-                    file.getParentFile().mkdirs();
-                    file.createNewFile();
+                    file.getAbsoluteFile().getParentFile().mkdirs();
+                    file.getAbsoluteFile().createNewFile();
                 }
                 else Files.copy(link, file.getAbsoluteFile().toPath());
             }

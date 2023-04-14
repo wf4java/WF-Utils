@@ -216,7 +216,7 @@ public class BukkitGuiController implements Listener {
 
 
     private void addDefaultFunctions(){
-        functions.put("open_inv", new Function((p, m) -> {
+        functions.put("open_gui", new Function((p, m) -> {
             if(m == null) return;
             if(!m.containsKey("gui")) return;
             if(!guis.containsKey(m.get("gui"))) return;
@@ -224,7 +224,7 @@ public class BukkitGuiController implements Listener {
             p.openInventory(guis.get(m.get("gui")).getInventory(p));
         }));
 
-        functions.put("open_entity_inv", new Function((p, m) -> {
+        functions.put("open_entity_gui", new Function((p, m) -> {
             if(m == null) return;
             if(!m.containsKey("gui")) return;
             if(!m.containsKey("entity")) return;
@@ -244,6 +244,7 @@ public class BukkitGuiController implements Listener {
             BukkitGui gui = guis.get(m.get("gui"));
             if(gui == null) return;
             if(!(gui instanceof ListedBukkitGui)) return;
+
             p.openInventory(((ListedBukkitGui) gui).getInventory(p, Integer.parseInt(m.get("page")) + 1));
         }));
 
@@ -255,6 +256,7 @@ public class BukkitGuiController implements Listener {
             BukkitGui gui = guis.get(m.get("gui"));
             if(gui == null) return;
             if(!(gui instanceof ListedBukkitGui)) return;
+
             p.openInventory(((ListedBukkitGui) gui).getInventory(p, Integer.parseInt(m.get("page")) - 1));
         }));
 
@@ -265,14 +267,17 @@ public class BukkitGuiController implements Listener {
             Bukkit.getServer().dispatchCommand(p,m.get("command"));
         }));
 
-
-        functions.put("say", new Function((p, m) -> {
-            Bukkit.broadcastMessage(String.valueOf(m.get("entity")));
+        functions.put("close_gui", new Function((p, m) -> {
+            p.closeInventory();
         }));
+
     }
 
     private void addDefaultReplaces(){
-        replaces.put("{player_name}", new ItemReplacer("{player_name}", (p, m) -> p.getDisplayName()));
+        replaces.put("{player_name}", new ItemReplacer("{player_name}", (p, m) -> p.getName()));
+        replaces.put("{player_display_name}", new ItemReplacer("{player_display_name}", (p, m) -> p.getDisplayName()));
+        replaces.put("{player_uuid}", new ItemReplacer("{player_uuid}", (p, m) -> p.getUniqueId().toString()));
+
         replaces.put("{entity}", new ItemReplacer("{entity}", (p, m) -> String.valueOf(m.get("entity"))));
     }
 
@@ -351,6 +356,8 @@ public class BukkitGuiController implements Listener {
     public void setItemLists(HashMap<String, ItemList> itemLists) {
         this.itemLists = itemLists;
     }
+
+
 
 
 

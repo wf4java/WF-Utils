@@ -1,5 +1,7 @@
 package wf.utils.bukkit.config;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -111,6 +113,27 @@ public class BukkitConfig {
     public <T> T getObject(String path, Class<T> type, T def){ return config.getObject(path, type, def); }
 
     public Object get(String path, Object def){ return config.get(path, def); }
+
+
+    public void set(String path, Location location){
+        config.set(path + ".x", location.getX());
+        config.set(path + ".y", location.getY());
+        config.set(path + ".z", location.getZ());
+        config.set(path + ".world", location.getWorld() != null ? location.getWorld().getName() : null);
+        config.set(path + ".yaw", location.getYaw() != 0f ? location.getYaw() : null);
+        config.set(path + ".pitch", location.getPitch() != 0f ? location.getPitch() : null);
+    }
+
+    public Location getLocation(String path){
+        if(!config.contains(path)) return null;
+        return new Location(
+                Bukkit.getWorld(config.getString(path + ".world")),
+                config.getDouble(path + ".x"),
+                config.getDouble(path + ".y"),
+                config.getDouble(path + ".z"),
+                (float) config.getDouble(path + ".yaw"),
+                (float) config.getDouble(path + ".pitch"));
+    }
 
 
     public void set(String path, StringSerializable value){

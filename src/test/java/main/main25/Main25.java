@@ -1,4 +1,4 @@
-package main;
+package main.main25;
 
 import wf.plugin.utils.main.Main;
 import wf.utils.java.math.smooth.controller.Item;
