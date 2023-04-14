@@ -1,11 +1,19 @@
 package wf.utils.bukkit.config;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Color;
 import org.bukkit.Location;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.FileConfigurationOptions;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.configuration.serialization.ConfigurationSerializable;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.util.Vector;
 import wf.utils.bukkit.config.utils.ConfigSerializable;
 
 
@@ -16,8 +24,12 @@ import wf.utils.java.file.yamlconfiguration.configuration.ConfigDefaultValue;
 
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Reader;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.Consumer;
 
 public class BukkitConfig {
@@ -114,27 +126,213 @@ public class BukkitConfig {
 
     public Object get(String path, Object def){ return config.get(path, def); }
 
-
-    public void set(String path, Location location){
-        config.set(path + ".x", location.getX());
-        config.set(path + ".y", location.getY());
-        config.set(path + ".z", location.getZ());
-        config.set(path + ".world", location.getWorld() != null ? location.getWorld().getName() : null);
-        config.set(path + ".yaw", location.getYaw() != 0f ? location.getYaw() : null);
-        config.set(path + ".pitch", location.getPitch() != 0f ? location.getPitch() : null);
+    public void save(File file) throws IOException {
+        config.save(file);
     }
 
-    public Location getLocation(String path){
-        if(!config.contains(path)) return null;
-        return new Location(
-                Bukkit.getWorld(config.getString(path + ".world")),
-                config.getDouble(path + ".x"),
-                config.getDouble(path + ".y"),
-                config.getDouble(path + ".z"),
-                (float) config.getDouble(path + ".yaw"),
-                (float) config.getDouble(path + ".pitch"));
+    public void save(String file) throws IOException {
+        config.save(file);
     }
 
+    public String saveToString() {
+        return config.saveToString();
+    }
+
+    public void load(File file) throws FileNotFoundException, IOException, InvalidConfigurationException {
+        config.load(file);
+    }
+
+    public void load(Reader reader) throws IOException, InvalidConfigurationException {
+        config.load(reader);
+    }
+
+    public void load(String file) throws FileNotFoundException, IOException, InvalidConfigurationException {
+        config.load(file);
+    }
+
+    public void loadFromString(String contents) throws InvalidConfigurationException {
+        config.loadFromString(contents);
+    }
+
+    public FileConfigurationOptions options() {
+        return config.options();
+    }
+
+    public void addDefault(String path, Object value) {
+        config.addDefault(path, value);
+    }
+
+    public void addDefaults(Map<String, Object> defaults) {
+        config.addDefaults(defaults);
+    }
+
+    public void addDefaults(Configuration defaults) {
+        config.addDefaults(defaults);
+    }
+
+    public void setDefaults(Configuration defaults) {
+        config.setDefaults(defaults);
+    }
+
+    public Configuration getDefaults() {
+        return config.getDefaults();
+    }
+
+    public ConfigurationSection getParent() {
+        return config.getParent();
+    }
+
+    public Set<String> getKeys(boolean deep) {
+        return config.getKeys(deep);
+    }
+
+    public Map<String, Object> getValues(boolean deep) {
+        return config.getValues(deep);
+    }
+
+    public boolean contains(String path, boolean ignoreDefault) {
+        return config.contains(path, ignoreDefault);
+    }
+
+    public boolean isSet(String path) {
+        return config.isSet(path);
+    }
+
+    public String getCurrentPath() {
+        return config.getCurrentPath();
+    }
+
+    public String getName() {
+        return config.getName();
+    }
+
+    public Configuration getRoot() {
+        return config.getRoot();
+    }
+
+    public ConfigurationSection getDefaultSection() {
+        return config.getDefaultSection();
+    }
+
+    public ConfigurationSection createSection(String path) {
+        return config.createSection(path);
+    }
+
+    public ConfigurationSection createSection(String path, Map<?, ?> map) {
+        return config.createSection(path, map);
+    }
+
+    public boolean isString(String path) {
+        return config.isString(path);
+    }
+
+    public boolean isInt(String path) {
+        return config.isInt(path);
+    }
+
+    public boolean isBoolean(String path) {
+        return config.isBoolean(path);
+    }
+
+    public boolean isDouble(String path) {
+        return config.isDouble(path);
+    }
+
+    public boolean isLong(String path) {
+        return config.isLong(path);
+    }
+
+    public List<?> getList(String path) {
+        return config.getList(path);
+    }
+
+    public List<?> getList(String path, List<?> def) {
+        return config.getList(path, def);
+    }
+
+    public boolean isList(String path) {
+        return config.isList(path);
+    }
+
+    public List<Short> getShortList(String path) {
+        return config.getShortList(path);
+    }
+
+    public List<Map<?, ?>> getMapList(String path) {
+        return config.getMapList(path);
+    }
+
+    public <T extends ConfigurationSerializable> T getSerializable(String path, Class<T> clazz) {
+        return config.getSerializable(path, clazz);
+    }
+
+    public <T extends ConfigurationSerializable> T getSerializable(String path, Class<T> clazz, T def) {
+        return config.getSerializable(path, clazz, def);
+    }
+
+    public Vector getVector(String path) {
+        return config.getVector(path);
+    }
+
+    public Vector getVector(String path, Vector def) {
+        return config.getVector(path, def);
+    }
+
+    public boolean isVector(String path) {
+        return config.isVector(path);
+    }
+
+    public OfflinePlayer getOfflinePlayer(String path) {
+        return config.getOfflinePlayer(path);
+    }
+
+    public OfflinePlayer getOfflinePlayer(String path, OfflinePlayer def) {
+        return config.getOfflinePlayer(path, def);
+    }
+
+    public boolean isOfflinePlayer(String path) {
+        return config.isOfflinePlayer(path);
+    }
+
+    public ItemStack getItemStack(String path) {
+        return config.getItemStack(path);
+    }
+
+    public ItemStack getItemStack(String path, ItemStack def) {
+        return config.getItemStack(path, def);
+    }
+
+    public boolean isItemStack(String path) {
+        return config.isItemStack(path);
+    }
+
+    public Color getColor(String path) {
+        return config.getColor(path);
+    }
+
+    public Color getColor(String path, Color def) {
+        return config.getColor(path, def);
+    }
+
+    public boolean isColor(String path) {
+        return config.isColor(path);
+    }
+
+    public Location getLocation(String path, Location def) {
+        return config.getLocation(path, def);
+    }
+
+    public boolean isLocation(String path) {
+        return config.isLocation(path);
+    }
+
+    public boolean isConfigurationSection(String path) {
+        return config.isConfigurationSection(path);
+    }
+
+    public Location getLocation(String path) {
+        return config.getLocation(path);
+    }
 
     public void set(String path, StringSerializable value){
         set(path, value.getSerializableString());
@@ -150,7 +348,7 @@ public class BukkitConfig {
     }
 
     public void set(String path, ConfigSerializable value){
-        set(path, value.setSerializableObject(getConfigurationSection(path)));
+        value.setSerializableObject(getConfigurationSection(path));
     }
 
 

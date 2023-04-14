@@ -9,12 +9,12 @@ public interface ConfigSerializable<T> {
     public default T getSerializableObject(ConfigurationSection section){
         return null;
     };
-    public default ConfigurationSection setSerializableObject(ConfigurationSection section){
-        return section;
+    public default void setSerializableObject(ConfigurationSection section){
+
     };
 
-    public default ConfigurationSection setSerializableObject(String path, Configuration configuration){
-        return setSerializableObject(configuration.getConfigurationSection(path));
+    public default void setSerializableObject(String path, Configuration configuration){
+        setSerializableObject(configuration.getConfigurationSection(path));
     };
 
     public default T getSerializableObject(String path, Configuration configuration){

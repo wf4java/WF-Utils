@@ -148,7 +148,7 @@ public class Config {
     }
 
     public void set(String path, ConfigSerializable value){
-        set(path, value.setSerializableObject(getConfigurationSection(path)));
+        value.setSerializableObject(getConfigurationSection(path));
     }
 
 
