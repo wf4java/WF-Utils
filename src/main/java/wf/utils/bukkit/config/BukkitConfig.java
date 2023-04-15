@@ -344,17 +344,21 @@ public class BukkitConfig {
 
 
     public <T extends ConfigSerializable> T get(String path, T value){
-        return (T) value.getSerializableObject(getConfigurationSection(path));
+        return (T) value.getSerializableObject(path,this);
     }
 
     public void set(String path, ConfigSerializable value){
-        value.setSerializableObject(getConfigurationSection(path));
+        value.setSerializableObject(path,this);
     }
+
+
 
 
 
 
     public ConfigurationSection getConfigurationSection(String path){ return config.getConfigurationSection(path); }
+
+
 
 
     public void forEach(String path, Consumer<String> consumer){
