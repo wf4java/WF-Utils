@@ -1,5 +1,6 @@
 package wf.utils.bukkit.command.handler.subcommand.executor.types.standart;
 
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import wf.utils.bukkit.command.handler.subcommand.executor.types.ArgumentType;
 import wf.utils.java.values.TypeUtils;
@@ -27,17 +28,17 @@ public class BooleanArgument implements ArgumentType {
     }
 
     @Override
-    public boolean isIt(String argument) {
+    public boolean isIt(CommandSender sender, String argument) {
         return TypeUtils.isBoolean(argument);
     }
 
     @Override
-    public Object get(String argument) {
+    public Object get(CommandSender sender,String argument) {
         return Boolean.parseBoolean(argument);
     }
 
     @Override
-    public List<String> tabulation(Player player, String arg) {
+    public List<String> tabulation(CommandSender sender, String arg) {
         return Arrays.asList("true", "false");
     }
 }

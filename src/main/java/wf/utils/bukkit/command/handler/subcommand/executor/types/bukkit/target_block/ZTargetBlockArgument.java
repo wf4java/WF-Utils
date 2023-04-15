@@ -1,5 +1,7 @@
 package wf.utils.bukkit.command.handler.subcommand.executor.types.bukkit.target_block;
 
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import wf.utils.bukkit.command.handler.subcommand.executor.types.standart.IntegerArgument;
 
@@ -27,8 +29,10 @@ public class ZTargetBlockArgument extends IntegerArgument {
     }
 
     @Override
-    public List<String> tabulation(Player player, String arg) {
-        return Arrays.asList(String.valueOf(player.getTargetBlock(maxDistance).getZ()));
+    public List<String> tabulation(CommandSender sender, String arg) {
+        if(!(sender instanceof LivingEntity)) return null;
+        LivingEntity le = (LivingEntity) sender;
+        return Arrays.asList(String.valueOf(le.getTargetBlock(maxDistance).getZ()));
     }
 
 

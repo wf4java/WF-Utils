@@ -1,6 +1,7 @@
 package wf.utils.bukkit.command.handler.subcommand.executor.types;
 
 
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import wf.utils.bukkit.command.handler.subcommand.executor.types.standart.BooleanArgument;
 import wf.utils.bukkit.command.handler.subcommand.executor.types.standart.DoubleArgument;
@@ -20,9 +21,9 @@ public interface ArgumentType {
     public String getMessage();
     public String getMessageCode();
     public String getName();
-    public boolean isIt(String argument);
-    public Object get(String argument);
-    public List<String> tabulation(Player player, String arg);
+    public boolean isIt(CommandSender sender, String argument);
+    public Object get(CommandSender sender,String argument);
+    public List<String> tabulation(CommandSender sender, String arg);
 
 
 }

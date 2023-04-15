@@ -1,6 +1,7 @@
 package wf.utils.bukkit.command.handler.subcommand.executor;
 
 
+import org.bukkit.command.CommandSender;
 import wf.utils.bukkit.command.handler.subcommand.executor.types.ArgumentType;
 
 public class Argument {
@@ -59,12 +60,12 @@ public class Argument {
 
 
 
-    public boolean typeIsRight(String argument){
-        return type.isIt(argument);
+    public boolean typeIsRight(CommandSender sender, String argument){
+        return type.isIt(sender, argument);
     }
 
-    public Object get(String argument){
-        return type.get(argument);
+    public Object get(CommandSender sender, String argument){
+        return type.get(sender, argument);
     }
 
     public String getName() {

@@ -45,13 +45,13 @@ public class SubCommandExecutor {
         for(int i = 0; i < arguments.length; i++){
             Argument argument = arguments[i];
             if(args.length > i){
-                if(!argument.typeIsRight(args[i])){
-                    sender.sendMessage(ChatColor.RED + "\n" + (messages == null ? argument.getType().getMessage() :
+                if(!argument.typeIsRight(sender, args[i])){
+                    sender.sendMessage(ChatColor.RED + "\n" + ((messages == null || argument.getType().getMessageCode() == null) ? argument.getType().getMessage() :
                             messages.get(argument.getType().getMessageCode())));
                     sender.sendMessage(getWrongArgumentText(i));
                     return null;
                 }
-                objects[i] = argument.get(args[i]);
+                objects[i] = argument.get(sender, args[i]);
             }else {
                 objects[i] = argument.getDefault();
             }

@@ -1,5 +1,6 @@
 package wf.utils.bukkit.command.handler.subcommand.executor.types.bukkit;
 
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.entity.Player;
 import wf.utils.bukkit.command.handler.subcommand.executor.types.ArgumentType;
@@ -38,18 +39,18 @@ public class ConfigurationArgument implements ArgumentType {
     }
 
     @Override
-    public boolean isIt(String argument) {
+    public boolean isIt(CommandSender sender, String argument) {
         if(path == null) return configuration.contains(argument);
         else return configuration.contains(path + "." + argument);
     }
 
     @Override
-    public Object get(String argument) {
+    public Object get(CommandSender sender,String argument) {
         return argument;
     }
 
     @Override
-    public List<String> tabulation(Player player, String arg) {
+    public List<String> tabulation(CommandSender sender, String arg) {
         if(path == null) return new ArrayList<>(configuration.getKeys(false));
         else return new ArrayList<>(configuration.getConfigurationSection(path).getKeys(false));
 

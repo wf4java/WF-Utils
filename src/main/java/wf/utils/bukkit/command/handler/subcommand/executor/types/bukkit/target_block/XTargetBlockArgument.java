@@ -1,5 +1,7 @@
 package wf.utils.bukkit.command.handler.subcommand.executor.types.bukkit.target_block;
 
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import wf.utils.bukkit.command.handler.subcommand.executor.types.standart.IntegerArgument;
 
@@ -28,17 +30,19 @@ public class XTargetBlockArgument extends IntegerArgument {
     }
 
     @Override
-    public List<String> tabulation(Player player, String arg) {
+    public List<String> tabulation(CommandSender sender, String arg) {
+        if(!(sender instanceof LivingEntity)) return null;
+        LivingEntity le = (LivingEntity) sender;
         if(full) return Arrays.asList(
-                String.valueOf(player.getTargetBlock(maxDistance).getX()),
+                String.valueOf(le.getTargetBlock(maxDistance).getX()),
 
-                String.valueOf(player.getTargetBlock(maxDistance).getX()) + " " +
-                String.valueOf(player.getTargetBlock(maxDistance).getY()),
+                String.valueOf(le.getTargetBlock(maxDistance).getX()) + " " +
+                String.valueOf(le.getTargetBlock(maxDistance).getY()),
 
-                String.valueOf(player.getTargetBlock(maxDistance).getX()) + " " +
-                String.valueOf(player.getTargetBlock(maxDistance).getY()) + " " +
-                String.valueOf(player.getTargetBlock(maxDistance).getZ()));
-        else return Collections.singletonList(String.valueOf(player.getTargetBlock(maxDistance).getX()));
+                String.valueOf(le.getTargetBlock(maxDistance).getX()) + " " +
+                String.valueOf(le.getTargetBlock(maxDistance).getY()) + " " +
+                String.valueOf(le.getTargetBlock(maxDistance).getZ()));
+        else return Collections.singletonList(String.valueOf(le.getTargetBlock(maxDistance).getX()));
     }
 
     public int getMaxDistance() {

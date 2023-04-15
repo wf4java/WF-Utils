@@ -1,6 +1,7 @@
 package wf.utils.bukkit.command.handler.subcommand.executor.types.standart;
 
 
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import wf.utils.bukkit.command.handler.subcommand.executor.types.ArgumentType;
 
@@ -35,17 +36,17 @@ public class StringArgument implements ArgumentType {
     }
 
     @Override
-    public boolean isIt(String argument) {
+    public boolean isIt(CommandSender sender, String argument) {
         return true;
     }
 
     @Override
-    public Object get(String argument) {
+    public Object get(CommandSender sender,String argument) {
         return argument;
     }
 
     @Override
-    public List<String> tabulation(Player player, String arg) {
+    public List<String> tabulation(CommandSender sender, String arg) {
         if(name == null) return new ArrayList<>(0);
         return Arrays.asList(name);
     }

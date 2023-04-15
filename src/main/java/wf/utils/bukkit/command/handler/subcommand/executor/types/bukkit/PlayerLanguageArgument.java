@@ -1,5 +1,6 @@
 package wf.utils.bukkit.command.handler.subcommand.executor.types.bukkit;
 
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import wf.utils.bukkit.command.handler.subcommand.executor.types.ArgumentType;
 
@@ -22,19 +23,19 @@ public class PlayerLanguageArgument implements ArgumentType {
     }
 
     @Override
-    public boolean isIt(String argument) {
+    public boolean isIt(CommandSender sender, String argument) {
        // for(String language : PlayerLanguage.getLoadedLanguages().keySet()) if(language.equalsIgnoreCase(argument)) return true;
         return false;
     }
 
     @Override
-    public Object get(String argument) {
+    public Object get(CommandSender sender,String argument) {
         //for(String language : PlayerLanguage.getLoadedLanguages().keySet()) if(language.equalsIgnoreCase(argument)) return language;
         return argument;
     }
 
     @Override
-    public List<String> tabulation(Player player, String arg) {
+    public List<String> tabulation(CommandSender sender, String arg) {
         //return PlayerLanguage.getLoadedLanguages().keySet().stream().collect(Collectors.toList());
         return null;
     }
