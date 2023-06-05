@@ -72,12 +72,6 @@ public class SmoothTransformFunctionType {
     };
 
 
-    public static final SmoothTransform.SmoothTransformFunction EXPONITIAL = new SmoothTransform.SmoothTransformFunction() {
-        @Override
-        public double get(double percent) {
-            return percent < 0.5 ? 0 : 1;
-        }
-    };
 
 
 

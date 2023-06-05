@@ -29,9 +29,6 @@ public class Item extends SmoothTransform {
         this.runnable = runnable;
     }
 
-    public boolean isEnd(){
-        return super.getValue() == super.getTo();
-    }
 
     public DoubleConsumer getRunnable() {
         return runnable;

@@ -3,7 +3,7 @@
     <output-path>$USER_HOME$/OneDrive/Рабочий стол/Java/Servers/1.16.5/plugins</output-path>
     <root id="archive" name="WF-Utils.jar">
       <element id="module-output" name="WF-Utils" />
-      <element id="dir-copy" path="$PROJECT_DIR$/src/main/resources" />
+      <element id="dir-copy" path="$PROJECT_DIR$/src/test/resources" />
     </root>
   </artifact>
 </component>

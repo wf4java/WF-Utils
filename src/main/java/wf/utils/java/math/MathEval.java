@@ -3,7 +3,11 @@ package wf.utils.java.math;
 public class MathEval {
 
 
-    public static double eval(final String expression) {
+    public static double eval(String expression){
+        return eval(expression, true);
+    }
+
+    public static double eval(String expression, boolean floatFix) {
         final String str = expression.toLowerCase();
         return new Object() {
             int pos = -1, ch;
@@ -81,8 +85,8 @@ public class MathEval {
                     else if (func.equals("round")) x = Math.round(x);
                     else if (func.equals("ceil")) x = Math.ceil(x);
                     else if (func.equals("floor")) x = Math.floor(x);
-                    else if (func.equals("asin")) x = Math.asin(Math.toRadians(x));
-                    else if (func.equals("acos")) x = Math.acos(Math.toRadians(x));
+                    else if (func.equals("asin") || func.equals("arcsin")) x = Math.toDegrees(Math.asin(x));
+                    else if (func.equals("acos") || func.equals("arccos")) x = Math.toDegrees(Math.acos(x));
                     else throw new RuntimeException("Unknown function: " + func);
                 } else {
                     throw new RuntimeException("Unexpected: " + (char)ch);
@@ -90,7 +94,7 @@ public class MathEval {
 
                 if (eat('^')) x = Math.pow(x, parseFactor()); // exponentiation
 
-                return x;
+                return floatFix ? MathUtils.floatFix(x) : x;
             }
         }.parse();
     }

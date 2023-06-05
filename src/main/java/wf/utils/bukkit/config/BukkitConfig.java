@@ -352,7 +352,9 @@ public class BukkitConfig {
     }
 
 
-
+    public void remove(String path){
+        config.set(path, null);
+    }
 
 
 

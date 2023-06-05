@@ -1,5 +1,6 @@
 package wf.utils.bukkit.world;
 
+import org.bukkit.Location;
 import org.bukkit.World;
 import wf.utils.java.math.MathUtils;
 
@@ -16,6 +17,15 @@ public class WorldUtils {
                     (int) Math.round(z1 + (confusion[2] * d))).isEmpty()) return true;
         }
         return false;
+    }
+
+    public static boolean locationInLocations(Location l1, Location l2, Location el){
+        if(!l1.getWorld().equals(el.getWorld())) return false;
+        if(el.getX() < Math.min(l1.getX(), l2.getX()) || el.getX() > Math.max(l1.getX(), l2.getX())) return false;
+        if(el.getY() < Math.min(l1.getY(), l2.getY()) || el.getY() > Math.max(l1.getY(), l2.getY())) return false;
+        if(el.getZ() < Math.min(l1.getZ(), l2.getZ()) || el.getZ() > Math.max(l1.getZ(), l2.getZ())) return false;
+
+        return true;
     }
 
 }

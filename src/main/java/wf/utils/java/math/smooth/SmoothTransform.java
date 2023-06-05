@@ -120,6 +120,10 @@ public class SmoothTransform {
         return value;
     }
 
+    public boolean isEnd(){
+        return value == to;
+    }
+
     public void setValue(double value) {
         this.value = value;
     }

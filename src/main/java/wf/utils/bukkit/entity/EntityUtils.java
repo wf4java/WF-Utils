@@ -5,6 +5,7 @@ package wf.utils.bukkit.entity;
 import org.bukkit.Location;
 import org.bukkit.entity.*;
 import org.bukkit.potion.PotionEffect;
+import wf.utils.bukkit.world.WorldUtils;
 
 import java.util.Collection;
 
@@ -74,6 +75,13 @@ public class EntityUtils {
     public static void fireTicks(Player player, Collection<LivingEntity> entities, int fireTicks){
         entities.forEach(e -> fireTicks(player, e, fireTicks));
     }
+
+
+    public static boolean entityInLocations(Location l1, Location l2, Entity entity){
+        return WorldUtils.locationInLocations(l1, l2, entity.getLocation());
+    }
+
+
 
 
 }

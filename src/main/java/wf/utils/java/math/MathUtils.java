@@ -95,6 +95,10 @@ public class MathUtils {
         return min;
     }
 
+    public static double floatFix(double d){
+        return Math.round((d + 0.000000000000004D) * 1000000000d) / 1000000000d;
+    }
+
 
     public static double roundTo10(double value) {
         return Math.round(value * 10d) / 10d;
