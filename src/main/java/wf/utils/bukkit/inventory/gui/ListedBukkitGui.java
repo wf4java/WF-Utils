@@ -54,7 +54,7 @@ public class ListedBukkitGui extends BukkitGui {
 
         Inventory inv = createEmptyInventory();
 
-        HashMap<String, String> arguments = new HashMap<>();
+        HashMap<String, String> arguments = new HashMap<>(3);
 
         arguments.put("page", String.valueOf(page));
         arguments.put("has_next_page", String.valueOf(maxOnPage * (page + 1) < count));

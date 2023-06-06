@@ -37,7 +37,6 @@ public class BukkitGui {
 
         Inventory inv = createEmptyInventory();
 
-
         for(ItemSlot slot : slots){
             Item item = slot.getItem();
             if(item.isCondition(player,null)) {

@@ -29,7 +29,7 @@ public class EntityBukkitGui extends BukkitGui{
     public Inventory getInventory(Player player, String entity) {
         Inventory inv = createEmptyInventory();
 
-        HashMap<String, String> arguments = new HashMap<>();
+        HashMap<String, String> arguments = new HashMap<>(1);
         arguments.put("entity", entity);
 
         for(ItemSlot slot : getSlots()){
