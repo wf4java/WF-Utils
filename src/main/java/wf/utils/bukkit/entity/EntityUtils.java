@@ -32,14 +32,17 @@ public class EntityUtils {
         return entities;
     }
 
-    public static Collection<LivingEntity> getEntityInRadius(Location location, double x, double y){
+    public static Collection<LivingEntity> getLivingInRadius(Location location, double x, double y){
         return location.getWorld().getNearbyLivingEntities(location, x, y);
     }
 
-    public static Collection<LivingEntity> getEntityInCube(Location location, double x, double y, double z){
+    public static Collection<LivingEntity> getLivingEntityInCube(Location location, double x, double y, double z){
         return location.getWorld().getNearbyLivingEntities(location, x, y, z);
     }
 
+    public static Collection<Entity> getEntityInCube(Location location, double x, double y, double z){
+        return location.getWorld().getNearbyEntities(location, x, y, z);
+    }
 
 
     public static int getEntityAgreedEntitiesCount(LivingEntity entity){
@@ -146,7 +149,7 @@ public class EntityUtils {
         }
     }
 
-    public static void removeEntityInCube(Function<Entity, Boolean> condition, Class<?> cl, Location l, double w, double h){
+    public static void removeEntityByClassInCube(Function<Entity, Boolean> condition, Class<?> cl, Location l, double w, double h){
         for(Entity entity : getEntityInCube(l, w, h, w)){
             if(!(entity.getClass() == cl)) continue;
             if(!condition.apply(entity)) continue;
@@ -172,7 +175,7 @@ public class EntityUtils {
     }
 
     public static double getYawSideAngle(Location at, Location to){
-        return MathUtils.roundToNearestNumber(at.clone().setDirection(getLookAtVector(at, to)).getYaw(),90);
+        return MathUtils.roundToNearestNumber(at.clone().setDirection(getLookAtVector(at, to)).getYaw() + 90,90);
     }
 
     public static double getPitchSideAngle(Location at, Location to){
@@ -181,7 +184,7 @@ public class EntityUtils {
 
     public static void setYawSideAngle(Entity entity, Location to){
         setYaw(entity, (float) MathUtils.roundToNearestNumber(entity.getLocation().clone().setDirection(
-                getLookAtVector(entity.getLocation(), to)).getYaw(),90));
+                getLookAtVector(entity.getLocation(), to)).getYaw() + 90,90));
     }
 
     public static void setPitchSideAngle(Entity entity, Location to){
