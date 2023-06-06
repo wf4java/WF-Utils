@@ -175,4 +175,42 @@ public class EntityUtils {
         return MathUtils.roundToNearestNumber(at.clone().setDirection(getLookAtVector(at, to)).getYaw(),90);
     }
 
+    public static double getPitchSideAngle(Location at, Location to){
+        return MathUtils.roundToNearestNumber(at.clone().setDirection(getLookAtVector(at, to)).getPitch(),90);
+    }
+
+    public static void setYawSideAngle(Entity entity, Location to){
+        setYaw(entity, (float) MathUtils.roundToNearestNumber(entity.getLocation().clone().setDirection(
+                getLookAtVector(entity.getLocation(), to)).getYaw(),90));
+    }
+
+    public static void setPitchSideAngle(Entity entity, Location to){
+        setPitch(entity, (float) MathUtils.roundToNearestNumber(entity.getLocation().clone().setDirection(
+                getLookAtVector(entity.getLocation(), to)).getPitch(),90));
+    }
+
+    public static void setRotationSideAngle(Entity entity, Location to){
+        setYawSideAngle(entity, to);
+        setPitchSideAngle(entity, to);
+    }
+
+    public static void setYaw(Entity entity, float yaw){
+        Location location = entity.getLocation();
+        location.setYaw(yaw);
+        entity.teleport(location);
+    }
+
+    public static void setPitch(Entity entity, float pitch){
+        Location location = entity.getLocation();
+        location.setPitch(pitch);
+        entity.teleport(location);
+    }
+
+    public static void setRotation(Entity entity, float yaw, float pitch){
+        Location location = entity.getLocation();
+        location.setYaw(yaw);
+        location.setPitch(pitch);
+        entity.teleport(location);
+    }
+
 }
