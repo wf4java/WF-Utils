@@ -11,22 +11,22 @@ public class TypeUtils {
 
 
     public static boolean isDouble(String arg) {
-        if(arg.length() == 0) return false;
+        if(arg.isEmpty()) return false;
         return doubleRegex.matcher(arg).matches();
     }
 
     public static boolean isInteger(String arg) {
-        if(arg.length() == 0) return false;
+        if(arg.isEmpty()) return false;
         return integerRegex.matcher(arg).matches();
     }
 
     public static boolean isLink(String arg){
-        if(arg.length() == 0) return false;
+        if(arg.isEmpty()) return false;
         return linkRegex.matcher(arg).matches();
     }
 
     public static boolean isBoolean(String arg){
-        if(arg.length() == 0) return false;
+        if(arg.isEmpty()) return false;
         return arg.equalsIgnoreCase("true") || arg.equalsIgnoreCase("false");
     }
 

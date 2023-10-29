@@ -27,7 +27,7 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
 
     private JavaPlugin plugin;
     private String ownCommandName;
-    private TreeMap<String, SubCommand> subcommands = new TreeMap<String, SubCommand>(new Comparator<String>() {@Override public int compare(String str1, String str2) {return str1.compareTo(str2) * -1;}});
+    private TreeMap<String, SubCommand> subcommands = new TreeMap<String, SubCommand>((str1, str2) -> str1.compareTo(str2) * -1);
     private Language language;
     private LanguageType languageType;
 
@@ -226,9 +226,7 @@ public class CommandHandler implements CommandExecutor, TabExecutor {
         return language;
     }
 
-    public static ConfigDefaultValue[] getLanguageDefaultValues(){
-        return DefaultCommandHandlerMessages.getValues();
-    }
+
 
 
     @Override

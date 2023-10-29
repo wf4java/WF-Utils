@@ -1,6 +1,3 @@
-/*
- * Decompiled with CFR 0.150.
- */
 package wf.utils.jetbrains.annotations;
 
 import java.lang.annotation.Documented;
@@ -13,6 +10,7 @@ import java.lang.annotation.Target;
 @Retention(value=RetentionPolicy.CLASS)
 @Target(value={ElementType.METHOD, ElementType.CONSTRUCTOR})
 public @interface Contract {
+
     @NonNls
     public String value() default "";
 
@@ -20,5 +18,6 @@ public @interface Contract {
 
     @NonNls
     public String mutates() default "";
+
 }
 

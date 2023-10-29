@@ -15,6 +15,7 @@ public class Main32 {
         HashMap<String, Integer> hashMap = new HashMap<>(2);
 
 
+
         hashMap.put("page", 1);
         hashMap.put("Aa", 1);
         hashMap.put("BB", 1);

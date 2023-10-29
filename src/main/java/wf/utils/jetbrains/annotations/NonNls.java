@@ -1,6 +1,3 @@
-/*
- * Decompiled with CFR 0.150.
- */
 package wf.utils.jetbrains.annotations;
 
 import java.lang.annotation.Documented;
@@ -13,5 +10,6 @@ import java.lang.annotation.Target;
 @Retention(value=RetentionPolicy.CLASS)
 @Target(value={ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER, ElementType.LOCAL_VARIABLE, ElementType.TYPE_USE, ElementType.TYPE, ElementType.PACKAGE})
 public @interface NonNls {
+
 }
 

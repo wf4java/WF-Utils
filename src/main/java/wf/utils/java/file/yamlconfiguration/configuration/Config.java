@@ -1,17 +1,23 @@
 package wf.utils.java.file.yamlconfiguration.configuration;
 
 
+import org.bukkit.plugin.Plugin;
+import wf.utils.bukkit.config.BukkitConfig;
 import wf.utils.java.file.yamlconfiguration.file.FileConfiguration;
 import wf.utils.java.file.yamlconfiguration.file.YamlConfiguration;
 import wf.utils.java.file.yamlconfiguration.utils.ConfigSerializable;
 import wf.utils.java.file.yamlconfiguration.utils.StringSerializable;
 import wf.utils.java.file.yamlconfiguration.utils.types.IntegerInRange;
 import wf.utils.java.file.yamlconfiguration.utils.types.IntegerRandom;
+import wf.utils.java.thread.loop.MultipleLoopTask;
+import wf.utils.java.thread.loop.ThreadMultipleLoopTask;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -20,6 +26,9 @@ public class Config {
 
     public File file;
     public FileConfiguration config;
+    private ThreadMultipleLoopTask autoSaveLoopTask;
+
+    private static HashMap<Integer, ThreadMultipleLoopTask> autoSaveLoopTaskMap;
 
 
     public Config(String path, String resourcePath){
@@ -27,10 +36,23 @@ public class Config {
             file = new File(path);
             if (!file.exists()) {
                 InputStream link = (Config.class.getResourceAsStream(resourcePath));
-                Files.copy(link, file.getAbsoluteFile().toPath());
+                if(link == null) {
+                    file.getAbsoluteFile().getParentFile().mkdirs();
+                    file.getAbsoluteFile().createNewFile();
+                }else{
+                    Files.copy(link, file.getAbsoluteFile().toPath());
+                }
             }
             config = YamlConfiguration.loadConfiguration(file);
         }catch (IOException e) { e.printStackTrace(); }
+    }
+
+    public Config(String path, String resourcePath, Collection<ConfigDefaultValue> defaultValues){
+        this(path, resourcePath);
+        if(defaultValues != null && !defaultValues.isEmpty()){
+            setDefaultValues(defaultValues);
+            save();
+        }
     }
 
     public Config(String path){
@@ -48,19 +70,28 @@ public class Config {
         }catch (IOException e) { e.printStackTrace(); }
     }
 
-    public Config(String path, String resourcePath, ConfigDefaultValue... values){
+    public Config(String path, String resourcePath, Collection<ConfigDefaultValue> defaultValues, int autoSaveSeconds, boolean autoSaveUnique){
         try {
             file = new File(path);
             if (!file.exists()) {
                 InputStream link = (Config.class.getResourceAsStream(resourcePath));
-                Files.copy(link, file.getAbsoluteFile().toPath());
+                if(link == null) {
+                    file.getAbsoluteFile().getParentFile().mkdirs();
+                    file.getAbsoluteFile().createNewFile();
+                }else{
+                    Files.copy(link, file.getAbsoluteFile().toPath());
+                }
             }
             config = YamlConfiguration.loadConfiguration(file);
         }catch (IOException e) { e.printStackTrace(); }
-        setDefaultValues(values);
+        if(defaultValues != null && !defaultValues.isEmpty()){
+            setDefaultValues(defaultValues);
+            save();
+        }
+        autoSaveInit(autoSaveSeconds, autoSaveUnique);
     }
 
-    public Config(String path, ConfigDefaultValue... values){
+    public Config(String path, Collection<ConfigDefaultValue> defaultValues){
         try {
             file = new File(path);
             if (!file.exists()) {
@@ -73,12 +104,43 @@ public class Config {
             }
             config = YamlConfiguration.loadConfiguration(file);
         }catch (IOException e) { e.printStackTrace(); }
-        setDefaultValues(values);
+        if(defaultValues != null && !defaultValues.isEmpty()){
+            setDefaultValues(defaultValues);
+            save();
+        }
     }
 
 
-    public void setDefaultValues(boolean replace, ConfigDefaultValue... values){
-        for(ConfigDefaultValue value : values){
+    private void autoSaveInit(int seconds, boolean unique) {
+        if(!unique) {
+            if(autoSaveLoopTaskMap == null) autoSaveLoopTaskMap = new HashMap<>();
+
+            ThreadMultipleLoopTask task = autoSaveLoopTaskMap.get( seconds);
+            if(task == null){
+                task = new ThreadMultipleLoopTask(seconds * 1000L, seconds * 1000L);
+                autoSaveLoopTaskMap.put(seconds, task);
+            }
+            autoSaveLoopTask = task;
+            autoSaveLoopTask.addRunnable(file.getAbsolutePath(), this::save);
+            autoSaveLoopTask.start();
+        }else {
+            autoSaveLoopTask = new ThreadMultipleLoopTask(seconds * 1000L, seconds * 1000L);
+            autoSaveLoopTask.addRunnable(file.getAbsolutePath(), this::save);
+            autoSaveLoopTask.start();
+        }
+    }
+
+    public void stopAutoSave(){
+        if(autoSaveLoopTask != null) autoSaveLoopTask.stop();
+    }
+
+    public void startAutoSave(){
+        if(autoSaveLoopTask != null) autoSaveLoopTask.start();
+    }
+
+
+    public void setDefaultValues(boolean replace, Collection<ConfigDefaultValue> defaultValues){
+        for(ConfigDefaultValue value : defaultValues){
             if(replace && config.contains(value.getPath())) continue;
             config.set(value.getPath(), value.getValue());
         }
@@ -90,8 +152,8 @@ public class Config {
     public boolean contains(String path){
         return config.contains(path);
     }
-    public void setDefaultValues(ConfigDefaultValue... values){
-        setDefaultValues(false, values);
+    public void setDefaultValues(Collection<ConfigDefaultValue> defaultValues){
+        setDefaultValues(false, defaultValues);
     }
 
 

@@ -10,7 +10,7 @@ public class SubCommandBuilder {
 
     private String command;
     private String permission;
-    private SubCommandExecutor commandBuilder = new SubCommandExecutor();
+    private SubCommandExecutor subCommandExecutor;
     private TriConsumer<CommandSender, Command, Object[]> runnable;
     private boolean onlyPlayer = false;
 
@@ -20,9 +20,9 @@ public class SubCommandBuilder {
         return this;
     }
 
-    public SubCommandBuilder setCommandBuilder(SubCommandExecutor commandBuilder) {
-        this.commandBuilder = commandBuilder;
-        return this;
+    public SubCommandExecutor subCommandExecutor(SubCommandExecutor subCommandExecutor) {
+        this.subCommandExecutor = subCommandExecutor;
+        return this.subCommandExecutor;
     }
 
     public SubCommandBuilder setRunnable(TriConsumer<CommandSender, Command, Object[]> runnable) {
@@ -36,18 +36,20 @@ public class SubCommandBuilder {
     }
 
     public SubCommandBuilder setArguments(Argument... arguments) {
-        commandBuilder.setArguments(arguments);
+        subCommandExecutor.setArguments(arguments);
         return this;
     }
 
     public SubCommandBuilder setCommand(String command) {
-        commandBuilder.setCommand(command);
+        subCommandExecutor.setCommand(command);
         this.command = command;
         return this;
     }
 
-    public SubCommand build(){
-        return new SubCommand(command, permission, commandBuilder, runnable, onlyPlayer);
+    public SubCommand build() {
+        if(this.subCommandExecutor == null) this.subCommandExecutor = new SubCommandExecutor();
+
+        return new SubCommand(command, permission, subCommandExecutor, runnable, onlyPlayer);
     }
 
 }

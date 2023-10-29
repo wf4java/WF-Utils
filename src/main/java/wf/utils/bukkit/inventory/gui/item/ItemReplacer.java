@@ -13,6 +13,7 @@ public class ItemReplacer {
     private BiFunction<Player, Map<String, String>, String> to;
 
     public ItemReplacer() {
+
     }
 
     public ItemReplacer(String from, BiFunction<Player, Map<String, String>, String> to) {

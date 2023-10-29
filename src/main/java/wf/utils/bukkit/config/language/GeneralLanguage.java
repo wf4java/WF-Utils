@@ -7,11 +7,9 @@ import wf.utils.bukkit.config.language.models.Language;
 import wf.utils.bukkit.config.language.models.MessageReceiver;
 import wf.utils.java.file.yamlconfiguration.configuration.ConfigDefaultValue;
 
+
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -23,20 +21,25 @@ public class GeneralLanguage implements Language {
     private BukkitConfig languageConfig;
     private BukkitConfig optionsConfig;
     private String path;
-    private ConfigDefaultValue[] defaultValues;
+    private final Collection<ConfigDefaultValue> defaultValues;
     private String selectedLanguage;
     private MessageReceiver messageReceiver;
 
 
 
-    public GeneralLanguage(Plugin plugin, String path, ConfigDefaultValue... defaultValues) {
+    public GeneralLanguage(Plugin plugin, String path, Collection<ConfigDefaultValue> defaultValues) {
         this(plugin, path, new String[0], defaultValues);
     }
-    public GeneralLanguage(Plugin plugin, String path, String... dl) {
-        this(plugin, path, dl, new ConfigDefaultValue[0]);
+
+    public GeneralLanguage(Plugin plugin, String path) {
+        this(plugin, path, new String[0], null);
     }
 
-    public GeneralLanguage(Plugin plugin, String path, String[] dl, ConfigDefaultValue... defaultValues) {
+    public GeneralLanguage(Plugin plugin, String path, String... dl) {
+        this(plugin, path, dl, null);
+    }
+
+    public GeneralLanguage(Plugin plugin, String path, String[] dl, Collection<ConfigDefaultValue> defaultValues) {
         this.path = path;
         this.defaultValues = defaultValues;
         optionsConfig = new BukkitConfig(plugin,path + File.separator + "options",false);
@@ -143,11 +146,6 @@ public class GeneralLanguage implements Language {
     }
 
 
-    @Override
-    public BukkitConfig getConfig() {
-        return null;
-    }
-
     public List<String> getAvailableLanguages() {
         return availableLanguages;
     }
@@ -178,14 +176,6 @@ public class GeneralLanguage implements Language {
 
     public void setPath(String path) {
         this.path = path;
-    }
-
-    public ConfigDefaultValue[] getDefaultValues() {
-        return defaultValues;
-    }
-
-    public void setDefaultValues(ConfigDefaultValue[] defaultValues) {
-        this.defaultValues = defaultValues;
     }
 
     public String getSelectedLanguage() {

@@ -1,6 +1,5 @@
 package wf.utils.bukkit.config;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
@@ -17,31 +16,37 @@ import org.bukkit.util.Vector;
 import wf.utils.bukkit.config.utils.ConfigSerializable;
 
 
+import wf.utils.bukkit.misc.while_runnable.BukkitMultipleLoopTask;
 import wf.utils.java.file.yamlconfiguration.utils.StringSerializable;
 import wf.utils.java.file.yamlconfiguration.utils.types.IntegerInRange;
 import wf.utils.java.file.yamlconfiguration.utils.types.IntegerRandom;
 import wf.utils.java.file.yamlconfiguration.configuration.ConfigDefaultValue;
+import wf.utils.java.thread.loop.MultipleLoopTask;
+import wf.utils.java.thread.loop.ThreadMultipleLoopTask;
 
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Consumer;
 
 public class BukkitConfig {
 
 
-    private File file;
+    private final File file;
     private FileConfiguration config;
+    private MultipleLoopTask autoSaveLoopTask;
+
+    private static HashMap<UniquenessLoopTaskKey, MultipleLoopTask> autoSaveLoopTaskMap;
+
 
 
     public BukkitConfig(Plugin plugin, String configName){
         this(plugin, configName, true);
     }
+
 
     public BukkitConfig(Plugin plugin, String configName, boolean autoCopy){
         file = new File(plugin.getDataFolder(),configName + ".yml");
@@ -55,20 +60,123 @@ public class BukkitConfig {
         config = YamlConfiguration.loadConfiguration(file);
     }
 
-    public BukkitConfig(Plugin plugin, String configName, boolean autoCopy, ConfigDefaultValue... values){
+    public BukkitConfig(Plugin plugin, String configName, boolean autoCopy, SaveType saveType, int autoSaveSeconds, boolean autoSaveUnique){
         this(plugin, configName, autoCopy);
-        setDefaultValues(values);
-        save();
+        autoSaveInit(plugin, saveType, autoSaveSeconds, autoSaveUnique);
     }
 
-    public BukkitConfig(Plugin plugin, String configName, ConfigDefaultValue... values){
+    public BukkitConfig(Plugin plugin, String configName, boolean autoCopy, Collection<ConfigDefaultValue> defaultValues, SaveType saveType, int autoSaveSeconds, boolean autoSaveUnique){
+        this(plugin, configName, autoCopy);
+        autoSaveInit(plugin, saveType, autoSaveSeconds, autoSaveUnique);
+
+        if(defaultValues != null && !defaultValues.isEmpty()) {
+            setDefaultValues(defaultValues);
+            save();
+        }
+    }
+
+    private void autoSaveInit(Plugin plugin, SaveType saveType, int seconds, boolean autoSaveUnique) {
+        if(!autoSaveUnique) {
+            if(autoSaveLoopTaskMap == null) autoSaveLoopTaskMap = new HashMap<>();
+
+            MultipleLoopTask task = autoSaveLoopTaskMap.get(new UniquenessLoopTaskKey(saveType, seconds));
+            if(task == null){
+                task = createMultipleLoopTask(plugin, saveType, seconds);
+                autoSaveLoopTaskMap.put(new UniquenessLoopTaskKey(saveType, seconds), task);
+            }
+            autoSaveLoopTask = task;
+            autoSaveLoopTask.addRunnable(file.getAbsolutePath(), this::save);
+            autoSaveLoopTask.start();
+        }else {
+            autoSaveLoopTask = createMultipleLoopTask(plugin, saveType, seconds);
+            autoSaveLoopTask.addRunnable(file.getAbsolutePath(), this::save);
+            autoSaveLoopTask.start();
+        }
+    }
+
+    public void stopAutoSave(){
+        if(autoSaveLoopTask != null) autoSaveLoopTask.stop();
+    }
+
+    public void startAutoSave(){
+        if(autoSaveLoopTask != null) autoSaveLoopTask.start();
+    }
+
+
+    private MultipleLoopTask createMultipleLoopTask(Plugin plugin, SaveType saveType, int seconds) {
+        if(saveType == SaveType.BUKKIT_SYNC) return new BukkitMultipleLoopTask(plugin, seconds * 20L,seconds * 20L, true);
+        if(saveType == SaveType.BUKKIT_ASYNC) return new BukkitMultipleLoopTask(plugin, seconds * 20L,seconds * 20L, false);
+        if(saveType == SaveType.THREAD) return new ThreadMultipleLoopTask(seconds * 1000L, seconds * 1000L);
+        throw new RuntimeException("Save type invalid!");
+    }
+
+    private static class UniquenessLoopTaskKey {
+
+        private SaveType saveType;
+        private int seconds;
+
+        public UniquenessLoopTaskKey(SaveType saveType, int seconds) {
+            this.saveType = saveType;
+            this.seconds = seconds;
+        }
+
+        public SaveType getSaveType() {
+            return saveType;
+        }
+
+        public void setSaveType(SaveType saveType) {
+            this.saveType = saveType;
+        }
+
+        public int getSeconds() {
+            return seconds;
+        }
+
+        public void setSeconds(int seconds) {
+            this.seconds = seconds;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof UniquenessLoopTaskKey)) return false;
+
+            UniquenessLoopTaskKey that = (UniquenessLoopTaskKey) o;
+
+            if (getSeconds() != that.getSeconds()) return false;
+            return getSaveType() == that.getSaveType();
+        }
+
+        @Override
+        public int hashCode() {
+            int result = getSaveType() != null ? getSaveType().hashCode() : 0;
+            result = 31 * result + getSeconds();
+            return result;
+        }
+    }
+
+    public enum SaveType {
+        BUKKIT_ASYNC,
+        BUKKIT_SYNC,
+        THREAD;
+    }
+
+    public BukkitConfig(Plugin plugin, String configName, boolean autoCopy, Collection<ConfigDefaultValue> defaultValues){
+        this(plugin, configName, autoCopy);
+        if(defaultValues != null && !defaultValues.isEmpty()) {
+            setDefaultValues(defaultValues);
+            save();
+        }
+    }
+
+    public BukkitConfig(Plugin plugin, String configName, Collection<ConfigDefaultValue> defaultValues){
         this(plugin, configName);
-        setDefaultValues(values);
+        setDefaultValues(defaultValues);
         save();
     }
 
-    public void setDefaultValues(boolean replace, ConfigDefaultValue... values){
-        for(ConfigDefaultValue value : values){
+    public void setDefaultValues(boolean replace, Collection<ConfigDefaultValue> defaultValues){
+        for(ConfigDefaultValue value : defaultValues){
             if(!replace && config.contains(value.getPath())) continue;
             config.set(value.getPath(), value.getValue());
         }
@@ -82,8 +190,8 @@ public class BukkitConfig {
         return config.contains(path);
     }
 
-    public void setDefaultValues(ConfigDefaultValue... values){
-        setDefaultValues(false, values);
+    public void setDefaultValues(Collection<ConfigDefaultValue> defaultValues){
+        setDefaultValues(false, defaultValues);
     }
 
     public void reloadConfig(){
@@ -101,7 +209,6 @@ public class BukkitConfig {
     public long getLong(String path){ return config.getLong(path); }
     public double getDouble(String path){ return config.getDouble(path); }
     public boolean getBoolean(String path){ return config.getBoolean(path); }
-
     public List<String> getStringList(String path){ return config.getStringList(path); }
     public List<Integer> getIntegerList(String path){ return config.getIntegerList(path); }
     public List<Long> getLongList(String path){ return config.getLongList(path); }

@@ -149,13 +149,7 @@ public class EntityUtils {
         }
     }
 
-    public static void removeEntityByClassInCube(Function<Entity, Boolean> condition, Class<?> cl, Location l, double w, double h){
-        for(Entity entity : getEntityInCube(l, w, h, w)){
-            if(!(entity.getClass() == cl)) continue;
-            if(!condition.apply(entity)) continue;
-            entity.remove();
-        }
-    }
+
 
     public static void lookAt(Entity entity, Location location){
         entity.teleport(entity.getLocation().setDirection(getLookAtVector(entity.getLocation(), location)));

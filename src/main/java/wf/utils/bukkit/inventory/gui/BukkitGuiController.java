@@ -60,7 +60,7 @@ public class BukkitGuiController implements Listener {
 
         try {
 
-            HashMap arguments = new HashMap<>();
+            HashMap<String, String> arguments = new HashMap<>();
 
             String name = PersistDataUtils.getString(plugin,"WF_BUKKIT_GUI_ITEM_NAME", itemStack);
             Item item = items.get(name);
@@ -91,7 +91,7 @@ public class BukkitGuiController implements Listener {
 
             item.setName(s);
 
-            ItemStack itemStack = new ItemStack(Material.getMaterial(config.getString("items." + s + ".item.material")));
+            ItemStack itemStack = new ItemStack(Objects.requireNonNull(Material.getMaterial(config.getString("items." + s + ".item.material"))));
             ItemMeta meta = itemStack.getItemMeta();
 
             if(config.contains("items." + s + ".item.name")){
@@ -264,7 +264,7 @@ public class BukkitGuiController implements Listener {
             if(m == null) return;
             if(!m.containsKey("command")) return;
 
-            Bukkit.getServer().dispatchCommand(p,m.get("command"));
+            Bukkit.getServer().dispatchCommand(p, m.get("command"));
         }));
 
         functions.put("close_gui", new Function((p, m) -> {

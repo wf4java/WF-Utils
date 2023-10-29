@@ -1,4 +1,5 @@
 items:
+
   head:
     item:
       material: "PLAYER_HEAD"
@@ -26,7 +27,7 @@ items:
   prev:
     item:
       material: "ARROW"
-      name: "&7Предыдующаыя"
+      name: "&7Предыдущая"
     conditions:
       - "has_prev_page"
     functions:

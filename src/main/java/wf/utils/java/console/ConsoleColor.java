@@ -1,7 +1,5 @@
 package wf.utils.java.console;
 
-import org.bukkit.ChatColor;
-
 
 public class ConsoleColor {
 	
@@ -21,7 +19,7 @@ public class ConsoleColor {
             case GRAY : { builder.append("37"); }
             default : { builder.append("37"); }
         }
-        builder.append(";1;" + (bold ? "1" : "2") + "m" + text + "\033[0m");
+        builder.append(";1;").append(bold ? "1" : "2").append("m").append(text).append("\033[0m");
         return builder.toString();
     }
 

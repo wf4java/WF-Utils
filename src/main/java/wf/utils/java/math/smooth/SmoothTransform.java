@@ -19,10 +19,6 @@ public class SmoothTransform {
         this.duration = duration;
         this.function = function;
         this.start = System.currentTimeMillis();
-
-
-
-
     }
 
     public SmoothTransform(double from, double to) {
@@ -121,7 +117,7 @@ public class SmoothTransform {
     }
 
     public boolean isEnd(){
-        return value == to;
+        return(Math.abs(value - to) < 0.0000001d);
     }
 
     public void setValue(double value) {

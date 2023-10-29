@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.function.Consumer;
 
 public class FileNewLinesListener {
@@ -17,7 +19,7 @@ public class FileNewLinesListener {
             @Override
             public void run() {
                 try {
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(path),"windows-1251"));
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(Files.newInputStream(Paths.get(path)),"windows-1251"));
                     reader.skip(Long.MAX_VALUE);
 
                     String line = reader.readLine();

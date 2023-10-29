@@ -1,6 +1,7 @@
 package wf.utils.bukkit.command.handler.handler;
 
 import org.bukkit.plugin.java.JavaPlugin;
+import wf.utils.bukkit.command.handler.DefaultCommandHandlerMessages;
 import wf.utils.bukkit.config.language.GeneralLanguage;
 import wf.utils.bukkit.config.language.models.Language;
 import wf.utils.bukkit.config.language.models.LanguageType;
@@ -8,6 +9,9 @@ import wf.utils.bukkit.config.language.PersonalLanguage;
 import wf.utils.java.file.yamlconfiguration.configuration.ConfigDefaultValue;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.stream.Collectors;
 
 
 public class CommandHandlerBuilder {
@@ -19,7 +23,7 @@ public class CommandHandlerBuilder {
     private boolean autoAddDefaultCommands = true;
     private String languagePath;
     private LanguageType languageType = LanguageType.GENERAL;
-    private ConfigDefaultValue[] values;
+    private Collection<ConfigDefaultValue> values;
 
 
     public CommandHandlerBuilder setPlugin(JavaPlugin plugin) {
@@ -55,9 +59,14 @@ public class CommandHandlerBuilder {
         return this;
     }
 
+    public CommandHandlerBuilder setValues(Collection<ConfigDefaultValue> values) {
+        this.values = values;
+        return this;
+    }
 
-    public CommandHandler build(){
-        return new CommandHandler(plugin, commands.toArray(new String[0]), createLanguage(), autoAddDefaultCommands);
+    public CommandHandlerBuilder setDefaultValues(ConfigDefaultValue... configDefaultValues) {
+        values = Arrays.asList(configDefaultValues);
+        return this;
     }
 
     private Language createLanguage(){
@@ -67,16 +76,18 @@ public class CommandHandlerBuilder {
         return null;
     }
 
-    private ConfigDefaultValue[] getValues(){
-        if(values == null) return CommandHandler.getLanguageDefaultValues();
-        return concatenateValues(CommandHandler.getLanguageDefaultValues(), values);
+    private Collection<ConfigDefaultValue> getValues(){
+        if(values == null) return DefaultCommandHandlerMessages.getInstance().getValues();
+        return concatenateValues(DefaultCommandHandlerMessages.getInstance().getValues(), values);
     }
 
-    private static ConfigDefaultValue[] concatenateValues(ConfigDefaultValue[] a, ConfigDefaultValue[] b) {
-        ConfigDefaultValue[] result = new ConfigDefaultValue[a.length + b.length];
-        System.arraycopy(a, 0, result, 0, a.length);
-        System.arraycopy(b, 0, result, a.length, b.length);
-        return result;
+    private static Collection<ConfigDefaultValue> concatenateValues(Collection<ConfigDefaultValue> a, Collection<ConfigDefaultValue> b) {
+        a.addAll(b);
+        return a.stream().distinct().collect(Collectors.toList());
+    }
+
+    public CommandHandler build(){
+        return new CommandHandler(plugin, commands.toArray(new String[0]), createLanguage(), autoAddDefaultCommands);
     }
 
 }

@@ -95,12 +95,12 @@ public class MathUtils {
         return min;
     }
 
-    public static double roundToNearestNumber(double number,double toRoundNumber) {
+    public static double roundToNearestNumber(double number, double toRoundNumber) {
         return Math.round(number / toRoundNumber) * toRoundNumber;
     }
 
-    public static double floatFix(double d){
-        return Math.round((d + 0.000000000000004D) * 1000000000d) / 1000000000d;
+    public static double floatFix(double d) {
+        return Math.round((d + 4.0E-15) * 1.0E9) / 1.0E9;
     }
 
 

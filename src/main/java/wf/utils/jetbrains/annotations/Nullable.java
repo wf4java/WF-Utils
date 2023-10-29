@@ -13,7 +13,9 @@ import java.lang.annotation.Target;
 @Retention(value=RetentionPolicy.CLASS)
 @Target(value={ElementType.METHOD, ElementType.FIELD, ElementType.PARAMETER, ElementType.LOCAL_VARIABLE, ElementType.TYPE_USE})
 public @interface Nullable {
+
     @NonNls
     public String value() default "";
+
 }
 

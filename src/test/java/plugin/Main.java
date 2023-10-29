@@ -1,4 +1,4 @@
-package wf.plugin.utils.main;
+package plugin;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -112,11 +112,6 @@ public class Main extends JavaPlugin implements Listener {
     }
 
 
-    @Override
-    public void onDisable() {
 
-
-
-    }
 
 }

@@ -8,6 +8,7 @@ import wf.utils.bukkit.config.BukkitConfig;
 import wf.utils.bukkit.config.language.models.Language;
 import wf.utils.bukkit.config.language.models.MessageReceiver;
 import wf.utils.java.file.yamlconfiguration.configuration.ConfigDefaultValue;
+import wf.utils.java.file.yamlconfiguration.configuration.ConfigDefaultValues;
 
 import java.io.File;
 import java.util.*;
@@ -24,11 +25,18 @@ public class PersonalLanguage implements Language {
 
 
 
-    public PersonalLanguage(Plugin plugin, String path, ConfigDefaultValue... defaultValues) {
+    public PersonalLanguage(Plugin plugin, String path, Collection<ConfigDefaultValue> defaultValues) {
         this(plugin, path, new String[0], defaultValues);
     }
 
-    public PersonalLanguage(Plugin plugin, String path, String[] dl, ConfigDefaultValue... defaultValues) {
+    public PersonalLanguage(Plugin plugin, String path) {
+        this(plugin, path, new String[0], null);
+    }
+    public PersonalLanguage(Plugin plugin, String path, String[] dl) {
+        this(plugin, path, dl, null);
+    }
+
+    public PersonalLanguage(Plugin plugin, String path, String[] dl, Collection<ConfigDefaultValue> defaultValues) {
         this.path = path;
         optionsConfig = new BukkitConfig(plugin,path + File.separator + "options",false);
 
@@ -54,7 +62,7 @@ public class PersonalLanguage implements Language {
         return files;
     }
 
-    private void loadAllLanguages(Plugin plugin, List<String> languages, ConfigDefaultValue... defaultValues){
+    private void loadAllLanguages(Plugin plugin, List<String> languages, Collection<ConfigDefaultValue> defaultValues){
         for(String lang : languages){
             BukkitConfig config = new BukkitConfig(plugin,path + File.separator + lang,false, defaultValues);
             allLanguages.add(config);

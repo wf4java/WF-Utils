@@ -141,7 +141,7 @@ public class HillCipher {
 
     // Function to implement Hill Cipher
     static void hillCipher(String message) {
-        message.toUpperCase();
+        message = message.toUpperCase();
         System.out.println("What do you want to process from the message?");
         System.out.println("Press 1: To Encrypt");
         System.out.println("Press 2: To Decrypt");
