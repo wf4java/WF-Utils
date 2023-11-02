@@ -1,13 +1,8 @@
 package main.main50;
 
-import wf.utils.bukkit.config.BukkitConfig;
-import wf.utils.bukkit.config.utils.BukkitConfigBuilder;
-import wf.utils.java.file.yamlconfiguration.configuration.Config;
-import wf.utils.java.file.yamlconfiguration.configuration.ConfigDefaultValue;
-import wf.utils.java.file.yamlconfiguration.utils.ConfigBuilder;
 
-import java.util.Arrays;
-import java.util.Collections;
+import wf.utils.java.file.yamlconfiguration.configuration.Config;
+import wf.utils.java.file.yamlconfiguration.utils.ConfigBuilder;
 
 
 public class Main38 {
@@ -16,7 +11,7 @@ public class Main38 {
     public static void main(String[] args) {
 
         Config config = new ConfigBuilder()
-                .setPath("test1.yml")
+                .setPath("test.yml")
                 .setAutoSave(true)
                 .setAutoSaveSeconds(5)
                 .setAutoSaveUnique(true)
@@ -24,13 +19,14 @@ public class Main38 {
 
 
 
-        BukkitConfig bukkitConfig = new BukkitConfigBuilder()
-                .setConfigName("test")
-                .setAutoSave(true)
-                .setSaveType(BukkitConfig.SaveType.BUKKIT_ASYNC)
-                .setAutoSaveSeconds(400)
-                .setAutoSaveUnique(true)
-                .build();
+//        BukkitConfig bukkitConfig = new BukkitConfigBuilder()
+//                .setPlugin(null)
+//                .setConfigName("test")
+//                .setAutoSave(true)
+//                .setSaveType(BukkitConfig.SaveType.BUKKIT_ASYNC)
+//                .setAutoSaveSeconds(400)
+//                .setAutoSaveUnique(true)
+//                .build();
 
 
         new Thread(() -> {

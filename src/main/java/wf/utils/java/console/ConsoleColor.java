@@ -1,6 +1,8 @@
 package wf.utils.java.console;
 
 
+import java.util.Random;
+
 public class ConsoleColor {
 	
 
@@ -8,16 +10,16 @@ public class ConsoleColor {
         StringBuilder builder = new StringBuilder("\033[");
 
         switch(color){
-            case RED : { builder.append("31"); }
-            case DARK_RED : { builder.append("31"); }
-            case GREEN : { builder.append("32"); }
-            case YELLOW : { builder.append("33"); }
-            case GOLD : { builder.append("33"); }
-            case BLUE : { builder.append("34"); }
-            case DARK_PURPLE : { builder.append("35"); }
-            case AQUA : { builder.append("36"); }
-            case GRAY : { builder.append("37"); }
-            default : { builder.append("37"); }
+            case RED:
+            case DARK_RED : { builder.append("31"); break; }
+            case GREEN : { builder.append("32"); break; }
+            case YELLOW :
+            case GOLD : { builder.append("33"); break; }
+            case BLUE : { builder.append("34"); break; }
+            case DARK_PURPLE : { builder.append("35"); break; }
+            case AQUA : { builder.append("36"); break; }
+            case GRAY :
+            default : { builder.append("37"); break; }
         }
         builder.append(";1;").append(bold ? "1" : "2").append("m").append(text).append("\033[0m");
         return builder.toString();
@@ -48,11 +50,35 @@ public class ConsoleColor {
     public static String translateAlternateColorCodes(String text, char key, boolean bold) {
         StringBuilder builder = new StringBuilder();
 
-        for(String s : text.split(String.valueOf(key))){
-            if(s.length() == 0) continue;
+        for(String s : text.split("\\" + key)){
+            if(s.isEmpty()) continue;
+
             builder.append(colored(s.substring(1),getColorByChar(s.substring(0, 1)), bold));
         }
 
+        return builder.toString();
+    }
+
+    public static String rainbow(String text) {
+        return rainbow(text, false, true);
+    }
+
+    public static String rainbow(String text, boolean round) {
+        return rainbow(text, false, round);
+    }
+
+    public static String rainbow(String text, boolean bold, boolean round) {
+        StringBuilder builder = new StringBuilder();
+        if(round){
+            char[] letters = text.toCharArray();
+            for (int i = 0; i < letters.length; i++)
+                builder.append(colored(String.valueOf(letters[i]), Color.values()[i % Color.values().length], bold));
+
+        }else{
+            Random random = new Random();
+            for (char letter : text.toCharArray())
+                builder.append(colored(String.valueOf(letter), Color.values()[random.nextInt(Color.values().length)], bold));
+        }
         return builder.toString();
     }
 

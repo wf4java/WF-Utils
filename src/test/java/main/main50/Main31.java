@@ -1,6 +1,6 @@
 package main.main50;
 
-import org.bukkit.entity.Player;
+
 
 public class Main31 {
 
@@ -17,9 +17,9 @@ public class Main31 {
         return (n < 0) ? 1 : (n >= (1 << 30)) ? (1 << 30) : n + 1;
     }
 
-    public static void print(Player s){
-        System.out.println("Str: " + s);
-    }
+//    public static void print(Player s){
+//        System.out.println("Str: " + s);
+//    }
 
     public static void print(String s){
         System.out.println("Str: " + s);

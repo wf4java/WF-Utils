@@ -1,11 +1,7 @@
 package main.main25;
 
 
-import wf.utils.bukkit.command.handler.subcommand.SubCommand;
-import wf.utils.bukkit.command.handler.subcommand.SubCommandBuilder;
-import wf.utils.bukkit.command.handler.subcommand.executor.Argument;
-import wf.utils.bukkit.command.handler.subcommand.executor.types.ArgumentType;
-import wf.utils.bukkit.command.handler.subcommand.executor.types.bukkit.BukkitArgumentType;
+
 import wf.utils.java.file.yamlconfiguration.configuration.Config;
 
 
@@ -14,21 +10,21 @@ public class Main20 {
 
     public static void main(String[] args) {
 
-        Config config = new Config("config.yml");
-
-        SubCommand subcommand = new SubCommandBuilder()
-                .setCommand("invite")
-                .setPermission("moderator")
-                .setOnlyPlayer(true)
-                .setArguments(
-                        new Argument("player", ArgumentType.STRING),
-                        new Argument("player", BukkitArgumentType.ONLINE_PLAYER))
-                .setRunnable(null)
-                .build();
-
-        config.set("test", subcommand);
-
-        config.save();
+//        Config config = new Config("config.yml");
+//
+//        SubCommand subcommand = new SubCommandBuilder()
+//                .setCommand("invite")
+//                .setPermission("moderator")
+//                .setOnlyPlayer(true)
+//                .setArguments(
+//                        new Argument("player", ArgumentType.STRING),
+//                        new Argument("player", BukkitArgumentType.ONLINE_PLAYER))
+//                .setRunnable(null)
+//                .build();
+//
+//        config.set("test", subcommand);
+//
+//        config.save();
 
 
 
