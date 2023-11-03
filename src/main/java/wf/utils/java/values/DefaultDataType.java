@@ -46,15 +46,21 @@ public enum DefaultDataType {
         return itsArray;
     }
 
-    public static boolean itsDefaultType(Object object){
-        for(DefaultDataType type : values()){
-            if(type.typeClass == object.getClass()) return true;
-        }
+    public static boolean isDefaultType(Object object){
+        for(DefaultDataType type : values())
+            if(type.typeClass.equals(object.getClass())) return true;
+
         return false;
     }
 
-    public static boolean itsDefaultArray(Object object){
-        return arrayTypes.contains(object);
+    public static boolean isDefaultArray(Object object){
+        for(DefaultDataType type : arrayTypes)
+            if(type.typeClass.equals(object.getClass())) return true;
+        return false;
+    }
+
+    public static boolean isArray(Object object){
+        return Object[].class.isAssignableFrom(object.getClass());
     }
 
 }

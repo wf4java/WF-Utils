@@ -4,25 +4,29 @@ import java.util.regex.Pattern;
 
 public class TypeUtils {
 
-    private static Pattern integerRegex = Pattern.compile("-?\\d+");
-    private static Pattern doubleRegex = Pattern.compile("-?\\d+(\\.\\d+)?");
-    private static Pattern linkRegex = Pattern.compile("^https?:\\/\\/(?:www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$");
+    private static final Pattern INTEGER_REGEX = Pattern.compile("-?\\d+");
+
+    private static final Pattern DOUBLE_REGEX = Pattern.compile("-?\\d+(\\.\\d+)?");
+
+    private static final Pattern LINK_REGEX = Pattern.compile("(https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\." +
+            "\\S{2,}|[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9]+\\." +
+            "\\S{2,}|www\\.[a-zA-Z0-9]+\\.\\S{2,})");
 
 
 
     public static boolean isDouble(String arg) {
         if(arg.isEmpty()) return false;
-        return doubleRegex.matcher(arg).matches();
+        return DOUBLE_REGEX.matcher(arg).matches();
     }
 
     public static boolean isInteger(String arg) {
         if(arg.isEmpty()) return false;
-        return integerRegex.matcher(arg).matches();
+        return INTEGER_REGEX.matcher(arg).matches();
     }
 
     public static boolean isLink(String arg){
         if(arg.isEmpty()) return false;
-        return linkRegex.matcher(arg).matches();
+        return LINK_REGEX.matcher(arg).matches();
     }
 
     public static boolean isBoolean(String arg){
