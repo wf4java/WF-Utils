@@ -12,13 +12,17 @@ public enum DefaultDataType {
     STRING(String.class,false),
     CHARACTER(Character.class,false),
     LONG(Long.class,false),
+    BYTE(Byte.class,false),
+    SHORT(Short.class,false),
     BOOLEAN_ARRAY(Long[].class,true),
     FLOAT_ARRAY(Float[].class,true),
     DOUBLE_ARRAY(Double[].class,true),
     INTEGER_ARRAY(Integer[].class,true),
     STRING_ARRAY(String[].class,true),
     CHARACTER_ARRAY(Character[].class,true),
-    LONG_ARRAY(Long[].class,true);
+    LONG_ARRAY(Long[].class,true),
+    BYTE_ARRAY(Byte[].class,true),
+    SHORT_ARRAY(Short[].class,true);
 
     private Class typeClass;
     private boolean itsArray;

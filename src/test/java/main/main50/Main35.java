@@ -19,7 +19,7 @@ public class Main35 {
         Set<String> set = new HashSet<>(each);
 
         for(int i = 0; i < each; i++){
-            String s = RandomStringGenerator.getRandomString(16);
+            String s = RandomStringGenerator.generate(16);
             if(set.contains(s)) collision++;
             else set.add(s);
         }

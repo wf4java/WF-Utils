@@ -15,7 +15,7 @@ public class Main34 {
         ExecutionTimeNano executionTimeNano = new ExecutionTimeNano();
 
         //System.out.println(RandomStringGenerator.getRandomString(length));
-        RandomStringGenerator.getRandomString(length);
+        RandomStringGenerator.generate(length);
 
         System.out.println(executionTimeNano.getSeconds());
 

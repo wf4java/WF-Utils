@@ -5,34 +5,41 @@ import wf.utils.java.values.DefaultDataType;
 import wf.utils.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.IdentityHashMap;
+import java.util.Set;
 
 public class ObjectToString {
 
-    public static String convert(Object object) {
-        return convert(object, false);
+    public static String toString(Object object) {
+        return toString(object, false);
     }
 
-    public static String convert(Object object, boolean colored){
-        if(!colored) return convert(object, null, 0, false);
-        else return ConsoleColor.translateAlternateColorCodes(convert(object, null, 0, true), '&');
+    public static String toString(Object object, boolean colored){
+        if(!colored) return toString(object, null, 0, false, null);
+        else return ConsoleColor.translateAlternateColorCodes(toString(object, null, 0, true, null), '&');
     }
 
-    private static String convert(Object object, @Nullable String fieldName, int indentationLevel, boolean colored) {
+    private static String toString(Object object, @Nullable String fieldName, int indentationLevel, boolean colored, @Nullable Set<Object> objectSet) {
         StringBuilder builder = new StringBuilder();
-        Field[] fields = object.getClass().getDeclaredFields();
+        Field[] fields = getAllFields(object.getClass());
+        if(objectSet == null){
+            objectSet = Collections.newSetFromMap(new IdentityHashMap<>());
+            objectSet.add(object);
+        }
 
         if(fieldName == null) builder.append(colored ? "&4" : "").append(object.getClass().getSimpleName());
         else builder.append(getTypeOfClassOwn(object.getClass(), colored));
 
         if(fieldName != null) builder.append(fieldName);
 
-        builder.append(" ");
-        builder.append(getOpenBracesSymbol(colored));
+        builder.append(" ").append(getOpenBracesSymbol(colored));
         if(fields.length != 0) builder.append("\n");
 
         for (Field field : fields) {
             builder.append(getIndentation(indentationLevel + 1));
-            builder.append(fieldToString(object, field, indentationLevel + 1, colored));
+            builder.append(fieldToString(object, field, indentationLevel + 1, colored, objectSet));
         }
 
         builder.append(fields.length == 0 ? " " : getIndentation(indentationLevel));
@@ -43,7 +50,7 @@ public class ObjectToString {
     }
 
 
-    private static String fieldToString(Object object, Field field, int indentationLevel, boolean colored) {
+    private static String fieldToString(Object object, Field field, int indentationLevel, boolean colored, Set<Object> objectSet) {
         field.setAccessible(true);
         if (!field.isAccessible()) return "";
         field.setAccessible(true);
@@ -59,16 +66,21 @@ public class ObjectToString {
             return getFieldType(field, colored) + getFieldName(field, colored) + getEqualsSymbol(colored) + (colored ? "&a" : "") + defaultArrayToString((Object[]) result, colored) + getCommaSymbol(colored) +" \n";
 
         if(DefaultDataType.isArray(result))
-            return getFieldTypeOwn(field, colored) + getFieldName(field, colored) + getEqualsSymbol(colored) + (colored ? "&a" : "") + objectArrayToString((Object[]) result, indentationLevel, colored);
+            return getFieldTypeOwn(field, colored) + getFieldName(field, colored) + getEqualsSymbol(colored) + (colored ? "&a" : "") + objectArrayToString((Object[]) result, indentationLevel, colored, objectSet);
 
         if(DefaultDataType.isDefaultType(result))
             return getFieldType(field, colored) + getFieldName(field, colored) + getEqualsSymbol(colored) + (colored ? "&a" : "") + String.valueOf(result) + getCommaSymbol(colored) + " \n";
 
-        return convert(result, getFieldName(field, colored), indentationLevel, colored);
+
+
+        if(objectSet.contains(result)) return getFieldTypeOwn(field, colored) + getFieldName(field, colored) + getEqualsSymbol(colored) + (colored? "&a" : "") + "*..." + getCommaSymbol(colored) + " \n";
+        objectSet.add(result);
+
+        return toString(result, getFieldName(field, colored), indentationLevel, colored, objectSet);
     }
 
 
-    private static String objectArrayToString(Object[] array, int indentationLevel, boolean colored) {
+    private static String objectArrayToString(Object[] array, int indentationLevel, boolean colored, Set<Object> objectSet) {
         StringBuilder builder = new StringBuilder();
         builder.append(getOpenSquareBracketSymbol(colored));
 
@@ -78,26 +90,26 @@ public class ObjectToString {
 
 
             if(object == null){
-                if(i == 0) builder.append("\n");
+                builder.append("\n");
                 builder.append(getIndentation(indentationLevel + 1)).append(getNullSymbol(colored));
                 if(i != (array.length - 1)) builder.append(getCommaSymbol(colored));
-                builder.append("\n");
+                if(i == (array.length - 1)) builder.append("\n");
             }
             else {
 
 
                 if (DefaultDataType.isDefaultArray(object)){
-                    if(i == 0) builder.append("\n");
+                    builder.append("\n");
                     builder.append(getIndentation(indentationLevel + 1)).append(colored ? "&a" : "").append(defaultArrayToString((Object[]) object, colored));
                     if(i != (array.length - 1)) builder.append(getCommaSymbol(colored));
-                    builder.append("\n");
+                    if(i == (array.length - 1)) builder.append("\n");
                 }
 
                 else if(DefaultDataType.isArray(object)) {
-                    if(i == 0) builder.append("\n");
-                    builder.append(colored ? "&a" : "").append(objectArrayToString((Object[]) object, indentationLevel, colored));
-                    if(i != (array.length - 1)) builder.append(getCommaSymbol(colored));
                     builder.append("\n");
+                    builder.append(colored ? "&a" : "").append(objectArrayToString((Object[]) object, indentationLevel, colored, objectSet));
+                    if(i != (array.length - 1)) builder.append(getCommaSymbol(colored));
+                    if(i == (array.length - 1)) builder.append("\n");
                 }
 
                 else if(DefaultDataType.isDefaultType(object)) {
@@ -106,10 +118,18 @@ public class ObjectToString {
                 }
 
                 else{
-                    if(i == 0) builder.append("\n");
-                    builder.append(getIndentation(indentationLevel + 1)).append(convert(object, null, indentationLevel + 1, colored));
-                    if(i != (array.length - 1)) builder.append(getCommaSymbol(colored));
                     builder.append("\n");
+
+                    if(objectSet.contains(object)) builder.append(getIndentation(indentationLevel + 1)).append(colored ? "&a" : "").append("*...");
+                    else{
+                        objectSet.add(object);
+                        builder.append(getIndentation(indentationLevel + 1)).append(toString(object, null, indentationLevel + 1, colored, objectSet));
+                    }
+
+
+
+                    if(i != (array.length - 1)) builder.append(getCommaSymbol(colored));
+                    if(i == (array.length - 1)) builder.append("\n");
                 }
             }
         }
@@ -213,5 +233,16 @@ public class ObjectToString {
     private static String getNullSymbol(boolean colored) {
         return (colored? "&a" : "") + "null";
     }
+
+
+    private static Field[] getAllFields(Class<?> clazz) {
+        Set<Field> fields = new HashSet<>();
+        while (clazz != null) {
+            Collections.addAll(fields, clazz.getDeclaredFields());
+            clazz = clazz.getSuperclass();
+        }
+        return fields.toArray(new Field[0]);
+    }
+
 
 }
