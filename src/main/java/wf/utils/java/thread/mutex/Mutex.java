@@ -26,7 +26,7 @@ public class Mutex {
         if (lock.get()) synchronized(mutex) {
             try {
                 mutex.wait();
-            } catch (InterruptedException ex) {}
+            } catch (InterruptedException ignored) {}
         }
     }
 
