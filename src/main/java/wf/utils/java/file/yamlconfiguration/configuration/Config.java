@@ -4,6 +4,7 @@ package wf.utils.java.file.yamlconfiguration.configuration;
 
 import wf.utils.java.file.yamlconfiguration.file.FileConfiguration;
 import wf.utils.java.file.yamlconfiguration.file.YamlConfiguration;
+import wf.utils.java.file.yamlconfiguration.utils.ConfigBuilder;
 import wf.utils.java.file.yamlconfiguration.utils.ConfigSerializable;
 import wf.utils.java.file.yamlconfiguration.utils.StringSerializable;
 import wf.utils.java.file.yamlconfiguration.utils.types.IntegerInRange;
@@ -142,6 +143,10 @@ public class Config {
             if(replace && config.contains(value.getPath())) continue;
             config.set(value.getPath(), value.getValue());
         }
+    }
+
+    public static ConfigBuilder builder() {
+        return new ConfigBuilder();
     }
 
     public void set(String path, Object value){
