@@ -34,7 +34,7 @@ public class Config {
         try {
             file = new File(path);
             if (!file.exists()) {
-                InputStream link = (Config.class.getResourceAsStream(File.pathSeparator + resourcePath));
+                InputStream link = (Config.class.getResourceAsStream(File.separator + resourcePath));
                 if(link == null) {
                     file.getAbsoluteFile().getParentFile().mkdirs();
                     file.getAbsoluteFile().createNewFile();
@@ -73,7 +73,7 @@ public class Config {
         try {
             file = new File(path);
             if (!file.exists()) {
-                InputStream link = (Config.class.getResourceAsStream(File.pathSeparator + resourcePath));
+                InputStream link = (Config.class.getResourceAsStream(File.separator + resourcePath));
                 if(link == null) {
                     file.getAbsoluteFile().getParentFile().mkdirs();
                     file.getAbsoluteFile().createNewFile();
