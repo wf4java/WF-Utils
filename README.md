@@ -5,7 +5,7 @@
   <dependency>
     <groupId>io.github.wf4java</groupId>
     <artifactId>WF-Utils</artifactId>
-    <version>2.3.1</version>
+    <version>2.3.2</version>
   </dependency>
 ```
 
