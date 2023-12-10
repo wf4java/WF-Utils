@@ -35,12 +35,10 @@ public class Config {
             file = new File(path);
             if (!file.exists()) {
                 InputStream link = (Config.class.getResourceAsStream("/" + resourcePath));
-                if(link == null) {
-                    file.getAbsoluteFile().getParentFile().mkdirs();
-                    file.getAbsoluteFile().createNewFile();
-                }else{
-                    Files.copy(link, file.getAbsoluteFile().toPath());
-                }
+                file.getAbsoluteFile().getParentFile().mkdirs();
+
+                if(link == null) file.getAbsoluteFile().createNewFile();
+                else Files.copy(link, file.getAbsoluteFile().toPath());
             }
             config = YamlConfiguration.loadConfiguration(file);
         }catch (IOException e) { e.printStackTrace(); }
@@ -59,10 +57,9 @@ public class Config {
             file = new File(path);
             if (!file.exists()) {
                 InputStream link = (Config.class.getResourceAsStream(path));
-                if(link == null) {
-                    file.getAbsoluteFile().getParentFile().mkdirs();
-                    file.getAbsoluteFile().createNewFile();
-                }
+                file.getAbsoluteFile().getParentFile().mkdirs();
+
+                if(link == null) file.getAbsoluteFile().createNewFile();
                 else Files.copy(link, file.getAbsoluteFile().toPath());
             }
             config = YamlConfiguration.loadConfiguration(file);
@@ -74,12 +71,10 @@ public class Config {
             file = new File(path);
             if (!file.exists()) {
                 InputStream link = (Config.class.getResourceAsStream("/" + resourcePath));
-                if(link == null) {
-                    file.getAbsoluteFile().getParentFile().mkdirs();
-                    file.getAbsoluteFile().createNewFile();
-                }else{
-                    Files.copy(link, file.getAbsoluteFile().toPath());
-                }
+                file.getAbsoluteFile().getParentFile().mkdirs();
+
+                if(link == null) file.getAbsoluteFile().createNewFile();
+                else Files.copy(link, file.getAbsoluteFile().toPath());
             }
             config = YamlConfiguration.loadConfiguration(file);
         }catch (IOException e) { e.printStackTrace(); }
@@ -95,10 +90,9 @@ public class Config {
             file = new File(path);
             if (!file.exists()) {
                 InputStream link = (Config.class.getResourceAsStream(path));
-                if(link == null) {
-                    file.getParentFile().mkdirs();
-                    file.createNewFile();
-                }
+                file.getAbsoluteFile().getParentFile().mkdirs();
+
+                if(link == null) file.createNewFile();
                 else Files.copy(link, file.getAbsoluteFile().toPath());
             }
             config = YamlConfiguration.loadConfiguration(file);
