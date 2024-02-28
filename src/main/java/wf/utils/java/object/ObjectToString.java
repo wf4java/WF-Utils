@@ -241,6 +241,7 @@ public class ObjectToString {
             Collections.addAll(fields, clazz.getDeclaredFields());
             clazz = clazz.getSuperclass();
         }
+        fields.forEach((f) -> f.setAccessible(true));
         return fields.toArray(new Field[0]);
     }
 

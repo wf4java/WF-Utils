@@ -24,8 +24,8 @@ public enum DefaultDataType {
     BYTE_ARRAY(Byte[].class,true),
     SHORT_ARRAY(Short[].class,true);
 
-    private Class typeClass;
-    private boolean itsArray;
+    private final Class typeClass;
+    private final boolean itsArray;
 
     private static final ArrayList<DefaultDataType> arrayTypes = new ArrayList<>(7);
 

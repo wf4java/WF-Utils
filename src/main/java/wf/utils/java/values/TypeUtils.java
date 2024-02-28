@@ -8,8 +8,8 @@ public class TypeUtils {
 
     private static final Pattern DOUBLE_REGEX = Pattern.compile("-?\\d+(\\.\\d+)?");
 
-    private static final Pattern LINK_REGEX = Pattern.compile("(https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\." +
-            "\\S{2,}|[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9]+\\." +
+    private static final Pattern LINK_REGEX = Pattern.compile("(https?://(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\." +
+            "\\S{2,}|[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?://(?:www\\.|(?!www))[a-zA-Z0-9]+\\." +
             "\\S{2,}|www\\.[a-zA-Z0-9]+\\.\\S{2,})");
 
 
