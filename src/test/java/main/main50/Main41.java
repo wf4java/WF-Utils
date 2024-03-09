@@ -24,7 +24,7 @@ public class Main41 extends Frame {
         super.paint(g);
 
         int scale = 12;
-        int fontSize = 9;
+        int fontSize = 11;
         int height = 11;
 
 
@@ -40,13 +40,13 @@ public class Main41 extends Frame {
         height = fontSize - fontMetrics.getDescent();
         System.out.println(height);
 
-        Rectangle2D stringBounds = fontMetrics.getStringBounds("П", g);
+        Rectangle2D stringBounds = fontMetrics.getStringBounds("У", g);
 
 
 
 
 
-        AttributedString attributedText = new AttributedString("П");
+        AttributedString attributedText = new AttributedString("У");
         attributedText.addAttribute(TextAttribute.FONT, font);
         attributedText.addAttribute(TextAttribute.FOREGROUND, Color.BLACK);
         attributedText.addAttribute(TextAttribute.BACKGROUND, Color.GREEN);
@@ -56,7 +56,7 @@ public class Main41 extends Frame {
 
 
 
-        BufferedImage image = new BufferedImage((int) fontMetrics.getStringBounds("П", g).getWidth(), height, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage image = new BufferedImage((int) fontMetrics.getStringBounds("У", g).getWidth() + 1, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D graphics = image.createGraphics();
 
         graphics.setColor(Color.YELLOW);

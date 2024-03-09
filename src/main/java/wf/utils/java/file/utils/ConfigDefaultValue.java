@@ -1,4 +1,4 @@
-package wf.utils.java.file.yamlconfiguration.configuration;
+package wf.utils.java.file.utils;
 
 import java.io.Serializable;
 

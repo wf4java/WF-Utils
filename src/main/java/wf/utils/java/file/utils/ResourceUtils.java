@@ -1,7 +1,7 @@
 package wf.utils.java.file.utils;
 
 
-import wf.utils.java.file.yamlconfiguration.configuration.Config;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -16,26 +16,11 @@ public class ResourceUtils {
         try {
             File file = new File(toPath);
             if (replace || !file.exists()) {
-                InputStream link = (Config.class.getResourceAsStream(resourcePath));
+                InputStream link = (ResourceUtils.class.getResourceAsStream(resourcePath));
                 Files.copy(link, file.getAbsoluteFile().toPath());
             }
         }catch (IOException e) { e.printStackTrace(); }
     }
-//    public static List<String> getResourceFiles(String path) {
-//        List<String> filenames = new ArrayList<>();
-//
-//        try(InputStream in = getResourceAsStream(path);
-//            BufferedReader br = new BufferedReader(new InputStreamReader(in)))
-//        {
-//            String resource;
-//
-//            while ((resource = br.readLine()) != null) {
-//                filenames.add(resource);
-//            }
-//        } catch (Exception ignored) {}
-//
-//        return filenames;
-//    }
 
     public static List<String> getResourceFiles(String path){
         return Arrays.asList(new File(getContextClassLoader().getResource(path).getFile()).list());

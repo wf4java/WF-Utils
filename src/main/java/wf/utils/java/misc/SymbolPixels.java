@@ -24,7 +24,7 @@ public class SymbolPixels {
 
 
         int height = fontSize - fontMetrics.getDescent();
-        int width = (int) fontMetrics.getStringBounds(text, null).getWidth();
+        int width = (int) fontMetrics.getStringBounds(text, null).getWidth() + 1;
 
 
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);

@@ -69,7 +69,7 @@ public class SmoothTransform {
     }
 
     public void setTo(double to) {
-        this.from = get();
+        this.from = this.get();
         this.start = System.currentTimeMillis();
         this.to = to;
     }

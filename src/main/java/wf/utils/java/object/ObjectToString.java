@@ -1,8 +1,9 @@
 package wf.utils.java.object;
 
+
 import wf.utils.java.console.ConsoleColor;
 import wf.utils.java.values.DefaultDataType;
-import wf.utils.jetbrains.annotations.Nullable;
+
 
 import java.lang.reflect.Field;
 import java.util.Collections;
@@ -21,7 +22,7 @@ public class ObjectToString {
         else return ConsoleColor.translateAlternateColorCodes(toString(object, null, 0, true, null), '&');
     }
 
-    private static String toString(Object object, @Nullable String fieldName, int indentationLevel, boolean colored, @Nullable Set<Object> objectSet) {
+    private static String toString(Object object, String fieldName, int indentationLevel, boolean colored, Set<Object> objectSet) {
         StringBuilder builder = new StringBuilder();
         Field[] fields = getAllFields(object.getClass());
         if(objectSet == null){
