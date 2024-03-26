@@ -16,10 +16,8 @@ public class StringUtils {
     private static final String[] EMPTY_STRING_ARRAY = new String[0];
 
 
-    public StringUtils() {
-    }
 
-    /** @deprecated */
+
     @Deprecated
     public static boolean isEmpty(@Nullable Object str) {
         return str == null || "".equals(str);

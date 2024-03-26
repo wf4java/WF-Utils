@@ -10,6 +10,7 @@ import java.io.Externalizable;
 import java.io.Serializable;
 import java.lang.reflect.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ClassUtils {
 
@@ -19,7 +20,7 @@ public class ClassUtils {
     private static final Map<Class<?>, Class<?>> primitiveTypeToWrapperMap = new IdentityHashMap(9);
     private static final Map<String, Class<?>> primitiveTypeNameMap = new HashMap(32);
     private static final Map<String, Class<?>> commonClassCache = new HashMap(64);
-    private static final Set<Class<?>[]> javaLanguageInterfaces;
+    private static final Set<Class<?>> javaLanguageInterfaces;
 
 
     public ClassUtils() {
@@ -787,7 +788,7 @@ public class ClassUtils {
         registerCommonClasses(Enum.class, Iterable.class, Iterator.class, Enumeration.class, Collection.class, List.class, Set.class, Map.class, Map.Entry.class, Optional.class);
         Class<?>[] javaLanguageInterfaceArray = new Class[]{Serializable.class, Externalizable.class, Closeable.class, AutoCloseable.class, Cloneable.class, Comparable.class};
         registerCommonClasses(javaLanguageInterfaceArray);
-        javaLanguageInterfaces = Collections.singleton(javaLanguageInterfaceArray);
+        javaLanguageInterfaces = Arrays.stream(javaLanguageInterfaceArray).collect(Collectors.toSet());
     }
 
 }
