@@ -5,12 +5,16 @@ import wf.utils.java.data.list.CollectionUtils;
 import wf.utils.java.misc.Assert;
 import wf.utils.java.object.reflect.ReflectionUtils;
 
-import java.io.Closeable;
-import java.io.Externalizable;
-import java.io.Serializable;
+import java.io.*;
 import java.lang.reflect.*;
+import java.lang.reflect.Proxy;
+import java.net.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ClassUtils {
 
@@ -23,9 +27,52 @@ public class ClassUtils {
     private static final Set<Class<?>> javaLanguageInterfaces;
 
 
-    public ClassUtils() {
-    }
 
+
+
+    public static List<Class<?>> scan(String path) {
+        try {
+            List<Class<?>> classes = new ArrayList<>();
+            String pathName = path.replace('.', '/');
+
+            // Get the resources for the given path
+            Enumeration<URL> resources = Thread.currentThread().getContextClassLoader().getResources(pathName);
+            while (resources.hasMoreElements()) {
+                URL resource = resources.nextElement();
+                URI uri = resource.toURI();
+                Path dirPath;
+
+                // Handle different URI schemes
+                if (uri.getScheme().equals("file")) {
+                    dirPath = Paths.get(uri);
+                } else {
+                    throw new IllegalArgumentException("Unsupported URI scheme: " + uri.getScheme());
+                }
+
+                // Walk the file tree to find all .class files
+                try(Stream<Path> stream =  Files.walk(dirPath)) {
+                    stream
+                            .filter(p -> p.toString().endsWith(".class"))
+                            .forEach(p -> {
+                                try {
+                                    // Convert file path to class name
+                                    String className = path + "." + dirPath.relativize(p)
+                                            .toString()
+                                            .replace(File.separatorChar, '.')
+                                            .replace(".class", "");
+                                    // Load the class and add to the list
+                                    classes.add(Class.forName(className));
+                                } catch (ClassNotFoundException e) {
+                                    e.printStackTrace();
+                                }
+                            });
+                }
+
+            }
+
+            return classes;
+        } catch (IOException | URISyntaxException e) {throw new RuntimeException(e);}
+    }
     private static void registerCommonClasses(Class<?>... commonClasses) {
         Class[] var1 = commonClasses;
         int var2 = commonClasses.length;

@@ -10,6 +10,7 @@ public class SerializationUtils {
 
 
     public SerializationUtils() {
+
     }
 
     @Nullable
