@@ -30,6 +30,15 @@ public class ClassUtils {
 
 
 
+    public static List<Class<?>> scan(Object o) {
+        return scan(o.getClass().getPackage().getName());
+    }
+
+    public static List<Class<?>> scan(Class<?> clazz) {
+        return scan(clazz.getPackage().getName());
+    }
+
+
     public static List<Class<?>> scan(String path) {
         try {
             List<Class<?>> classes = new ArrayList<>();
