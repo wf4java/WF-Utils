@@ -2,6 +2,7 @@ package wf.utils.java.data.list;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class ListUtils {
 
@@ -16,5 +17,14 @@ public class ListUtils {
 
         return result;
     }
+
+
+    public static <T> void batchForEach(List<T> list, int batchSize, Consumer<List<T>> consumer) {
+        for (int i = 0; i < list.size(); i += batchSize) {
+            int end = Math.min(i + batchSize, list.size());
+            consumer.accept(list.subList(i, end));
+        }
+    }
+
 
 }

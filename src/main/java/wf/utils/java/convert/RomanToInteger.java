@@ -5,11 +5,8 @@ import java.util.Map;
 
 public class RomanToInteger {
 
-    private static Map<Character, Integer> map = new HashMap<Character, Integer>() {
-        /**
-         *          */
+    private static final Map<Character, Integer> map = new HashMap<Character, Integer>() {
         private static final long serialVersionUID = 87605733047260530L;
-
         {
             put('I', 1);
             put('V', 5);
@@ -58,10 +55,5 @@ public class RomanToInteger {
         }
 
         return sum;
-    }
-
-    public static void main(String[] args) {
-        int sum = romanToInt("MVV");
-        System.out.println(sum);
     }
 }

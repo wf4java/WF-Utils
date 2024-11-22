@@ -3,7 +3,7 @@ package wf.utils.java.algoritms.searches;
 /**
  * The common interface of most searching algorithms
  *
- * @author Podshivalov Nikita (https://github.com/nikitap492)
+ * @author Podshivalov Nikita (<a href="https://github.com/nikitap492">...</a>)
  */
 public interface SearchAlgorithm {
     /**

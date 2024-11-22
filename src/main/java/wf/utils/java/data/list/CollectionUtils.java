@@ -23,11 +23,11 @@ public class CollectionUtils {
     }
 
     public static <K, V> HashMap<K, V> newHashMap(int expectedSize) {
-        return new HashMap(computeMapInitialCapacity(expectedSize), 0.75F);
+        return new HashMap<>(computeMapInitialCapacity(expectedSize), 0.75F);
     }
 
     public static <K, V> LinkedHashMap<K, V> newLinkedHashMap(int expectedSize) {
-        return new LinkedHashMap(computeMapInitialCapacity(expectedSize), 0.75F);
+        return new LinkedHashMap<>(computeMapInitialCapacity(expectedSize), 0.75F);
     }
 
     private static int computeMapInitialCapacity(int expectedSize) {

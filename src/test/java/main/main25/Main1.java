@@ -6,7 +6,7 @@ import java.util.TreeMap;
 public class Main1 {
 
 
-    public static void main(String[] args) {
+    public static void main(String... args) {
 
 
         TreeMap<String, String> map = new TreeMap<String, String>(new MapKeyComparator());
