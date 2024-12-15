@@ -58,6 +58,18 @@ public class FileUtils {
         }
     }
 
+    public static byte[] readDataFromFile(String path) {
+        try { return Files.readAllBytes(new File(path).toPath()); }
+        catch (IOException e) { throw new RuntimeException(e); }
+    }
+
+    public static String getFileExtension(String fileName) {
+        int dotIndex = fileName.lastIndexOf('.');
+        return dotIndex == -1 ? "" : fileName.substring(dotIndex + 1);
+    }
+
+
+
     public void copyFromJar(String source, final Path target) {
         URI resource = null;
         FileSystem fileSystem = null;

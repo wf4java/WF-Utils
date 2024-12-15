@@ -31,6 +31,17 @@ public class StringUtils {
         return str != null && !str.isEmpty();
     }
 
+    public String truncate(String text, int length) {
+        return truncate(text, length, "...");
+    }
+
+    public String truncate(String text, int length, String truncatedSymbols) {
+        if (text.length() <= length)
+            return text;
+        else
+            return text.substring(0, length - truncatedSymbols.length()) + truncatedSymbols;
+    }
+
     public static boolean hasText(@Nullable CharSequence str) {
         if (str == null) {
             return false;
